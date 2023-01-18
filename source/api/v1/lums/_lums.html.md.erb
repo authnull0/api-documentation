@@ -309,3 +309,381 @@ custom_mapping | custom mapping.
 <aside class="success">
 Remember — This is for Add in LUMs!
 </aside>
+
+## Password Policy
+A proper password complexity policy would be: eight characters for the length of a password and at least three types of the following characters used: uppercase letters, lowercase letters, digits, and special characters. Add the following parameters and their values: minlen, dcredit, ucredit, lcredit, and ocredit.
+
+
+## Add Password Policy 
+
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/addPasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+```
+
+This will add password policy.
+
+### HTTP Request
+
+`POST /api/v1/instances/addPasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+### HTTP response
+
+`successfully Add Password Policy`
+
+```json
+{
+    "code": 200,
+    "message": "Successfully Added Password Policy"
+}
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Delete Password Policy
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":1
+    }
+]
+```
+
+This will delete password policy.
+
+### HTTP Request
+
+`DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyId | Policy id is for linux user.
+
+
+### HTTP response
+
+`successfully Add Password Policy`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## List All Password Policy
+
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "pageId":1,
+        "pageSize":10
+    }
+]
+```
+
+This will List all password policy.
+
+### HTTP Request
+
+`POST /api/v1/instances/addPasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+pageId | Id for page.
+pageSize | Page size for page.
+
+### HTTP response
+
+`successfully List All Password Policy`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Assign Policy To Machine
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
+
+
+
+
+```json
+[
+  {
+    "policyId":2,
+    "instanceId":1
+
+}
+]
+```
+
+This will Assign Policy To Machine.
+
+### HTTP Request
+
+`POST /api/v1/instances/assignPolicyToMachine HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyId | Policy id is for linux user.
+instanceId | id for the instance
+
+
+### HTTP response
+
+`successfully Assign Policy To Machine`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Update Password Policy
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":2,
+        "policyName":"PolicyManjuTest1",
+        "minLen":"3",
+        "maxLen":"5",
+        "firstChar":"",
+        "allowUpperLower":"",
+        "allowSpecial":"",
+        "allowNumeric":""
+    
+    }
+]
+```
+
+This will update Password Policy.
+
+### HTTP Request
+
+`POST /api/v1/instances/updatePasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+
+### HTTP response
+
+`successfully update Password Policy`
+
+```json
+[
+ {
+  "Update Successfully"
+ }
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Validate Password
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/validatePolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":2,
+        "policyName":"PolicyManjuTest1",
+        "minLen":"3",
+        "maxLen":"5",
+        "firstChar":"",
+        "allowUpperLower":"",
+        "allowSpecial":"",
+        "allowNumeric":""
+    
+    }
+]
+```
+
+This will validate Password Policy.
+
+### HTTP Request
+
+`POST /api/v1/instances/validatePolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+
+### HTTP response
+
+`successfully update Password Policy`
+
+```json
+[
+ {
+  "Update Successfully"
+ }
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
