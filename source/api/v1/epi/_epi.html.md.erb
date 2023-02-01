@@ -47,6 +47,7 @@ privateIp | Private Ip of the Instance
 totalUser | Total number of Users
 hostName | Name of the host
 status | Status of the instances
+Key | Authorization Key
 
 ### HTTP Response
 
@@ -109,6 +110,7 @@ machineKey| Machine Key of the instances
 osId | Id of the OS used
 publicIpAddress | Public Ip of the instance
 privateIpAddress | Private Ip of the Instance
+Key | Authorization Key
 
 ### HTTP Response
 
@@ -116,59 +118,9 @@ privateIpAddress | Private Ip of the Instance
 
 ```json
 {
-"domainId": 1,
-"instanceName": "abc-xyz",
-"osId": 1,
-"publicIp": "192.168.1.1",
-"privateIp": "172.64.32.1"
-}
-```
-<aside class="success">
-Instance added to the list.
-</aside>
-
-## Delete Instances
-Delete Instances adds particular instances to the existing list.
-
-```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/delete-instance' \
-```
-
-```http
-DELETE /api/v1/instances/delete-instance HTTP/1.1
-```
-
-```json
-{
-    "Os_Id": 1,
-    "key" : XXXXXXXXXXXX
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`DELETE /api/v1/instances/add-instance HTTP/1.1`
-
-### Query Parameter
-
-Parameter  | Description
---------- | -----------
-osId | Id of the OS used
-
-### HTTP Response
-
-`Instance deleted`
-
-```json
-{
-"domainId": 1,
-"instanceName": "abc-xyz",
-"osId": 1,
-"publicIp": "192.168.1.1",
-"privateIp": "172.64.32.1"
+  "instance_id": "fdsf-dfdf-gfdsgf-fdsgfdg-fdge",
+  "code": 200,
+  "message": "success" 
 }
 ```
 <aside class="success">
@@ -216,26 +168,139 @@ Parameter  | Description
 domainId| Domain Id of the instances
 instanceId | Instance Id of the used
 status| status of the instances whether it is updated or not.
-
+Key | Authorization Key
 ### HTTP Response
 
 `Instance updated.`
 
 ```json
-{
-  "domainId": "11",
-  "instanceId": "201",
-  "status": "Success"
-}
+"Machine Status Updated "
 ```
 
 <aside class="success">
 Instance updated.
 </aside>
 
+## Update Auth Type
+It updated the type of Authorization used.
+
+```shell
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateAuthType' 
+```
+
+```http
+PUT /api/v1/instances/updateAuthType HTTP/1.1
+```
+
+```json
+{
+    "instanceId":"1",
+    "domainId":"1",
+    "authType":"SSH,DID,Password",
+    "key" : XXXXXXXXXXXX
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+PUT /api/v1/instances/updateAuthType HTTP/1.1
+
+### Query Parameter
+
+Parameter  | Description
+---------  | -----------
+instanceId | Instance Id 
+domainId   | domain Id
+authType   | Authorization type
+Key        | Authorization Key
+
+### HTTP Response
+
+`Auth Type updated`
+
+```json
+{
+  "Auth Type Updated"
+}
+```
+<aside class="success">
+Auth type updated
+</aside>
+
+
+## Assign  User to Machines
+
+It assign usere to existing machines.
+
+```shell
+curl --location --request 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines
+```
+
+```http
+POST /api/v1/instances/assignUsersToMachines HTTP/1.1
+```
+
+```json
+
+{
+    "instanceIds":[1,2],
+    "domainId":1,
+    "userIds":[106,103],
+    "action" : "add",
+    "key" : XXXXXXXXXXXX
+}
+
+
+ 
+
+{
+    "instanceIds":[1,2],
+    "domainId":1,
+    "userIds":[106,103],
+    "action" : "remove",
+    "key" : XXXXXXXXXXXX
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/instances/assignUsersToMachines HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+domainId| Domain Id of the instances
+instanceIds | Instance Id of the used
+userId | Users id of users
+action | Whether it is add or remove
+Key | Authorization Key
+
+### HTTP Response
+
+`Assign  user to Machine`
+
+```json
+{
+    "code": 200,
+    "message": "Successfully Added"
+}
+```
+
+<aside class="success">
+Group added to Machine
+</aside>
+
+
+
 ## Assign Groups To Machines
 
-It adds groups to existing machines.
+It adds/removes groups to existing machines.
 
 ```shell
 curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/addGroupsToMachines' \
@@ -280,117 +345,11 @@ domainId| Domain Id of the instances
 instanceId | Instance Id of the used
 groupId | Group Id
 actions | whether Group is added to machines or not.
+Key | Authorization Key
 
 ### HTTP Response
 
 `Group added to Machine`
-
-```json
-{
-  "domainId": "11",
-  "instanceId": "201",
-  "groupId": 23,
-"actions":"added"
-}
-```
-
-<aside class="success">
-Group added to Machine
-</aside>
-
-## Remove Groups To Machines
-
-It remove groups to existing machines.
-
-```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/removeGroupsToMachines' \
-```
-
-```http
-PUT /api/v1/instances/removeGroupsToMachines HTTP/1.1
-```
-
-```json
-{
-"domain_id": 1,
-"instance_id": 2,
-"group_id": 23,
-"actions":"removed",
-"key" : XXXXXXXXXXXX
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`PUT /api/v1/instances/removeGroupsToMachines/1.1`
-
-### Query Parameter
-Parameter  | Description
---------- | -----------
-domainId| Domain Id of the instances
-instanceId | Instance Id of the used
-groupId | Group Id
-actions | whether Group is added to machines or not.
-
-### HTTP Response
-
-`Group added to Machine`
-
-```json
-{
-  "domainId": "11",
-  "instanceId": "201",
-  "groupId": 23,
-  "actions":"removed",
-}
-```
-
-<aside class="success">
-Group added to Machine
-</aside>
-
-## Add User From Machines
-
-It adds usere to existing machines.
-
-```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/addusersToMachines' \
-```
-
-```http
-PUT /api/v1/instances/adduserToMachines HTTP/1.1
-```
-
-```json
-
-{
-  "instanceIds":[1,2],
-  "domainId":1,
-  "userIds":[106,103],
-  "action" : "add"
-}
-
-```
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-`PUT /api/v1/instances/addusersToMachines/1.1`
-
-### Query Parameter
-Parameter  | Description
---------- | -----------
-domainId| Domain Id of the instances
-instanceIds | Instance Id of the used
-userId | Users id of users
-
-### HTTP Response
-
-`Add user to Machine`
 
 ```json
 {
@@ -403,54 +362,5 @@ userId | Users id of users
 Group added to Machine
 </aside>
 
-## Remove User From Machines
 
-It Remove usere to existing machines.
-
-```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/removeusersToMachines' \
-```
-
-```http
-PUT /api/v1/instances/removeuserToMachines HTTP/1.1
-```
-
-```json
-
-  {
-    "instanceIds":["1","2"],
-    "domainId":1,
-    "userIds":[106,103],
-    "key" : XXXXXXXXXXXX
-}
-
-```
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-`PUT /api/v1/instances/removeusersToMachines/1.1`
-
-### Query Parameter
-Parameter  | Description
---------- | -----------
-domainId| Domain Id of the instances
-instanceIds | Instance Id of the used
-userId | Users id of users
-
-### HTTP Response
-
-`User remove to Machine`
-
-```json
-{
-    "code": 200,
-    "message": "Successfully Remove"
-}
-```
-
-<aside class="success">
-Group added to Machine
-</aside>
 

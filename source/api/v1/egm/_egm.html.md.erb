@@ -34,6 +34,7 @@ Parameter  | Description
  pageId | Page id
 pageSize | Size of the Page
 filter | filter
+Key | Authorization Key
 
 ### HTTP Response
 `Endpoint listed.`
@@ -102,6 +103,7 @@ Parameter  | Description
  domainId| Domain Id of the instances
  groupName | Name of the group
 users | Name of the Users
+Key | Authorization Key
 
 ### HTTP Response
 `Endpoint added.`
@@ -145,6 +147,8 @@ Parameter  | Description
 --------- | -----------
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
+ Key | Authorization Key
+ 
 
 ### HTTP Response
 `Endpoint`
@@ -159,14 +163,14 @@ Parameter  | Description
 Endpoint  deleted.
 </aside>
 
-## Update Endpoint Group Status
+## Edit Endpoint Groups
 It updates Endpoint status.
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/updateEPMGroupStatus' \
+curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/editEPMGroupStatus' \
 ```
 ```http
-PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1
+PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1
 ```
 ```json
 {
@@ -181,7 +185,7 @@ PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1
 Authorization Key Required 
 
 ### HTTP Request
-`PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1`
+`PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1`
 
 ### Query Parameter
 
@@ -190,16 +194,90 @@ Parameter  | Description
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
  status | Status
+ Key | Authorization Key
+
+
 ### HTTP Response
 
 `Endpoint Status Updated.`
 
 ```json
 {
-  "domainId": 1,
-  "epmGroupId": "3",
-  "status":"Success"
-  }
+    "status": "Success",
+    "message": "Status Updated Successfully"
+}
+```
+<aside class="success">
+Endpoint Status Updated.
+</aside>
+
+## Assign Users To Endpoint Groups
+It assign users to Endpoint Group
+
+```shell
+curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/assignUsersToEndpointGroup
+```
+```http
+POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1
+```
+```json
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"add",
+"key" : XXXXXXXXXXXX
+}
+
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"remove",
+"key" : XXXXXXXXXXXX
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1`
+
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ action | action
+ userId | User Id
+ Key | Authorization Key
+
+
+### HTTP Response
+
+`Endpoint Status Updated.`
+
+```json
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"add"
+}
+
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"remove"
+}
+
+{
+    "status": "Success",
+    "message": "Users Added/Removed successfully"
+}
 ```
 <aside class="success">
 Endpoint Status Updated.
