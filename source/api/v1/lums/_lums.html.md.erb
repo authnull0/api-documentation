@@ -32,7 +32,7 @@ POST /api/v1/add-linux-user-info HTTP/1.1
     "AuthMethod":"s",
     "UserType":"6",
     "CustomMapping":"6",
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
 }
 ]
 ```
@@ -40,8 +40,8 @@ POST /api/v1/add-linux-user-info HTTP/1.1
 This will add the users to LUMs.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -94,15 +94,15 @@ POST /api/v1/list-all-lums HTTP/1.1
      "TTLPassword":"xyz", 
      "TTLUser":"xyz", 
      "UserType":"zyx",
-     "key" : 34rfdhuytqwrtttbcv
+     "key" : XXXXXXXXXXXX
 }
 ]
 ```
 This will add the users to LUMs.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -151,7 +151,7 @@ DELETE /api/v1/delete-user HTTP/1.1
 [
 {
     "linuxUserId": "1",
-    "key" : 34rfdhuytqwrtttbcv
+    "key" : XXXXXXXXXXXX
 }
 ]
 ```
@@ -159,8 +159,8 @@ DELETE /api/v1/delete-user HTTP/1.1
 This will delete the users to LUMs.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -200,7 +200,7 @@ POST /api/v1/addUserToMachine HTTP/1.1
     "domainId":"1", 
     "instanceId":"1", 
     "userIds":"1",
-    "key" : 34rfdhuytqwrtttbcv
+    "key" : XXXXXXXXXXXX
 }
 ]
 ```
@@ -208,8 +208,8 @@ POST /api/v1/addUserToMachine HTTP/1.1
 This will add User To Machine.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -252,7 +252,7 @@ POST /api/v1/updateEPMUserWallet HTTP/1.1
     "server_group_name":"xyz-xyz-xyz", 
     "authnull_user_name":"abc-abc-abd", 
     "authnull_user_group":"xyz-xyz-xyz",
-    "key" : 34rfdhuytqwrtttbcv
+    "key" : XXXXXXXXXXXX
 }
 ]
 ```
@@ -260,8 +260,8 @@ POST /api/v1/updateEPMUserWallet HTTP/1.1
 This will Update EPM User Wallet.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -306,7 +306,7 @@ POST /api/v1/updateEpmUserInfo HTTP/1.1
     "user_type":"abc", 
     "credential_type":"abc", 
     "custom_mapping":"asd",
-    "key" : 34rfdhuytqwrtttbcv
+    "key" : XXXXXXXXXXXX
 }
 ]
 ```
@@ -314,8 +314,8 @@ POST /api/v1/updateEpmUserInfo HTTP/1.1
 This will update Epm User Information.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -369,7 +369,7 @@ POST /api/v1/instances/addPasswordPolicy HTTP/1.1
     "allowUpperLower":"",
     "allowSpecial":"yes",
     "allowNumeric":"yes",
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
 }
 ]
 ```
@@ -377,8 +377,8 @@ POST /api/v1/instances/addPasswordPolicy HTTP/1.1
 This will add password policy.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -429,15 +429,15 @@ DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
 [
   {
         "policyId":1,
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
     }
 ]
 ```
 
 This will delete password policy.
 `
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -493,7 +493,7 @@ POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
   {
         "pageId":1,
         "pageSize":10,
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
     }
 ]
 ```
@@ -501,8 +501,8 @@ POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
 This will List all password policy.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -557,7 +557,7 @@ POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
   {
     "policyId":2,
     "instanceId":1,
-  "key":"34rfdhuytqwrtttbcv"
+  "key":"XXXXXXXXXXXX"
 
 }
 ]
@@ -566,7 +566,7 @@ POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
 This will Assign Policy To Machine.
 
 ### HTTP AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -629,7 +629,7 @@ POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
         "allowUpperLower":"",
         "allowSpecial":"",
         "allowNumeric":"",
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
     
     }
 ]
@@ -638,8 +638,8 @@ POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
 This will update Password Policy.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
@@ -700,7 +700,7 @@ POST /api/v1/instances/validatePolicy HTTP/1.1
         "allowUpperLower":"",
         "allowSpecial":"",
         "allowNumeric":"",
-    "key":"34rfdhuytqwrtttbcv"
+    "key":"XXXXXXXXXXXX"
     
     }
 ]
@@ -708,8 +708,8 @@ POST /api/v1/instances/validatePolicy HTTP/1.1
 
 T`his will validate Password Policy.
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### API AuthKey
+Authorization Key Required : `XXXXXXXXXXXX`
 
 ### HTTP Request
 
