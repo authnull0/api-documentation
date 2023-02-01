@@ -13,16 +13,16 @@ POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1
 
 ```json
 {
-  "domainId": 1,
-  "pageId": 2,
-  "pageSize": 23,
-  "filter":"added",
-  "key" : XXXXXXXXXXXX
+    "domainId" :"0",
+     "filter" : "",
+      "pageId": 1 , 
+      "pageSize" :10,
+      "key" : XXXXXXXXXXXX
   }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1`
@@ -39,12 +39,28 @@ filter | filter
 `Endpoint listed.`
 
 ```json
+[
 {
-  "domainId": 1,
-  "pageId": 2,
-  "pageSize": 23,
-  "filter":"added"
-  }
+        "groupId": 7,
+        "groupName": "sam",
+        "usersCount": 3
+    },
+    {
+        "groupId": 8,
+        "groupName": "serverGroup1",
+        "usersCount": 29
+    },
+    {
+        "groupId": 9,
+        "groupName": "serverGroupTest",
+        "usersCount": 29
+    },
+    {
+        "groupId": 10,
+        "groupName": "helllo",
+        "usersCount": 29
+    }
+]
 ```
 <aside class="success">
 Endpoint listed.
@@ -63,15 +79,18 @@ POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1
 
 ```json
 {
-  "domainId": 1,
-  "groupName": "Blue",
-  "users":"Stephen",
-  "key" : XXXXXXXXXXXX
+"domainId":1234,
+"instanceIds":[1,2],
+"groupName":"serverGroupTest",
+"ou":"",
+"cn":"",
+"dc":"",
+"key" : XXXXXXXXXXXX
   }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 
 ### HTTP Request
@@ -89,10 +108,10 @@ users | Name of the Users
 
 ```json
 {
-  "domainId": 1,
-  "groupName": "Blue",
-  "users":"Stephen"
-  }
+    "Instance_id": "9",
+    "Code": "200",
+    "Message": "Successfully Added Endpoint Group"
+}
 ```
 <aside class="success">
 Endpoint added.
@@ -109,14 +128,14 @@ DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1
 ```
 ```json
 {
-  "domainId": 1,
-  "epmroupId": "3",
+    "domainId" : 1 ,
+    "id": 5,
   "key" : XXXXXXXXXXXX
   }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1`
@@ -132,9 +151,9 @@ Parameter  | Description
 
 ```json
 {
-  "domainId": 1,
-  "epmGroupId": "3",
-  }
+    "status": "Success",
+    "message": "Group Deleted successfully"
+}
 ```
 <aside class="success">
 Endpoint  deleted.
@@ -158,8 +177,8 @@ PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1
   }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1`
@@ -185,13 +204,4 @@ Parameter  | Description
 <aside class="success">
 Endpoint Status Updated.
 </aside>
-
-
-
-
-
-
-
-
-
 

@@ -22,14 +22,15 @@ POST /api/v1/instances/list HTTP/1.1
 
 ```json
 {
-"domainId": 1,
-"groupId":1,
-"key" : XXXXXXXXXXXX
+    "domainId":1,
+    "pageId":1,
+    "pageSize":10,
+    "key" : XXXXXXXXXXXX
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/instances/list HTTP/1.1`
@@ -85,17 +86,17 @@ POST /api/v1/instances/add-instance HTTP/1.1
 
 ```json
 {
-"domainId": 1,
-"instanceName": "abc-xyz",
-"osId": 1,
-"publicIp": "192.168.1.1",
-"privateIp": "172.64.32.1",
+"domain_id":1234,
+"instance_name":"kloudone.vm",
+"os_id":1,
+"public_ip":"144.32.55.5",
+"private_ip":"10.32.45.1",
 "key" : XXXXXXXXXXXX
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/instances/add-instance HTTP/1.1`
@@ -144,8 +145,8 @@ DELETE /api/v1/instances/delete-instance HTTP/1.1
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 
 ### HTTP Request
@@ -187,15 +188,22 @@ PUT /api/v1/instances/update-instance HTTP/1.1
 
 ```json
 {
-"domainId": 1,
-"instanceId": 2,
-"status": "updated",
-"key" : XXXXXXXXXXXX
+  "domainId": "123",
+  status:"ACTIVE"
+  "instanceIds": ["1,2,3"],
+  "key" : XXXXXXXXXXXX
+}
+
+{
+  "domainId": "123",
+  status:"DISABLED"
+  "instanceIds": ["1,2,3"],
+  "key" : XXXXXXXXXXXX
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 
 ### HTTP Request
@@ -225,7 +233,7 @@ status| status of the instances whether it is updated or not.
 Instance updated.
 </aside>
 
-## Add Groups To Machines
+## Assign Groups To Machines
 
 It adds groups to existing machines.
 
@@ -239,16 +247,27 @@ PUT /api/v1/instances/addGroupsToMachines HTTP/1.1
 
 ```json
 {
-"domain_id": 1,
-"instance_id": 2,
-"group_id": 23,
-"actions":"added",
-"key" : XXXXXXXXXXXX
+    "instanceId":[1,2],
+    "domainId":1,
+    "groupId":[1,2,3],
+     "action":"add",
+     "key" : XXXXXXXXXXXX
+}
+
+
+ 
+
+{
+    "instanceId":[1,2],
+    "domainId":1,
+    "groupId":[1,2,3],
+     "action":"remove",
+     "key" : XXXXXXXXXXXX
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 
 ### HTTP Request
@@ -296,13 +315,13 @@ PUT /api/v1/instances/removeGroupsToMachines HTTP/1.1
 "domain_id": 1,
 "instance_id": 2,
 "group_id": 23,
-"actions":"added",
+"actions":"removed",
 "key" : XXXXXXXXXXXX
 }
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 
 ### HTTP Request
@@ -325,7 +344,7 @@ actions | whether Group is added to machines or not.
   "domainId": "11",
   "instanceId": "201",
   "groupId": 23,
-"actions":"added"
+  "actions":"removed",
 }
 ```
 
@@ -347,18 +366,17 @@ PUT /api/v1/instances/adduserToMachines HTTP/1.1
 
 ```json
 
-  {
-    "instanceIds":["1","2"],
-    "domainId":1,
-    "userIds":[106,103],
-    "key" : XXXXXXXXXXXX
-    
+{
+  "instanceIds":[1,2],
+  "domainId":1,
+  "userIds":[106,103],
+  "action" : "add"
 }
 
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `PUT /api/v1/instances/addusersToMachines/1.1`
@@ -408,8 +426,8 @@ PUT /api/v1/instances/removeuserToMachines HTTP/1.1
 
 ```
 
-### API AuthKey
-Authorization Key Required : `XXXXXXXXXXXX`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `PUT /api/v1/instances/removeusersToMachines/1.1`
