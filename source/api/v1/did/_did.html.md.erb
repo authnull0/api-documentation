@@ -137,6 +137,7 @@ curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issue
 ```http
 POST /api/v1/credential/createCredential HTTP/1.1
 ```
+
 ```json
 {
 	"domainId" : 1,
@@ -172,7 +173,7 @@ metadata | These are the set of properties or claims.
 `Credential Assigned successfully`
 
 ## Revoke Credential 
-
+Revoking a credential refers to the process of invalidating a previously issued digital credential.
 
 ```shell
 curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential'
@@ -212,7 +213,8 @@ holderDid |Holder DID refers to the recipient of the verifiable credential.
 ### HTTP Response
  `Credential Revoked successfully`
 
-## Credential List
+
+ ## Credential List
 
 
 ```shell
@@ -226,7 +228,8 @@ POST /api/v1/credential/credentialList HTTP/1.1
 {
    "domainId": 1
 }
-``
+```
+
 ### HTTP Request
 `POST /api/v1/credential/credentialList HTTP/1.1`
 
@@ -430,7 +433,7 @@ Parameter | Description
 --------- | ----------- 
 domain_id |This refers to the company or organization who is using the service.
 issuerDID      |This refers to the DID of the issuing organization or company. 
-holderDid  | Holder DID
+holderDid  | Holder DID refers to the recipient of the verifiable credential.
 vcId | VC ID
 
 
