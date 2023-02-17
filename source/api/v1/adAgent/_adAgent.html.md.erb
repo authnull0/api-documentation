@@ -32,8 +32,7 @@ In multitasking computer operating systems, a daemon (/ˈdiːmən/ or /ˈdeɪmə
 ## Save ActiveDirectory Configuration
 
 ```shell
-curl --location --request POST "https://api.authnull.kloudlearn.com/api/v1/saveActiveDirectoryConfig" \
-  -H "Authorization: AuthNull"
+curl POST "https://api.authnull.kloudlearn.com/api/v1/saveActiveDirectoryConfig"
 ```
 
 ```HTTP
@@ -86,8 +85,7 @@ ActiveDirectory Configure successfully saved
 ## Import Users
 
 ```shell
-curl --location --request POST "https://api.authnull.kloudlearn.com/api/v1/importUsers" \
-  -H "Authorization: AuthNull"
+curl POST "https://api.authnull.kloudlearn.com/api/v1/importUsers"
 ```
 
 ```HTTP
@@ -139,8 +137,7 @@ successfully Imported Users
 ## Get Import Status
 
 ```shell
-curl --location --request POST "https://api.authnull.kloudlearn.com/api/v1/getImportStatus" \
-  -H "Authorization: AuthNull"
+curl  POST "https://api.authnull.kloudlearn.com/api/v1/getImportStatus" 
 ```
 
 ```HTTP
@@ -185,8 +182,7 @@ For mapping api we need to reconfigure the api:
 ## Reconfigure Active Directory
 
 ```shell
-curl --location --request POST "https://api.authnull.kloudlearn.com/api/v1/reConfigure" \
-  -H "Authorization: AuthNull"
+curl POST "https://api.authnull.kloudlearn.com/api/v1/reConfigure" 
 ```
 
 ```HTTP
