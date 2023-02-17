@@ -15,8 +15,7 @@ This is a PRD for the Linux user management service (LUMS) covering the followin
 
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info" 
-  -H "Authorization: AuthNull"
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info'
 ```
 
 ```HTTP
@@ -69,12 +68,11 @@ Remember — This is for Add in LUMs!
 
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/list-all-lums" 
-  -H "Authorization: AuthNull"
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/listAllEpmUsers'
 ```
 
 ```HTTP
-POST /api/v1/list-all-lums HTTP/1.1
+POST /api/v1/lums/listAllEpmUsers HTTP/1.1
 
 
 
@@ -95,7 +93,7 @@ Authorization Key Required
 
 ### HTTP Request
 
-`POST /api/v1/list-all-lums HTTP/1.1`
+`POST /api/v1/lums/listAllEpmUsers HTTP/1.1`
 
 ### Query Parameters
 
@@ -119,12 +117,11 @@ Remember — This is for Add in LUMs!
 ## Delete User
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/delete-user" 
-  -H "Authorization: AuthNull"
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser'
 ```
 
 ```HTTP
-DELETE /api/v1/delete-user HTTP/1.1
+DELETE /api/v1/lums/deleteEpmUser HTTP/1.1
 
 
 
@@ -146,7 +143,7 @@ Authorization Key Required
 
 ### HTTP Request
 
-`DELETE /api/v1/delete-user HTTP/1.1`
+`DELETE /api/v1/lums/deleteEpmUser HTTP/1.1`
 
 ### Query Parameters
 
