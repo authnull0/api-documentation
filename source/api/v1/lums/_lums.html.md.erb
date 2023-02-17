@@ -31,8 +31,8 @@ POST /api/v1/add-linux-user-info HTTP/1.1
     "Username":"sefali",
     "AuthMethod":"s",
     "UserType":"6",
-    "CustomMapping":"6",
-    "key":"XXXXXXXXXXXX"
+    "CustomMapping":"6"
+   
 }
 ]
 ```
@@ -80,26 +80,15 @@ POST /api/v1/list-all-lums HTTP/1.1
 
 
 ```json
-[
 {
-    "CredentialType":"xyz",
-     "HomeDir":"xyz", 
-     "LinuxUserId":"1", 
-     "LinuxUserName":"sefali", 
-     "PasswordManaged":"xyz-xyz", 
-     "PrivilegedUser":"xyz-xyz-xyz", 
-     "Source":"xyz", 
-     "Status":"active", 
-     "SyncMethod":"xyz", 
-     "TTLPassword":"xyz", 
-     "TTLUser":"xyz", 
-     "UserType":"zyx",
-     "key" : XXXXXXXXXXXX
-}
-]
+"pageId": 1,
+"pageSize": 50,
+"domainId": 1,
+"instanceId":0,
+"Filter":
+{"filterBy": "localGroups", "value": ""}}
 ```
-This will add the users to LUMs.
-`
+
 
 ### Access Token
 Authorization Key Required 
@@ -112,18 +101,11 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-CredentialType |  Credentials refer to the verification of identity or tools for authentication.
-HomeDir |  A home directory is a file system directory on a multiuser operating system containing files for a given user of the system.
-LinuxUserId | A UID (user identifier) is a number assigned by Linux to each user on the system. This number is used to identify the user to the system and to determine which system resources the user can access. 
-LinuxUserName | A username is a distinctive alphabetical and numerical set of characters used to identify and gain access to a computing system.
-PasswordManaged | Password management is a set of principles and best practices to be followed by users while storing and managing passwords in an efficient manner to secure passwords as much as they can to prevent unauthorized access.
-PrivilegedUser | A user that is authorized (and therefore, trusted) to perform security-relevant functions that ordinary users are not authorized to perform.
-Source | In general, a source is the location from which information is gathered. 
-Status | Alternatively called state, status is the current condition a device or user.
-SyncMethod | This module provides a portable way of using operating system dependent functionality.
-TTLPassword | TTL.
-TTLUser | A computer cluster is a set of computers that work together so that they can be viewed as a single system. 
-UserType | A user type defines a class of users, such as administrators, ordinary users, operators, and so on.
+pageId | Page Id
+pageSize | Page Size
+domainId | Domain Id
+instanceId | Instance Id
+Filter | Filter
 
 ### HTTP response
 
@@ -151,7 +133,7 @@ DELETE /api/v1/delete-user HTTP/1.1
 [
 {
     "linuxUserId": "1",
-    "key" : XXXXXXXXXXXX
+    
 }
 ]
 ```
@@ -199,8 +181,8 @@ POST /api/v1/addUserToMachine HTTP/1.1
 {
     "domainId":"1", 
     "instanceId":"1", 
-    "userIds":"1",
-    "key" : XXXXXXXXXXXX
+    "userIds":"1"
+  
 }
 ]
 ```
@@ -251,8 +233,8 @@ POST /api/v1/updateEPMUserWallet HTTP/1.1
     "linux_user_id":"1", 
     "server_group_name":"xyz-xyz-xyz", 
     "authnull_user_name":"abc-abc-abd", 
-    "authnull_user_group":"xyz-xyz-xyz",
-    "key" : XXXXXXXXXXXX
+    "authnull_user_group":"xyz-xyz-xyz"
+   
 }
 ]
 ```
@@ -305,8 +287,8 @@ POST /api/v1/updateEpmUserInfo HTTP/1.1
     "auth_method":"abc", 
     "user_type":"abc", 
     "credential_type":"abc", 
-    "custom_mapping":"asd",
-    "key" : XXXXXXXXXXXX
+    "custom_mapping":"asd"
+  
 }
 ]
 ```
@@ -368,8 +350,8 @@ POST /api/v1/instances/addPasswordPolicy HTTP/1.1
     "firstChar":"",
     "allowUpperLower":"",
     "allowSpecial":"yes",
-    "allowNumeric":"yes",
-    "key":"XXXXXXXXXXXX"
+    "allowNumeric":"yes"
+  
 }
 ]
 ```
@@ -428,8 +410,8 @@ DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
 ```json
 [
   {
-        "policyId":1,
-    "key":"XXXXXXXXXXXX"
+        "policyId":1
+  
     }
 ]
 ```
@@ -492,8 +474,8 @@ POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
 [
   {
         "pageId":1,
-        "pageSize":10,
-    "key":"XXXXXXXXXXXX"
+        "pageSize":10
+  
     }
 ]
 ```
@@ -556,8 +538,8 @@ POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
 [
   {
     "policyId":2,
-    "instanceId":1,
-  "key":"XXXXXXXXXXXX"
+    "instanceId":1
+  
 
 }
 ]
@@ -628,8 +610,8 @@ POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
         "firstChar":"",
         "allowUpperLower":"",
         "allowSpecial":"",
-        "allowNumeric":"",
-    "key":"XXXXXXXXXXXX"
+        "allowNumeric":""
+   
     
     }
 ]
@@ -699,14 +681,14 @@ POST /api/v1/instances/validatePolicy HTTP/1.1
         "firstChar":"",
         "allowUpperLower":"",
         "allowSpecial":"",
-        "allowNumeric":"",
-    "key":"XXXXXXXXXXXX"
+        "allowNumeric":""
+  
     
     }
 ]
 ```
 
-T`his will validate Password Policy.
+This will validate Password Policy.
 
 ### Access Token
 Authorization Key Required 

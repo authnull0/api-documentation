@@ -13,12 +13,12 @@ POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1
 
 ```json
 {
-    "domainId" :"0",
-     "filter" : "",
-      "pageId": 1 , 
-      "pageSize" :10,
-      "key" : XXXXXXXXXXXX
-  }
+"pageId": 1,
+"pageSize": 50,
+"domainId": 1,
+"instanceId":0,
+"Filter":
+{"filterBy": "localGroups", "value": ""}}
 ```
 
 ### Access Token
@@ -34,7 +34,7 @@ Parameter  | Description
  pageId | Page id
 pageSize | Size of the Page
 filter | filter
-Key | Authorization Key
+instanceId | Instance Id
 
 ### HTTP Response
 `Endpoint listed.`
@@ -85,8 +85,7 @@ POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1
 "groupName":"serverGroupTest",
 "ou":"",
 "cn":"",
-"dc":"",
-"key" : XXXXXXXXXXXX
+"dc":""
   }
 ```
 
@@ -103,7 +102,7 @@ Parameter  | Description
  domainId| Domain Id of the instances
  groupName | Name of the group
 users | Name of the Users
-Key | Authorization Key
+
 
 ### HTTP Response
 `Endpoint added.`
@@ -131,8 +130,7 @@ DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1
 ```json
 {
     "domainId" : 1 ,
-    "id": 5,
-  "key" : XXXXXXXXXXXX
+    "id": 5
   }
 ```
 
@@ -147,7 +145,7 @@ Parameter  | Description
 --------- | -----------
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
- Key | Authorization Key
+ 
  
 
 ### HTTP Response
@@ -176,8 +174,7 @@ PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1
 {
   "domainId": 1,
   "epmGroupId": "3",
-  "status":"Success",
-  "key" : XXXXXXXXXXXX
+  "status":"Success"
   }
 ```
 
@@ -194,7 +191,7 @@ Parameter  | Description
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
  status | Status
- Key | Authorization Key
+ 
 
 
 ### HTTP Response
@@ -225,16 +222,14 @@ POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1
 "domainId":1234,
 "groupId":9,
 "userIds":[2,3],
-"action":"add",
-"key" : XXXXXXXXXXXX
+"action":"add"
 }
 
 {
 "domainId":1234,
 "groupId":9,
 "userIds":[2,3],
-"action":"remove",
-"key" : XXXXXXXXXXXX
+"action":"remove"
 }
 ```
 
@@ -252,7 +247,7 @@ Parameter  | Description
  groupId | Id of the group
  action | action
  userId | User Id
- Key | Authorization Key
+ 
 
 
 ### HTTP Response
