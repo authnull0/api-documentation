@@ -13,15 +13,16 @@ POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1
 
 ```json
 {
-  "domainId": 1,
-  "pageId": 2,
-  "pageSize": 23,
-  "filter":"added",
-  "key":"34rfdhuytqwrtttbcv"
-  }
+"pageId": 1,
+"pageSize": 50,
+"domainId": 1,
+"instanceId":0,
+"Filter":
+{"filterBy": "localGroups", "value": ""}}
 ```
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1`
@@ -33,17 +34,34 @@ Parameter  | Description
  pageId | Page id
 pageSize | Size of the Page
 filter | filter
+instanceId | Instance Id
 
 ### HTTP Response
 `Endpoint listed.`
 
 ```json
+[
 {
-  "domainId": 1,
-  "pageId": 2,
-  "pageSize": 23,
-  "filter":"added"
-  }
+        "groupId": 7,
+        "groupName": "sam",
+        "usersCount": 3
+    },
+    {
+        "groupId": 8,
+        "groupName": "serverGroup1",
+        "usersCount": 29
+    },
+    {
+        "groupId": 9,
+        "groupName": "serverGroupTest",
+        "usersCount": 29
+    },
+    {
+        "groupId": 10,
+        "groupName": "helllo",
+        "usersCount": 29
+    }
+]
 ```
 <aside class="success">
 Endpoint listed.
@@ -62,14 +80,18 @@ POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1
 
 ```json
 {
-  "domainId": 1,
-  "groupName": "Blue",
-  "users":"Stephen",
-  "key":"34rfdhuytqwrtttbcv"
+"domainId":1234,
+"instanceIds":[1,2],
+"groupName":"serverGroupTest",
+"ou":"",
+"cn":"",
+"dc":""
   }
 ```
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+
+### Access Token
+Authorization Key Required 
+
 
 ### HTTP Request
 `POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1`
@@ -81,15 +103,16 @@ Parameter  | Description
  groupName | Name of the group
 users | Name of the Users
 
+
 ### HTTP Response
 `Endpoint added.`
 
 ```json
 {
-  "domainId": 1,
-  "groupName": "Blue",
-  "users":"Stephen"
-  }
+    "Instance_id": "9",
+    "Code": "200",
+    "Message": "Successfully Added Endpoint Group"
+}
 ```
 <aside class="success">
 Endpoint added.
@@ -106,14 +129,13 @@ DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1
 ```
 ```json
 {
-  "domainId": 1,
-  "epmroupId": "3",
-  "key":"34rfdhuytqwrtttbcv"
+    "domainId" : 1 ,
+    "id": 5
   }
 ```
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1`
@@ -123,43 +145,44 @@ Parameter  | Description
 --------- | -----------
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
+ 
+ 
 
 ### HTTP Response
 `Endpoint`
 
 ```json
 {
-  "domainId": 1,
-  "epmGroupId": "3",
-  }
+    "status": "Success",
+    "message": "Group Deleted successfully"
+}
 ```
 <aside class="success">
 Endpoint  deleted.
 </aside>
 
-## Update Endpoint Group Status
+## Edit Endpoint Groups
 It updates Endpoint status.
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/updateEPMGroupStatus' \
+curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/editEPMGroupStatus' \
 ```
 ```http
-PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1
+PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1
 ```
 ```json
 {
   "domainId": 1,
   "epmGroupId": "3",
-  "status":"Success",
-  "key":"34rfdhuytqwrtttbcv"
+  "status":"Success"
   }
 ```
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
-`PUT /api/v1/epmGroupManagement/updateEPMGroupStatus HTTP/1.1`
+`PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1`
 
 ### Query Parameter
 
@@ -168,27 +191,90 @@ Parameter  | Description
  domainId| Domain Id of the instances
  epmGroupId | Id of the group
  status | Status
+ 
+
+
 ### HTTP Response
 
 `Endpoint Status Updated.`
 
 ```json
 {
-  "domainId": 1,
-  "epmGroupId": "3",
-  "status":"Success"
-  }
+    "status": "Success",
+    "message": "Status Updated Successfully"
+}
 ```
 <aside class="success">
 Endpoint Status Updated.
 </aside>
 
+## Assign Users To Endpoint Groups
+It assign users to Endpoint Group
+
+```shell
+curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/assignUsersToEndpointGroup
+```
+```http
+POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1
+```
+```json
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"add"
+}
+
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"remove"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1`
+
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ action | action
+ userId | User Id
+ 
 
 
+### HTTP Response
 
+`Endpoint Status Updated.`
 
+```json
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"add"
+}
 
+{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"remove"
+}
 
-
-
+{
+    "status": "Success",
+    "message": "Users Added/Removed successfully"
+}
+```
+<aside class="success">
+Endpoint Status Updated.
+</aside>
 

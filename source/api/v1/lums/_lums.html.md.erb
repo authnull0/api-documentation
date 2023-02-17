@@ -31,16 +31,17 @@ POST /api/v1/add-linux-user-info HTTP/1.1
     "Username":"sefali",
     "AuthMethod":"s",
     "UserType":"6",
-    "CustomMapping":"6",
-    "key":"34rfdhuytqwrtttbcv"
+    "CustomMapping":"6"
+   
 }
 ]
 ```
 
-`This will add the users to LUMs.
+This will add the users to LUMs.
+`
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -79,28 +80,18 @@ POST /api/v1/list-all-lums HTTP/1.1
 
 
 ```json
-[
 {
-    "CredentialType":"xyz",
-     "HomeDir":"xyz", 
-     "LinuxUserId":"1", 
-     "LinuxUserName":"sefali", 
-     "PasswordManaged":"xyz-xyz", 
-     "PrivilegedUser":"xyz-xyz-xyz", 
-     "Source":"xyz", 
-     "Status":"active", 
-     "SyncMethod":"xyz", 
-     "TTLPassword":"xyz", 
-     "TTLUser":"xyz", 
-     "UserType":"zyx",
-     "key":"34rfdhuytqwrtttbcv"
-}
-]
+"pageId": 1,
+"pageSize": 50,
+"domainId": 1,
+"instanceId":0,
+"Filter":
+{"filterBy": "localGroups", "value": ""}}
 ```
-This will add the users to LUMs.
-`
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+
+
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -110,18 +101,11 @@ Authorization Key : `34rfdhuytqwrtttbcv`
 
 Parameter | Description
 --------- | ------- | -----------
-CredentialType |  Credentials refer to the verification of identity or tools for authentication.
-HomeDir |  A home directory is a file system directory on a multiuser operating system containing files for a given user of the system.
-LinuxUserId | A UID (user identifier) is a number assigned by Linux to each user on the system. This number is used to identify the user to the system and to determine which system resources the user can access. 
-LinuxUserName | A username is a distinctive alphabetical and numerical set of characters used to identify and gain access to a computing system.
-PasswordManaged | Password management is a set of principles and best practices to be followed by users while storing and managing passwords in an efficient manner to secure passwords as much as they can to prevent unauthorized access.
-PrivilegedUser | A user that is authorized (and therefore, trusted) to perform security-relevant functions that ordinary users are not authorized to perform.
-Source | In general, a source is the location from which information is gathered. 
-Status | Alternatively called state, status is the current condition a device or user.
-SyncMethod | This module provides a portable way of using operating system dependent functionality.
-TTLPassword | TTL.
-TTLUser | A computer cluster is a set of computers that work together so that they can be viewed as a single system. 
-UserType | A user type defines a class of users, such as administrators, ordinary users, operators, and so on.
+pageId | Page Id
+pageSize | Page Size
+domainId | Domain Id
+instanceId | Instance Id
+Filter | Filter
 
 ### HTTP response
 
@@ -149,7 +133,7 @@ DELETE /api/v1/delete-user HTTP/1.1
 [
 {
     "linuxUserId": "1",
-    "key":"34rfdhuytqwrtttbcv"
+    
 }
 ]
 ```
@@ -157,8 +141,8 @@ DELETE /api/v1/delete-user HTTP/1.1
 This will delete the users to LUMs.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -197,8 +181,8 @@ POST /api/v1/addUserToMachine HTTP/1.1
 {
     "domainId":"1", 
     "instanceId":"1", 
-    "userIds":"1",
-    "key":"34rfdhuytqwrtttbcv"
+    "userIds":"1"
+  
 }
 ]
 ```
@@ -206,8 +190,8 @@ POST /api/v1/addUserToMachine HTTP/1.1
 This will add User To Machine.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -249,8 +233,8 @@ POST /api/v1/updateEPMUserWallet HTTP/1.1
     "linux_user_id":"1", 
     "server_group_name":"xyz-xyz-xyz", 
     "authnull_user_name":"abc-abc-abd", 
-    "authnull_user_group":"xyz-xyz-xyz",
-    "key":"34rfdhuytqwrtttbcv"
+    "authnull_user_group":"xyz-xyz-xyz"
+   
 }
 ]
 ```
@@ -258,8 +242,8 @@ POST /api/v1/updateEPMUserWallet HTTP/1.1
 This will Update EPM User Wallet.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -303,8 +287,8 @@ POST /api/v1/updateEpmUserInfo HTTP/1.1
     "auth_method":"abc", 
     "user_type":"abc", 
     "credential_type":"abc", 
-    "custom_mapping":"asd",
-    "key":"34rfdhuytqwrtttbcv"
+    "custom_mapping":"asd"
+  
 }
 ]
 ```
@@ -312,8 +296,8 @@ POST /api/v1/updateEpmUserInfo HTTP/1.1
 This will update Epm User Information.
 `
 
-### Header AuthKey
-Authorization Key : `34rfdhuytqwrtttbcv`
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 
@@ -333,6 +317,412 @@ custom_mapping | custom mapping.
 ### HTTP response
 
 `successfully Update EPM User Information`
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Password Policy
+A proper password complexity policy would be: eight characters for the length of a password and at least three types of the following characters used: uppercase letters, lowercase letters, digits, and special characters. Add the following parameters and their values: minlen, dcredit, ucredit, lcredit, and ocredit.
+
+
+## Add Password Policy 
+
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/addPasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+  
+}
+]
+```
+
+This will add password policy.
+`
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/instances/addPasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+### HTTP response
+
+`successfully Add Password Policy`
+
+```json
+{
+    "code": 200,
+    "message": "Successfully Added Password Policy"
+}
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Delete Password Policy
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":1
+  
+    }
+]
+```
+
+This will delete password policy.
+`
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyId | Policy id is for linux user.
+
+
+### HTTP response
+
+`successfully Add Password Policy`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## List All Password Policy
+
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "pageId":1,
+        "pageSize":10
+  
+    }
+]
+```
+
+This will List all password policy.
+`
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/instances/addPasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+pageId | Id for page.
+pageSize | Page size for page.
+
+### HTTP response
+
+`successfully List All Password Policy`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Assign Policy To Machine
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
+
+
+
+
+```json
+[
+  {
+    "policyId":2,
+    "instanceId":1
+  
+
+}
+]
+```
+
+This will Assign Policy To Machine.
+
+### HTTP AuthKey
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/instances/assignPolicyToMachine HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyId | Policy id is for linux user.
+instanceId | id for the instance
+
+
+### HTTP response
+
+`successfully Assign Policy To Machine`
+
+```json
+[
+  {
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+
+## Update Password Policy
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":2,
+        "policyName":"PolicyManjuTest1",
+        "minLen":"3",
+        "maxLen":"5",
+        "firstChar":"",
+        "allowUpperLower":"",
+        "allowSpecial":"",
+        "allowNumeric":""
+   
+    
+    }
+]
+```
+
+This will update Password Policy.
+`
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/instances/updatePasswordPolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+
+### HTTP response
+
+`successfully update Password Policy`
+
+```json
+[
+ {
+  "Update Successfully"
+ }
+]
+
+```
+
+<aside class="success">
+Remember — This is for Add in LUMs!
+</aside>
+
+## Validate Password
+
+```shell
+curl "https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy" 
+  -H "Authorization: AuthNull"
+```
+
+```HTTP
+POST /api/v1/instances/validatePolicy HTTP/1.1
+
+
+
+
+```json
+[
+  {
+        "policyId":2,
+        "policyName":"PolicyManjuTest1",
+        "minLen":"3",
+        "maxLen":"5",
+        "firstChar":"",
+        "allowUpperLower":"",
+        "allowSpecial":"",
+        "allowNumeric":""
+  
+    
+    }
+]
+```
+
+This will validate Password Policy.
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/instances/validatePolicy HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+policyName | Policy name is for linux user.
+templateName | template for name name is for lums.
+minLen | AuthNull authentication methad.
+maxLen | maximum length for length.
+firstChar | character type.
+allowUpperLower | Allow upper lower case.
+allowSpecial | custom mapping.
+allowNumeric | allow numeric is to allow number
+
+
+### HTTP response
+
+`successfully update Password Policy`
+
+```json
+[
+ {
+  "Update Successfully"
+ }
+]
+
+```
 
 <aside class="success">
 Remember — This is for Add in LUMs!
