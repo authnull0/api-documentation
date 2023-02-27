@@ -15,12 +15,12 @@ This is a PRD for the Linux user management service (LUMS) covering the followin
 
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info'
+curl POST https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info
 ```
 
-```HTTP
+```http
 POST /api/v1/add-linux-user-info HTTP/1.1
-
+```
 
 
 
@@ -37,7 +37,7 @@ POST /api/v1/add-linux-user-info HTTP/1.1
 ```
 
 This will add the users to LUMs.
-`
+
 
 ### Access Token
 Authorization Key Required 
@@ -68,11 +68,12 @@ Remember — This is for Add in LUMs!
 
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/listAllEpmUsers'
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/listAllEpmUsers
 ```
 
-```HTTP
+```http
 POST /api/v1/lums/listAllEpmUsers HTTP/1.1
+```
 
 
 
@@ -114,209 +115,329 @@ Filter | Filter
 Remember — This is for Add in LUMs!
 </aside>
  
-## Delete User
+## Add EPM User Info
 
 ```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser'
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo'
 ```
 
-```HTTP
-DELETE /api/v1/lums/deleteEpmUser HTTP/1.1
-
+```http
+POST /api/v1/lums/addEpmUserInfo HTTP/1.1
+```
 
 
 
 ```json
-[
 {
-    "linuxUserId": "1",
-    
+"domainId":1,
+"userType":"Local",
+"credType":"password",
+"password":"manju",
+"privilegedUser":"true",
+"userName":"testManjuupdate",
+"sshKey":"",
+"motp":"",
+"did":""
 }
-]
 ```
 
-This will delete the users to LUMs.
-`
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
 
-`DELETE /api/v1/lums/deleteEpmUser HTTP/1.1`
+`POST /api/v1/lums/addEpmUserInfo HTTP/1.1`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | ------- | -----------
-LinuxUserId | A UID (user identifier) is a number assigned by Linux to each user on the system. This number is used to identify the user to the system and to determine which system resources the user can access. 
+domainId | Domain Id
+userType | Type of Users
+credType | Credential Type
+password | Password
+privilegedUser | Priveleged User
+userName | Name of user
+sshKey | sshKey
+motp | motp
+did | DID
+
 
 ### HTTP response
 
-`successfully Deleted`
+```json
+{
+    "status": "Success",
+    "message": "User Added successfully",
+    "userId": "71"
+}
+```
+
+`User Added successfully`
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+User Added successfully
 </aside>
 
-## Add user to machine
+## Get EPM User detail
 
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/addUserToMachine" 
-  -H "Authorization: AuthNull"
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/getEpmUserDetail'
 ```
 
-```HTTP
-POST /api/v1/addUserToMachine HTTP/1.1
-
+```http
+POST /api/v1/lums/getEpmUserDetail
+```
 
 
 
 ```json
-[
 {
-    "domainId":"1", 
-    "instanceId":"1", 
-    "userIds":"1"
-  
+"userId":26,
+"domainId":1
 }
-]
 ```
 
-This will add User To Machine.
-`
+
+
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
 
-`POST /api/v1/addUserToMachine HTTP/1.1`
+`POST /api/v1/lums/getEpmUserDetail HTTP/1.1`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | ------- | -----------
 domainId | Domain Id of the instances.
-instanceId |Instance Id of the used
 userIds | userId is used
 
 ### HTTP response
 
-`successfully add user to machine`
+```json
+{
+"domainId":1,
+"userId":26,
+"userType":"Local",
+"credType":"password",
+"password":"manju",
+"privilegedUser":"true",
+"userName":"testManjuupdate",
+"sshKey":"",
+"motp":"",
+"did":""
+}
+```
+
+`Epm User Detail Fetched`
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+Epm User Detail Fetched
 </aside>
 
 
-## update Endpoint User Wallet
+## Update EPM User Info
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/updateEPMUserWallet" 
-  -H "Authorization: AuthNull"
+curl PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo
 ```
 
-```HTTP
-POST /api/v1/updateEPMUserWallet HTTP/1.1
-
+```http
+PUT /api/v1/lums/updateEpmUserInfo HTTP/1.1
+```
 
 
 
 ```json
-[
 {
-    "linux_user_id":"1", 
-    "server_group_name":"xyz-xyz-xyz", 
-    "authnull_user_name":"abc-abc-abd", 
-    "authnull_user_group":"xyz-xyz-xyz"
-   
+"userId":26,
+"domainId":1,
+"userType":"Local",
+"credType":"password",
+"password":"manju",
+"privilegedUser":"true",
+"userName":"testManjuupdate",
+"sshKey":"",
+"motp":"",
+"did":""
 }
-]
 ```
 
-This will Update EPM User Wallet.
-`
+
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
 
-`POST /api/v1/updateEPMUserWallet HTTP/1.1`
+`PUT /api/v1/lums/updateEpmUserInfo HTTP/1.1`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | ------- | -----------
-linux_user_id | linuxUserId is for linux user.
-server_group_name |ServerGroupName is for lums.
-authnull_user_name | AuthNull user name is the name.
-authnull_user_group | AuthNull user group is for group.
+userId | Id of the user
+domainId | Domain Id
+userType | Type of user
+credType | Credential Type
+passord | Password
+privilegedUser | privileged User
+userName | Name of User
+sshKey | sshKey
+motp | motp
+did | DID
+
 
 ### HTTP response
 
-`successfully Update EPM User Wallet`
+`EPM User Info updated`
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+EPM User Info updated
 </aside>
 
-## update Endpoint User Info
+## Download sshKey
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/updateEpmUserInfo" 
-  -H "Authorization: AuthNull"
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/donwloadSshKey
 ```
 
-```HTTP
-POST /api/v1/updateEpmUserInfo HTTP/1.1
-
-
-
-
-```json
-[
-{
-    "linux_user_id":"1",
-    "username":"xyz-xyz-xyz", 
-    "auth_method":"abc", 
-    "user_type":"abc", 
-    "credential_type":"abc", 
-    "custom_mapping":"asd"
-  
-}
-]
+```http
+POST /api/v1/lums/donwloadSshKey  HTTP/1.1
 ```
 
-This will update Epm User Information.
-`
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
 
-`POST /api/v1/updateEpmUserInfo HTTP/1.1`
+`POST /api/v1/lums/donwloadSshKey HTTP/1.1`
+
+### Query Parameters
+
+### HTTP response
+
+`successfully sshKey downloaded`
+
+<aside class="success">
+successfully sshKey downloaded
+</aside>
+
+## Generate sshKey
+
+```shell
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/generateSshKey
+```
+
+```http
+POST /api/v1/lums/generateSshKey HTTP/1.1
+```
+
+
+
+```json
+{
+"domainId":1,
+"userName":"manju"
+}
+```
+
+
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/lums/generateSshKey HTTP/1.1`
 
 ### Query Parameters
 
 Parameter | Description
 --------- | ------- | -----------
-linux_user_id | linuxUserId is for linux user.
-username | user name is for lums.
-auth_method | AuthNull authentication methad.
-user_type | Type of user.
-credential_type | credential type.
-custom_mapping | custom mapping.
+domainId | Domain Id
+userName | Name of User
+
+
 
 ### HTTP response
 
-`successfully Update EPM User Information`
+```json
+Private Key:
+
+Public Key:
+```
+
+`sshKey generated`
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+sshKey generated
+</aside>
+
+
+
+## Delete EPM User
+
+```shell
+curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser
+```
+
+```http
+DELETE api/v1/lums/deleteEpmUser HTTP/1.1
+```
+
+
+
+```json
+{
+"epmUserId":899,
+"domainId":1,
+"userName":"messagebus",
+"instanceIds":[2]
+
+}
+```
+
+
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`DELETE api/v1/lums/deleteEpmUser HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+domainId | Domain Id
+epmUserId | EPM user Id
+userName | User Name
+instanceId | Instance Id
+
+
+
+### HTTP response
+
+```json
+{
+    "status": "Success",
+    "message": "User deleted successfully",
+    "userId": "25"
+}
+```
+
+`EPM User deleted`
+
+<aside class="success">
+EPM User deleted
 </aside>
 
 ## Password Policy
@@ -327,34 +448,28 @@ A proper password complexity policy would be: eight characters for the length of
 
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy" 
-  -H "Authorization: AuthNull"
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy
 ```
 
-```HTTP
+```http
 POST /api/v1/instances/addPasswordPolicy HTTP/1.1
-
+```
 
 
 
 ```json
-[
-  {
-    "policyName":"PolicynonMachineTest",
-    "templateName":"Template1",
-    "minLen":"5",
-    "maxLen":"10",
-    "firstChar":"",
-    "allowUpperLower":"",
-    "allowSpecial":"yes",
-    "allowNumeric":"yes"
-  
+{
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
 }
-]
 ```
 
-This will add password policy.
-`
 
 ### Access Token
 Authorization Key Required 
@@ -378,7 +493,7 @@ allowNumeric | allow numeric is to allow number
 
 ### HTTP response
 
-`successfully Add Password Policy`
+`successfully Added Password Policy`
 
 ```json
 {
@@ -388,19 +503,18 @@ allowNumeric | allow numeric is to allow number
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully Added Password Policy
 </aside>
 
 ## Delete Password Policy
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy" 
-  -H "Authorization: AuthNull"
+curl DELETE https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy
 ```
 
-```HTTP
+```http
 DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
-
+```
 
 
 
@@ -413,8 +527,6 @@ DELETE /api/v1/instances/deletePasswordPolicy HTTP/1.1
 ]
 ```
 
-This will delete password policy.
-`
 ### Access Token
 Authorization Key Required 
 
@@ -431,7 +543,7 @@ policyId | Policy id is for linux user.
 
 ### HTTP response
 
-`successfully Add Password Policy`
+`successfully deleted Password Policy`
 
 ```json
 [
@@ -450,20 +562,19 @@ policyId | Policy id is for linux user.
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully deleted Password Policy
 </aside>
 
 ## List All Password Policy
 
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy" 
-  -H "Authorization: AuthNull"
+curlPOST  https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy
 ```
 
-```HTTP
+```http
 POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
-
+```
 
 
 
@@ -477,8 +588,7 @@ POST /api/v1/instances/listAllPasswordPolicy HTTP/1.1
 ]
 ```
 
-This will List all password policy.
-`
+
 
 ### Access Token
 Authorization Key Required 
@@ -496,7 +606,7 @@ pageSize | Page size for page.
 
 ### HTTP response
 
-`successfully List All Password Policy`
+`successfully Listed All Password Policy`
 
 ```json
 [
@@ -515,19 +625,18 @@ pageSize | Page size for page.
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully Listed All Password Policy
 </aside>
 
 ## Assign Policy To Machine
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine" 
-  -H "Authorization: AuthNull"
+curl POST https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine
 ```
 
-```HTTP
+```http
 POST /api/v1/instances/assignPolicyToMachine HTTP/1.1
-
+```
 
 
 
@@ -561,7 +670,7 @@ instanceId | id for the instance
 
 ### HTTP response
 
-`successfully Assign Policy To Machine`
+`successfully Assigned Policy To Machine`
 
 ```json
 [
@@ -580,20 +689,19 @@ instanceId | id for the instance
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully Assigned Policy To Machine
 </aside>
 
 
 ## Update Password Policy
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy" 
-  -H "Authorization: AuthNull"
+curl POST https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy
 ```
 
-```HTTP
+```http
 POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
-
+```
 
 
 
@@ -615,7 +723,7 @@ POST /api/v1/instances/updatePasswordPolicy HTTP/1.1
 ```
 
 This will update Password Policy.
-`
+
 
 ### Access Token
 Authorization Key Required 
@@ -640,7 +748,7 @@ allowNumeric | allow numeric is to allow number
 
 ### HTTP response
 
-`successfully update Password Policy`
+`successfully updated Password Policy`
 
 ```json
 [
@@ -652,19 +760,18 @@ allowNumeric | allow numeric is to allow number
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully updated Password Policy
 </aside>
 
 ## Validate Password
 
 ```shell
-curl "https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy" 
-  -H "Authorization: AuthNull"
+curl POST https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy
 ```
 
-```HTTP
+```http
 POST /api/v1/instances/validatePolicy HTTP/1.1
-
+```
 
 
 
@@ -710,7 +817,7 @@ allowNumeric | allow numeric is to allow number
 
 ### HTTP response
 
-`successfully update Password Policy`
+`successfully Password Policy validated`
 
 ```json
 [
@@ -722,5 +829,5 @@ allowNumeric | allow numeric is to allow number
 ```
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+successfully Password Policy validated
 </aside>

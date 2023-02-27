@@ -13,7 +13,7 @@ Endpoint management is the process of actively monitoring, detecting, and preven
 List All Instances lists all the instances that are present .
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/instances/list' \
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/list' \
 ```
 
 ```http
@@ -22,9 +22,10 @@ POST /api/v1/instances/list HTTP/1.1
 
 ```json
 {
-    "domainId":1,
-    "pageId":1,
-    "pageSize":10
+  "domainId": 1,
+"pageId": 1,
+"pageSize": 10,
+"filter":""
 }
 ```
 
@@ -39,14 +40,9 @@ Authorization Key Required
 Parameter  | Description
 --------- | -----------
 domainId | Domain Id of the Apps
-instanceName | Name of the instance
-osId | Id of the OS used
-publicIp | Public Ip of the instance
-privateIp | Private Ip of the Instance
-totalUser | Total number of Users
-hostName | Name of the host
-status | Status of the instances
-
+pageId | Id of the page
+pageSize | size of the page
+filter | filter
 
 ### HTTP Response
 
@@ -54,19 +50,23 @@ status | Status of the instances
 
 ```json
 {
-  "domainId": 1,
-  "groupId": 1,
-  "instances": [
-      {
-          "totalUsers": 2,
-          "instanceName": "lap",
-          "osName": "RedHat",
-          "publicIp": "qw12",
-          "privateIp": "",
-          "hostName": "",
-          "status": "active",
-          "instanceId": 1
-      }
+    "domainId": 1,
+    "groupId": 0,
+    "totalCount": 7,
+    "instances": [
+        {
+            "totalUsers": 38,
+            "instanceName": "SK2014",
+            "osName": "RedHat",
+            "publicIp": "192.168.3.1",
+            "privateIp": "",
+            "hostName": "",
+            "status": "Inactive",
+            "instanceId": 1,
+            "totalGroups": 8
+        }
+      ]
+    }
 ```
 
 <aside class="success">
@@ -77,11 +77,11 @@ All the instances listed below.
 Add Instances adds particular instances to the existing list.
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/instances/add-instance' \
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addInstance
 ```
 
 ```http
-POST /api/v1/instances/add-instance HTTP/1.1
+POST /api/v1/instances/addInstance HTTP/1.1
 ```
 
 ```json
@@ -90,7 +90,7 @@ POST /api/v1/instances/add-instance HTTP/1.1
 "instance_name":"kloudone.vm",
 "os_id":1,
 "public_ip":"144.32.55.5",
-"private_ip":"10.32.45.1"
+"private_ip":"10.32.45.1",
 }
 ```
 
@@ -98,16 +98,17 @@ POST /api/v1/instances/add-instance HTTP/1.1
 Authorization Key Required 
 
 ### HTTP Request
-`POST /api/v1/instances/add-instance HTTP/1.1`
+`POST /api/v1/instances/addInstance HTTP/1.1`
 
 ### Query Parameter
 
 Parameter  | Description
 --------- | -----------
-machineKey| Machine Key of the instances
-osId | Id of the OS used
-publicIpAddress | Public Ip of the instance
-privateIpAddress | Private Ip of the Instance
+domain_id | Domain Id
+instance_name | Name of instance
+os_id | Id of the OS used
+public_ip | Public Ip of the instance
+private_ip | Private Ip of the Instance
 
 
 ### HTTP Response
@@ -129,11 +130,11 @@ Instance added to the list.
 It updates the instances that are present.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/update-instance' \
+curl PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateInstanceStatus
 ```
 
 ```http
-PUT /api/v1/instances/update-instance HTTP/1.1
+PUT /api/v1/instances/updateInstanceStatus HTTP/1.1
 ```
 
 ```json
@@ -155,7 +156,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`PUT /api/v1/instances/add-instance HTTP/1.1`
+`PUT /api/v1/instances/updateInstanceStatus HTTP/1.1`
 
 ### Query Parameter
 
@@ -181,7 +182,7 @@ Instance updated.
 It updated the type of Authorization used.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateAuthType' 
+curl PUT https://api.authnull.kloudlearn.com/api/v1/instances/updateAuthType
 ```
 
 ```http
@@ -190,10 +191,11 @@ PUT /api/v1/instances/updateAuthType HTTP/1.1
 
 ```json
 {
-    "instanceId":"1",
-    "domainId":"1",
-    "authType":"SSH,DID,Password"
-    
+    "instanceId":"1",
+    "domainId":"1",
+    "authType":"SSH,DID,Password"
+}
+ 
 ```
 
 ### Access Token
@@ -210,7 +212,7 @@ Parameter  | Description
 instanceId | Instance Id 
 domainId   | domain Id
 authType   | Authorization type
-Key        | Authorization Key
+
 
 ### HTTP Response
 
@@ -231,7 +233,7 @@ Auth type updated
 It assign usere to existing machines.
 
 ```shell
-curl --location --request 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines
 ```
 
 ```http
@@ -245,16 +247,6 @@ POST /api/v1/instances/assignUsersToMachines HTTP/1.1
     "domainId":1,
     "userIds":[106,103],
     "action" : "add"
-}
-
-
- 
-
-{
-    "instanceIds":[1,2],
-    "domainId":1,
-    "userIds":[106,103],
-    "action" : "remove"
 }
 
 ```
@@ -280,9 +272,10 @@ action | Whether it is add or remove
 
 ```json
 {
-    "code": 200,
-    "message": "Successfully Added"
+    "code": 200,
+    "message": "Successfully Added"
 }
+
 ```
 
 <aside class="success">
@@ -296,18 +289,18 @@ Group added to Machine
 It adds/removes groups to existing machines.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/addGroupsToMachines' \
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/assignGroupToMachines
 ```
 
 ```http
-PUT /api/v1/instances/addGroupsToMachines HTTP/1.1
+PUT /api/v1/instances/assignGroupToMachines HTTP/1.1
 ```
 
 ```json
 {
-    "instanceId":[1,2],
-    "domainId":1,
-    "groupId":[1,2,3],
+    "instanceId":[1,2],
+    "domainId":1,
+    "groupId":[1,2,3],
      "action":"add"
 }
 
@@ -327,7 +320,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`PUT /api/v1/instances/addGroupsToMachines/1.1`
+`PUT /api/v1/instances/assignGroupToMachines`
 
 ### Query Parameter
 Parameter  | Description
