@@ -87,6 +87,89 @@ description | Description of the User DID
 ### HTTP Response
 `Successfully created DID`
 
+
+## Create Schema List 
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema
+```
+
+```http
+POST /api/v1/schema/createSchema HTTP/1.1
+```
+
+```json
+{
+  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "name": "EPM User",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "EPM User Schema",
+    "type": "object",
+    "properties": {
+      "userId": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "sign": false
+}
+
+```
+### HTTP Request
+`POST /api/v1/schema/createSchema HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+author  | Author
+name | This refers to the name.
+schema | This refers to schema
+description | Description
+type | Type 
+properties | Properties 
+userId | Id of the user.
+additionalProperties | Additional Properties 
+sign | sign
+
+```json
+{
+    "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+    "Schema": {
+        "type": "https://w3c-ccg.github.io/vc-json-schemas/schema/2.0/schema.json",
+        "version": "1.0",
+        "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+        "name": "EPM User",
+        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
+        "authored": "2023-02-28T15:34:42Z",
+        "Schema": {
+            "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": false,
+            "description": "EPM User Schema",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
+```
+
+### HTTP Response
+`Schema List created`
+
+
 ## Credential Schema List 
 This API retrieves all the available schemas for creating a Verifiable Credential.
 
@@ -212,6 +295,44 @@ holderDid |Holder DID refers to the recipient of the verifiable credential.
 
 ### HTTP Response
 `Credential Revoked successfully`
+
+## Credential PR 
+
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/credentialPR'
+```
+
+```http
+POST /api/v1/did/credentialPR HTTP/1.1
+```
+```json
+{
+  "domainId": 1,
+  "did": "did:web:xxxxxxx"
+  "verifierId": 123
+}
+```
+### HTTP Request
+`POST https://api.authnull.kloudlearn.com/api/v1/did/credentialPR HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+
+domainId | This refers to the company or organization which the user is part of. 
+did | DID
+verifierId | Verifier Id
+
+
+```json
+{
+  credential spec
+}
+```
+
+### HTTP Response
+`Credential PR`
 
 
 ## Credential List
@@ -421,9 +542,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ```json
 {
   "domainId": 1,
-  "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn",
-  "holderDid": "did:brcm:z6Mkk6VNNoj2feojkoRFsek7HKqJJQeNZBLdz3TJ3T5P8Fq6",
-  "vcId": 1234
+  "issuerDid": "did:brcm:dfdasfdasf",
+  "userDid": "did:brcm:dfdsafdsfdg",
+  "credentialId": "fdsaf-dfdsfdasf-dsfdasf"
+  "action": "Assign"
 }
 ```
 ### HTTP Request
@@ -434,20 +556,348 @@ Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
 issuerDID      |This refers to the DID of the issuing organization or company. 
-holderDid  | Holder DID refers to the recipient of the verifiable credential.
-vcId | VC ID
+userId | Id of the user
+credentialId | Credential Id
+action | Action
 
 
 ```json
 {
-    "Message": "Credential Assignment successfully",
-    "Code": 200,
-    "Status": "Success"
+  "Code": 200,
+  "Message": "Credential Assigned Successfully",
+  "Status": "Success"
 }
 ```
 
 ### HTTP Response
 `Successfully assigned VC`
+
+
+## Verify VC
+
+
+```http
+POST /api/v1/did/verifyVerifiableCredential HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/verifyVerifiableCredential'
+```
+
+```json
+{
+  "domainId": 1,
+  "did": "did:web:xxxxx "
+  "claims": { Claim Spec}
+  "verifier": 23213
+}
+```
+### HTTP Request
+`POST /api/v1/did/verifyVerifiableCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+did | did
+claims | claims
+verifier | Verifier
+
+
+```json
+{
+  "isVerified": true/false
+}
+```
+
+### HTTP Response
+`Successfully VC verified`
+
+
+## Sign VC
+
+
+```http
+POST /api/v1/did/signVerifiableCredential HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/signVerifiableCredential'
+```
+
+```json
+{
+  "domainId": 1,
+  "issuerDid": "did:bcm:xxxxx",
+  "holderDid": "did:bcm:yyyyy",
+  "vcId": "123"
+}
+```
+### HTTP Request
+`POST /api/v1/did/signVerifiableCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+issuerDid |This refers to the DID of the issuing organization or company.
+holderDid |Holder DID refers to the recipient of the verifiable credential.
+vcId | Verifiable Credential Id
+
+
+```json
+{
+  "isSigned": true/false
+}
+```
+
+### HTTP Response
+`Successfully VC signed`
+
+
+
+## Present VC
+
+
+```http
+POST /api/v1/did/presentVerifiableCredential HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/presentVerifiableCredential'
+```
+
+```json
+{
+  "domainId": 1,
+  "walletId": 123,
+  "vcDid": "did:bcm:yyyy",
+  "verifierId": ""
+}
+```
+### HTTP Request
+`POST /api/v1/did/presentVerifiableCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+walletId | Wallet Id
+vcDid | Verifiable Credential Did
+verifierId | verifier Id
+
+
+### HTTP Response
+`Successfully VC presented`
+
+
+## VC-Verify-Request
+
+
+```http
+POST /api/v1/did/vcVerifyRequest HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/vcVerifyRequest'
+```
+
+```json
+{
+  "domainId": 1,
+  "verifierId": 2,
+  "vcDid": "did:bcm:yyyy"
+}
+```
+### HTTP Request
+`POST /api/v1/did/vcVerifyRequest HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+vcDid | Verifiable Credential Did
+verifierId | verifier Id
+
+
+### HTTP Response
+`Successfully VC verify request sent`
+
+## Register Wallet
+
+
+```http
+POST /api/v1/walletService/registerDevice HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletService/registerDevice'
+```
+
+```json
+{
+  "email": "hussain@kloudone.com",
+  "walletKey": "dnfdm-dfdsfdf-dfdfd=dfdasfn"
+}
+```
+### HTTP Request
+`POST /api/v1/walletService/registerDevice HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+email | email address
+walletKey | Wallet key
+
+
+
+```json
+{
+  "code": 200,
+  "status":"Success",
+  "message":"Wallet successfully registered"}
+}
+```
+
+### HTTP Response
+` Wallet registered Successfully`
+
+
+## Get-Credential-json
+
+
+```http
+POST /api/v1/did/GetCredential HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/GetCredential'
+```
+
+```json
+{
+  "domainId": 1,
+  "credentialId": 100
+}
+```
+### HTTP Request
+`POST /api/v1/did/GetCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+email | email address
+walletKey | Wallet key
+
+
+
+```json
+{
+  credential spec 
+}
+```
+
+### HTTP Response
+`Credential json Successfully displayed`
+
+
+## Wallet User List
+
+
+```http
+POST /api/v1/wallet/users HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/wallet/users'
+```
+
+```json
+{
+  "domainId": 1
+}
+```
+### HTTP Request
+`POST /api/v1/wallet/users HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+
+
+
+```json
+{
+  "Code": 200,
+  "Message": "Successfully retrieved waller users",
+  "Status": "Success",
+  "users": [
+      {
+          "userId": 100,
+          "walletUrl": "link",
+          "noOfCredentials": 10
+      }
+  ]
+}
+```
+
+### HTTP Response
+`Successfully Listed wallet user`
+
+
+## Create EPM User Verifiable Credential
+
+
+```http
+POST /api/v1/credentials/createEpmUserCredential HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credentials/createEpmUserCredential
+```
+
+```json
+{
+  "epmUserId": 1,
+  "epmUsername": "john",
+  "credentialType": "password",
+  "credentialValue": "abcxyz",
+  "privilegedUser": true,
+  "userType": "local",
+  "listOfEndpoints": [1, 2, 3],
+  "listOfGroups": [1, 2, 3],
+  "listOfWallets": [1, 2, 3]
+}
+```
+### HTTP Request
+`POST /api/v1/credentials/createEpmUserCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+epmUserId | epm User Id
+epmUsername | epm User Name
+credentialType | Credential Type
+credentialValue Value of the credential
+privilegedUser | privileged User
+userType | Type of users
+listOfEndpoints | List of endpoints
+listOfGroups | List of groups
+listOfWallets | list of wallets
+
+
+
+```json
+{
+  "code": 201,
+  "status": "success",
+  "message": "Queued"
+}
+```
+
+### HTTP Response
+`Successfully created EPM User Verifiable Credential`
 
 
 ## User List
