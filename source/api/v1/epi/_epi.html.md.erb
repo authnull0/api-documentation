@@ -126,57 +126,6 @@ private_ip | Private Ip of the Instance
 Instance added to the list.
 </aside>
 
-## Update Instances Status
-It updates the instances that are present.
-
-```shell
-curl PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateInstanceStatus
-```
-
-```http
-PUT /api/v1/instances/updateInstanceStatus HTTP/1.1
-```
-
-```json
-{
-  "domainId": "123",
-  status:"ACTIVE"
-  "instanceIds": ["1,2,3"]
-}
-
-{
-  "domainId": "123",
-  status:"DISABLED"
-  "instanceIds": ["1,2,3"]
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`PUT /api/v1/instances/updateInstanceStatus HTTP/1.1`
-
-### Query Parameter
-
-Parameter  | Description
---------- | -----------
-domainId| Domain Id of the instances
-instanceId | Instance Id of the used
-status| status of the instances whether it is updated or not.
-
-### HTTP Response
-
-`Instance updated.`
-
-```json
-"Machine Status Updated "
-```
-
-<aside class="success">
-Instance updated.
-</aside>
 
 ## Update Auth Type
 It updated the type of Authorization used.
@@ -191,8 +140,8 @@ PUT /api/v1/instances/updateAuthType HTTP/1.1
 
 ```json
 {
-    "instanceId":"1",
-    "domainId":"1",
+    "instanceId":1,
+    "domainId":1,
     "authType":"SSH,DID,Password"
 }
  
