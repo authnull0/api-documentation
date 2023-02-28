@@ -4,29 +4,28 @@ Enterprise Performance Management (EPM)  helps you analyze, understand, and repo
 It list all the Endpoint that are present.
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/listAllEPMGroup' \
+curl POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/listEndpointGroup
 ```
 
 ```http
-POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1
+POST /api/v1/instanceGroup/listEndpointGroup
 ```
 
 ```json
 {
-"pageId": 1,
-"pageSize": 50,
-"domainId": 1,
-"instanceId":0,
-"Filter":
-{"filterBy": "localGroups", "value": ""}}
+    "domainId" :"1",
+     "filter" : "",
+      "pageId": 1 , 
+      "pageSize" :100
+}
 ```
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
-`POST /api/v1/epmGroupManagement/listAllEPMGroup HTTP/1.1`
-
+`POST /api/v1/instanceGroup/listEndpointGroup
+`
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
@@ -34,34 +33,26 @@ Parameter  | Description
  pageId | Page id
 pageSize | Size of the Page
 filter | filter
-instanceId | Instance Id
 
 ### HTTP Response
 `Endpoint listed.`
 
 ```json
-[
 {
-        "groupId": 7,
-        "groupName": "sam",
-        "usersCount": 3
-    },
-    {
-        "groupId": 8,
-        "groupName": "serverGroup1",
-        "usersCount": 29
-    },
-    {
-        "groupId": 9,
-        "groupName": "serverGroupTest",
-        "usersCount": 29
-    },
-    {
-        "groupId": 10,
-        "groupName": "helllo",
-        "usersCount": 29
-    }
-]
+    "totalCount": 2,
+    "groups": [
+        {
+            "groupId": 60,
+            "groupName": "test 5",
+            "usersCount": 38
+        },
+        {
+            "groupId": 62,
+            "groupName": "test1",
+            "usersCount": 38
+        }
+    ]
+}
 ```
 <aside class="success">
 Endpoint listed.
@@ -71,22 +62,22 @@ Endpoint listed.
 It adds the Endpoint to the present list.
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/addEPMGroup' \
+curl POST 'https://api.authnull.kloudlearn.comapi/v1/instanceGroup/addInstanceGroup
 ```
 
 ```http
-POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1
+POST api/v1/instanceGroup/addInstanceGroup
 ```
 
 ```json
 {
-"domainId":1234,
-"instanceIds":[1,2],
-"groupName":"serverGroupTest",
+"domainId":1,
+"instanceIds":[1,3],
+"groupName":"ServerGroup",
 "ou":"",
 "cn":"",
 "dc":""
-  }
+}
 ```
 
 ### Access Token
@@ -94,14 +85,18 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST /api/v1/epmGroupManagement/addEPMGroup HTTP/1.1`
+`POST api/v1/instanceGroup/addInstanceGroup`
 
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
  domainId| Domain Id of the instances
+ instanceIds | Instance Id 
  groupName | Name of the group
-users | Name of the Users
+ ou | organization unit
+ cn | common name
+ dc | domain component
+ 
 
 
 ### HTTP Response
@@ -109,9 +104,9 @@ users | Name of the Users
 
 ```json
 {
-    "Instance_id": "9",
+    "Instance_id": "63",
     "Code": "200",
-    "Message": "Successfully Added Endpoint Group"
+    "Message": "Successfully Updated Endpoint Group"
 }
 ```
 <aside class="success">
@@ -122,23 +117,24 @@ Endpoint added.
 It is used to delete the Endpoint from the existing list.
 
 ```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/deleteEPMGroup' \
+curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/deleteEndpointGroup
 ```
 ```http
-DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1
+DELETE api/v1/instanceGroup/deleteEndpointGroup
 ```
 ```json
 {
-    "domainId" : 1 ,
-    "id": 5
-  }
+    "domainId" : 1 ,
+    "id": 5
+}
+ 
 ```
 
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
-`DELETE /api/v1/epmGroupManagement/deleteEPMGroup HTTP/1.1`
+`DELETE api/v1/instanceGroup/deleteEndpointGroup`
 
 ### Query Parameter
 Parameter  | Description
@@ -149,7 +145,7 @@ Parameter  | Description
  
 
 ### HTTP Response
-`Endpoint`
+`Endpoint Deleted`
 
 ```json
 {
@@ -165,17 +161,18 @@ Endpoint  deleted.
 It updates Endpoint status.
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/epmGroupManagement/editEPMGroupStatus' \
+curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/editInstanceGroup
 ```
+
 ```http
-PUT /api/v1/epmGroupManagement/editEPMGroupStatus HTTP/1.1
+PUT /api/v1/instanceGroup/editInstanceGroup
 ```
 ```json
 {
-  "domainId": 1,
-  "epmGroupId": "3",
-  "status":"Success"
-  }
+"DomainId":16,
+"instanceIds":[1,2],
+"groupName":"Ghimiray"
+}
 ```
 
 ### Access Token
@@ -189,8 +186,8 @@ Authorization Key Required
 Parameter  | Description
 --------- | -----------
  domainId| Domain Id of the instances
- epmGroupId | Id of the group
- status | Status
+ instanceIds| Instance Id of the group
+ groupName | Name of the group
  
 
 
@@ -208,14 +205,15 @@ Parameter  | Description
 Endpoint Status Updated.
 </aside>
 
-## Assign Users To Endpoint Groups
+## Assign Users To Endpoint Group
 It assign users to Endpoint Group
 
 ```shell
-curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/assignUsersToEndpointGroup
+curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToEndpointGroup
 ```
+
 ```http
-POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1
+POST /api/v1/instances/assignUsersToEndpointGroup
 ```
 ```json
 {
@@ -237,7 +235,7 @@ POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1
 Authorization Key Required 
 
 ### HTTP Request
-`POST /api/v1/instanceGroup/assignUsersToEndpointGroup HTTP/1.1`
+`POST /api/v1/instances/assignUsersToEndpointGroup`
 
 ### Query Parameter
 
@@ -256,25 +254,267 @@ Parameter  | Description
 
 ```json
 {
-"domainId":1234,
-"groupId":9,
-"userIds":[2,3],
-"action":"add"
-}
-
-{
-"domainId":1234,
-"groupId":9,
-"userIds":[2,3],
-"action":"remove"
-}
-
-{
-    "status": "Success",
-    "message": "Users Added/Removed successfully"
+    "status": "Success",
+    "message": "Users Added/Removed successfully"
 }
 ```
 <aside class="success">
 Endpoint Status Updated.
 </aside>
+
+
+
+## Add Auth Flow
+It adds the authentication flow
+
+```shell
+curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/addAuthFlowToInstanceGroup
+```
+
+```http
+POST /api/v1/instanceGroup/addAuthFlowToInstanceGroup
+```
+```json
+{
+"domainId":1234,
+"groupId":9,
+"authFlow":"SSH,DID"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/instanceGroup/addAuthFlowToInstanceGroup`
+
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ authFlow | authentication flow
+
+
+### HTTP Response
+
+`Auth flow added`
+
+```json
+{
+    "Instance_id": "9",
+    "Code": "auth  \t   required  pam_securetty.so\nauth      required  pam_unix.so shadow nullok\naccount   required  pam_unix.so\npassword  required  pam_cracklib.so retry=3\nsession   required  pam_unix.so\n",
+    "Message": "Successfully Updated Auth Flow.\n The PAM Config File can be downloaded at {url}:{port}/files/pam.txt"
+}
+```
+<aside class="success">
+Auth flow added
+</aside>
+
+
+
+## Update Instance Group Status
+It updates the instance group status 
+
+```shell
+curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/updateInstanceGroupStatus
+```
+
+```http
+PUT /api/v1/instanceGroup/updateInstanceGroupStatus
+```
+```json
+{
+"domainId":1234,
+"groupId":9,
+"status":"Disabled"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`PUT /api/v1/instanceGroup/updateInstanceGroupStatus`
+
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ status | Status
+
+
+### HTTP Response
+
+`Instance Group status updated`
+
+```json
+{
+    "status": "Success",
+    "message": "Status Updated Successfully"
+}
+```
+<aside class="success">
+Instance Group status updated
+</aside>
+
+
+
+## Fetch Instance Group Detail
+It give the group detail for the instance
+
+```shell
+curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/fetchInstanceGroupDetail
+```
+
+```http
+POST /api/v1/instanceGroup/fetchInstanceGroupDetail
+```
+```json
+{
+"domainId":4,
+"groupId":4
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/instanceGroup/fetchInstanceGroupDetail`
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+
+
+### HTTP Response
+
+`Instance group detail fetched`
+
+```json
+{
+    "instanceName": "sk123",
+    "os": "sk",
+    "hostName": "SK980",
+    "privateIp": "123.432.3",
+    "publicIp": "123.43.23",
+    "state": "Active"
+}
+```
+<aside class="success">
+Instance group detail fetched
+</aside>
+
+
+
+
+## Update Credential Policy
+It updated or modifies the Credential Policyof the particular instance.
+
+```shell
+curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateCredentialPolicyToEndpointGroup
+```
+
+```http
+PUT /api/v1/instances/updateCredentialPolicyToEndpointGroup
+```
+```json
+{
+
+"groupId":1,
+"domainId":1,
+"ttlUser":"",
+"priviligedUser":"",
+"policyId":"",
+"homeDir":""
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`PUT /api/v1/instances/updateCredentialPolicyToEndpointGroup`
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ ttlUser | ttl user
+ priviligedUser | priviliged User
+ policyId | Policy Id
+ homeDir | Home directory
+
+
+### HTTP Response
+
+`Credential Policy Updated`
+
+```json
+{
+    "code": 200,
+    "message": "Successfully Updated"
+}
+```
+<aside class="success">
+Credential Policy Updated
+</aside>
+
+
+
+
+## Delete Credential Policy
+It deletes the Credential Policyof the particular instance.
+
+```shell
+curl-- DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deleteCredentialPolicyToEndpointGroup
+```
+
+```http
+DELETE /api/v1/instances/deleteCredentialPolicyToEndpointGroup
+```
+```json
+{
+"groupId":1,
+"domainId":1,
+"credPolicyId":""
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`DELETE /api/v1/instances/deleteCredentialPolicyToEndpointGroup`
+### Query Parameter
+
+Parameter  | Description
+--------- | -----------
+ domainId| Domain Id of the instances
+ groupId | Id of the group
+ credPolicyId | Id of the Credential Policy
+
+### HTTP Response
+
+`Credential Policy Deleted`
+
+```json
+{
+    "code": 200,
+    "message": "Successfully Deleted"
+}
+```
+<aside class="success">
+Credential Policy Deleted
+</aside>
+
+
+
 
