@@ -1,24 +1,11 @@
 
 # AD Agent
 
-The Active Directory Agent is a Windows service that provides transparent user identification for Windows Active Directory-based networks. The Active Directory Agent (also called the "AD Agent") collects information from several sources simultaneously and populates a single session table that identifies the current user for each active workstation on the network
-The Oracle Enterprise Manager Console works with Intelligent Agents and a Communication Daemon to gather information about the network environment, communicate with network objects, and manage jobs and events. Topics discussed in this chapter include:
-
-1. Agents.
-
-2.Communication Daemon.
-
-3. Daemon Manager.
+The AD (Active Directory) agent is a software component that is designed to integrate with an Active Directory environment and facilitate the synchronization of user and group information between Active Directory and Authnull Active Directory Proxy Server.
+The AD agent is responsible for pulling user and group information from the Active Directory and pushing it to an authentication and authorization (authnull) AD proxy server. This process is commonly known as identity synchronization or user/group synchronization.
 
 ### Daemon
-In multitasking computer operating systems, a daemon (/ˈdiːmən/ or /ˈdeɪmən/)[1] is a computer program that runs as a background process, rather than being under the direct control of an interactive user. Traditionally, the process names of a daemon end with the letter d, for clarification that the process is in fact a daemon, and for differentiation between a daemon and a normal computer program.
-## Installation 
-1. To install a new forest, you must be logged on as the local Administrator for the computer.
-
-2. To install a new child domain or new domain tree, you must be logged on as a member of the Enterprise Admins group.
-
-3. To install an additional domain controller in an existing domain, you must be a member of the Domain Admins group.
-
+The daemon is the program that runs continuously in the background to synchronize user and group information to the AD proxy. The daemon may be designed to run on a dedicated server or workstation and can be configured to perform periodic checks or real-time synchronization between the source system (such as Active Directory) and the target system (such as the AD proxy).
 
 ## Configuration File
 1. The windows server of 2012 and above is needed.

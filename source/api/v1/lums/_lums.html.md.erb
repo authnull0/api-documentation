@@ -1,5 +1,5 @@
 # Endpoint User Management
-This is a PRD for the Linux user management service (LUMS) covering the following use case:
+This is a PRD for Endpoint Management (EPM) covering the following use case:
 
 1.Provision new users from a SSO console
 
@@ -36,7 +36,7 @@ POST /api/v1/add-linux-user-info HTTP/1.1
 ]
 ```
 
-This will add the users to LUMs.
+This will add the users to an Endpoint.
 
 
 ### Access Token
@@ -61,7 +61,7 @@ CustomMapping | It expresses ideas, thoughts and relationships among and between
 
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+Remember — This is for Add user in Endpoint!
 </aside>
  
 ## List All User
@@ -112,7 +112,7 @@ Filter | Filter
 
 
 <aside class="success">
-Remember — This is for Add in LUMs!
+Remember — This is for List all EPM Users!
 </aside>
  
 ## Add Endpoint User Info
@@ -405,13 +405,13 @@ Authorization Key Required
 Parameter | Description
 --------- | ------- | -----------
 policyName | Policy name is for linux user.
-templateName | template for name name is for lums.
-minLen | AuthNull authentication methad.
-maxLen | maximum length for length.
-firstChar | character type.
-allowUpperLower | Allow upper lower case.
-allowSpecial | custom mapping.
-allowNumeric | allow numeric is to allow number
+templateName | Template Name to inherit from existing password policy.
+minLen | Minimum Password length.
+maxLen | Maximum Password length.
+firstChar | Enforce first Character type.
+allowUpperLower | Flag to allow both upper and lower case.
+allowSpecial | Allow special characters flag.
+allowNumeric | Allow numeric characters flag.
 
 ### HTTP response
 
@@ -658,14 +658,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name is for linux user.
-templateName | template for name name is for lums.
-minLen | AuthNull authentication methad.
-maxLen | maximum length for length.
-firstChar | character type.
-allowUpperLower | Allow upper lower case.
-allowSpecial | custom mapping.
-allowNumeric | allow numeric is to allow number
+policyName | Policy name.
+templateName | Template name.
+minLen | Minimum Password length.
+maxLen | Maximum password length.
+firstChar | Enforce first character type.
+allowUpperLower | Flag to allow both uppercase and lowercase characters.
+allowSpecial | Flag to allow special characters.
+allowNumeric | Flag to allow numberic characters.
 
 
 ### HTTP response
@@ -727,14 +727,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name is for linux user.
-templateName | template for name name is for lums.
-minLen | AuthNull authentication methad.
-maxLen | maximum length for length.
-firstChar | character type.
-allowUpperLower | Allow upper lower case.
-allowSpecial | custom mapping.
-allowNumeric | allow numeric is to allow number
+policyName | Policy name to be validated.
+templateName | Template name.
+minLen | Minimum Password length.
+maxLen | Maximum Password length.
+firstChar | Enforce first character type.
+allowUpperLower | Flag to allow both uppercase and lowercase characters.
+allowSpecial | Flag to allowe special characters.
+allowNumeric | Flag to allow numberic characters.
 
 
 ### HTTP response
