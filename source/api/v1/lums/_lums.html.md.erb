@@ -1,4 +1,4 @@
-# Linux User Management
+# Endpoint User Management
 This is a PRD for the Linux user management service (LUMS) covering the following use case:
 
 1.Provision new users from a SSO console
@@ -115,7 +115,7 @@ Filter | Filter
 Remember — This is for Add in LUMs!
 </aside>
  
-## Add EPM User Info
+## Add Endpoint User Info
 
 ```shell
 curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo'
@@ -180,7 +180,7 @@ did | DID
 User Added successfully
 </aside>
 
-## Get EPM User detail
+## Get Endpoint User detail
 
 
 ```shell
@@ -241,7 +241,7 @@ Epm User Detail Fetched
 </aside>
 
 
-## Update EPM User Info
+## Update Endpoint User Info
 
 ```shell
 curl PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo
@@ -301,88 +301,10 @@ did | DID
 EPM User Info updated
 </aside>
 
-## Download sshKey
-
-```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/donwloadSshKey
-```
-
-```http
-POST /api/v1/lums/donwloadSshKey  HTTP/1.1
-```
-
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-
-`POST /api/v1/lums/donwloadSshKey HTTP/1.1`
-
-### Query Parameters
-
-### HTTP response
-
-`successfully sshKey downloaded`
-
-<aside class="success">
-successfully sshKey downloaded
-</aside>
-
-## Generate sshKey
-
-```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/generateSshKey
-```
-
-```http
-POST /api/v1/lums/generateSshKey HTTP/1.1
-```
 
 
 
-```json
-{
-"domainId":1,
-"userName":"manju"
-}
-```
-
-
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-
-`POST /api/v1/lums/generateSshKey HTTP/1.1`
-
-### Query Parameters
-
-Parameter | Description
---------- | ------- | -----------
-domainId | Domain Id
-userName | Name of User
-
-
-
-### HTTP response
-
-```json
-Private Key:
-
-Public Key:
-```
-
-`sshKey generated`
-
-<aside class="success">
-sshKey generated
-</aside>
-
-
-
-## Delete EPM User
+## Delete Endpoint User
 
 ```shell
 curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser
@@ -434,10 +356,10 @@ instanceId | Instance Id
 }
 ```
 
-`EPM User deleted`
+`Endpoint User deleted`
 
 <aside class="success">
-EPM User deleted
+Endpoint User deleted
 </aside>
 
 ## Password Policy
