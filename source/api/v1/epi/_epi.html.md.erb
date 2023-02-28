@@ -86,11 +86,11 @@ POST /api/v1/instances/addInstance HTTP/1.1
 
 ```json
 {
-"domain_id":1234,
-"instance_name":"kloudone.vm",
-"os_id":1,
-"public_ip":"144.32.55.5",
-"private_ip":"10.32.45.1",
+"domainId":1234,
+"instanceName":"kloudone.vm",
+"osId":1,
+"publicIp":"144.32.55.5",
+"privateIp":"10.32.45.1",
 }
 ```
 
@@ -104,11 +104,11 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
-domain_id | Domain Id
-instance_name | Name of instance
-os_id | Id of the OS used
-public_ip | Public Ip of the instance
-private_ip | Private Ip of the Instance
+domainId | Domain Id
+instanceName | Name of instance
+osId | Id of the OS used
+publicIp | Public Ip of the instance
+privateIp | Private Ip of the Instance
 
 
 ### HTTP Response
@@ -117,7 +117,7 @@ private_ip | Private Ip of the Instance
 
 ```json
 {
-  "instance_id": "fdsf-dfdf-gfdsgf-fdsgfdg-fdge",
+  "instanceId": "fdsf-dfdf-gfdsgf-fdsgfdg-fdge",
   "code": 200,
   "message": "success" 
 }
@@ -179,7 +179,7 @@ Auth type updated
 
 ## Assign  User to Machines
 
-It assign usere to existing machines.
+It assign users to existing machines.
 
 ```shell
 curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines
@@ -238,7 +238,7 @@ Group added to Machine
 It adds/removes groups to existing machines.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/assignGroupToMachines
+curl PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/assignGroupToMachines
 ```
 
 ```http

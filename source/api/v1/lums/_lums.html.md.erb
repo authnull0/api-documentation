@@ -27,10 +27,10 @@ POST /api/v1/add-linux-user-info HTTP/1.1
 ```json
 [
 {
-    "Username":"sefali",
-    "AuthMethod":"s",
-    "UserType":"6",
-    "CustomMapping":"6"
+    "userName":"sefali",
+    "authMethod":"s",
+    "userType":"6",
+    "customMapping":"6"
    
 }
 ]
@@ -50,10 +50,10 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-UserName | an identification used by a person with access to a computer, network, or online service..
-AuthMethod | Authentication is the process of determining whether someone or something is, in fact, who or what it says it is..
-UserType | Roles is the user is admin or user it signify.
-CustomMapping | It expresses ideas, thoughts and relationships among and between different spatial elements in multiple dimensions..
+userName | an identification used by a person with access to a computer, network, or online service..
+authMethod | Authentication is the process of determining whether someone or something is, in fact, who or what it says it is..
+userType | Roles is the user is admin or user it signify.
+customMapping | It expresses ideas, thoughts and relationships among and between different spatial elements in multiple dimensions..
 
 ### HTTP response
 
@@ -61,7 +61,7 @@ CustomMapping | It expresses ideas, thoughts and relationships among and between
 
 
 <aside class="success">
-Remember — This is for Add user in Endpoint!
+successfully Added
 </aside>
  
 ## List All User
@@ -104,7 +104,7 @@ pageId | Page Id
 pageSize | Page Size
 domainId | Domain Id
 instanceId | Instance Id
-Filter | Filter
+filter | Filter
 
 ### HTTP response
 
@@ -112,7 +112,7 @@ Filter | Filter
 
 
 <aside class="success">
-Remember — This is for List all EPM Users!
+successfully shown list of all linux user
 </aside>
  
 ## Add Endpoint User Info
