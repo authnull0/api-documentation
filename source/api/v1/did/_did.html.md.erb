@@ -13,7 +13,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/create
 ```json
 {
   "method": "key",
-  "domain_id": 1,
+  "domainId": 1,
    "name":  "Authnull"
    "description": "This is a Issuer DID"
 }
@@ -25,7 +25,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/create
 Parameter | Description
 --------- | -----------
 method    |This refers to the specific DID method that will be used to create the DID. A DID method is a set of rules and specifications that govern how a DID is created, stored, and used. There are many different DID methods available, each with its own unique features and requirements. 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 name      |This refers to a department or a group in a company or an organization. 
 description | Description of the Issuer DID
 
@@ -55,9 +55,9 @@ POST /api/v1/did/createHolderDid HTTP/1.1
 ```json
 {
   "method": "key",
-  "domain_id": 1 ,
-  "user_id" : 104,
-  "issuer_did" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY"
+  "domainId": 1 ,
+  "userId" : 104,
+  "issuerDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY"
   "description": "This is a User DID"
 }
 ```
@@ -70,9 +70,9 @@ POST /api/v1/did/createHolderDid HTTP/1.1
 Parameter | Description
 --------- | -----------
  method   |This refers to the specific DID method that will be used to create the DID. A DID method is a set of rules and specifications that govern how a DID is created, stored, and used. There are many different DID methods available, each with its own unique features and requirements.  
-domain_id |This refers to the company or organization which the user is part of. 
-user_id   |This refers to the unique ID of the user. 
-issuer_did | This refers to the DID of the issuing organization or company.
+domainId |This refers to the company or organization which the user is part of. 
+userId   |This refers to the unique ID of the user. 
+issuerDid | This refers to the DID of the issuing organization or company.
 description | Description of the User DID
 
 ```json
@@ -128,10 +128,10 @@ issuerDID |This refers to the DID of the issuing organization or company.
 `Credential Schema Listed`
 
 ## Create Verifiable Credential
-Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credential's authenticity and ownership
+Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential' \
+curl --location --request POST https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential
 ```
 
 ```http
@@ -317,7 +317,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 issuerDID      |This refers to the DID of the issuing organization or company. 
 
 ```json
@@ -357,7 +357,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDLis
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 issuerDID |This refers to the DID of the issuing organization or company.
 userId | Id of the user. 
 
@@ -432,7 +432,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 issuerDID      |This refers to the DID of the issuing organization or company. 
 holderDid  | Holder DID refers to the recipient of the verifiable credential.
 vcId | VC ID
@@ -472,7 +472,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userLi
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 
 
 
@@ -526,7 +526,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuer
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-domain_id |This refers to the company or organization who is using the service.
+domainId |This refers to the company or organization who is using the service.
 
 
 
@@ -641,9 +641,9 @@ curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalle
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-wallet_id |Wallet Id
-user_id | User ID
-credential_id | Credential Id
+walletId |Wallet Id
+userId | User ID
+credentialId | Credential Id
 
 
 
