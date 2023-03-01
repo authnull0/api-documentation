@@ -39,7 +39,7 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
-domainId |  Domain Id is the company/organization id within our Authnull platform.
+domainId |  The domainId is used to specify the ID of the domain to which the endpoint belongs.
 pageId |Page ID refers to the page number.
 pageSize | Page size refers to the number of endpoints groups to be fetched.
 filter | filter is the search keyword for searching endpoint groups.
@@ -105,11 +105,11 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
-domainId | Domain Id is the company/organization id within our Authnull platform.
-instanceName | Name of instance
-osId | Id of the OS used
-publicIp | Public Ip of the instance
-privateIp | Private Ip of the Instance
+domainId |The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceName | The instanceName specifies the name of the instance that the endpoint belongs to.
+osId | The osId specifies the operating system identifier for the device associated with the endpoint.
+publicIp | The public IP refers to the unique identifier assigned to a device or network interface that is visible to the public internet.
+privateIp |The privateIp is used to specify the private IP address for an endpoint in a private network.
 
 
 ### HTTP Response
@@ -159,8 +159,8 @@ PUT /api/v1/instances/updateAuthType HTTP/1.1
 
 Parameter  | Description
 ---------  | -----------
-instanceId | Instance Id 
-domainId   | Domain Id is the company/organization id within our Authnull platform.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
+domainId   | The domainId is used to specify the ID of the domain to which the endpoint belongs.
 authType   | Authorization type
 
 
@@ -217,10 +217,10 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
-domainId| Domain Id is the company/organization id within our Authnull platform.
-instanceIds | Instance Id of the used
-userId | Users id of users
-action | Whether it is add or remove
+domainId| The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceIds |  The instanceId is used to specify the ID of the instances that are part of the endpoint.
+userId |The userId is used to specify the unique identifier of a user to be added or removed from an endpoint.
+action |The action is used to specify the type of action to be performed on an endpoint, such as add or remove an endpoint.
 
 
 ### HTTP Response
@@ -282,10 +282,10 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
-domainId| Domain Id is the company/organization id within our Authnull platform.
-instanceId | Instance Id of the used
-groupId | Group Id
-actions | whether Group is added to machines or not.
+domainId| The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceId |  The instanceId is used to specify the ID of the instances that are part of the endpoint.
+groupId | The groupId is used to specify the unique identifier of an endpoint to retrieve, update or delete its information.
+actions | The action is used to specify the type of action to be performed on a endpoint, such as add or remove a endpoint.
 
 
 ### HTTP Response

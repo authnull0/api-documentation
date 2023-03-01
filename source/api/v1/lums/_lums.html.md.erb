@@ -41,7 +41,7 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-userName | an identification used by a person with access to a computer, network, or online service..
+userName | an identification used by a person with access to a computer, network, or online service.
 authMethod | Authentication is the process of determining whether someone or something is, in fact, who or what it says it is..
 userType | Roles is the user is admin or user it signify.
 customMapping | It expresses ideas, thoughts and relationships among and between different spatial elements in multiple dimensions..
@@ -95,7 +95,7 @@ Parameter | Description
 pageId | Page ID refers to the page number.
 pageSize | Page size refers to the number of endpoints groups to be fetched.
 domainId |  Domain Id is the company/organization id within our Authnull platform.
-instanceId | Instance Id
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
 filter | filter is the search keyword for searching endpoint groups.
 
 ### HTTP response
@@ -147,14 +147,14 @@ Authorization Key Required
 Parameter | Description
 --------- | ------- | -----------
 domainId |  Domain Id is the company/organization id within our Authnull platform.
-userType | Type of Users
-credType | Credential Type
-password | Password
-privilegedUser | Priveleged User
-userName | Name of user
-sshKey | sshKey
-motp | motp
-did | DID
+userType | Roles is the user is admin or user it signify.
+credType | The credType specifies the type of credential used for authentication or authorization purposes.
+password | The password refers to the authentication credential used to verify the identity of the user making the request.
+privilegedUser |The privilegedUser allows certain users to have elevated access and permissions within the endpoint.
+userName | an identification used by a person with access to a computer, network, or online service.
+sshKey | The sshKey allows for secure access to an endpoint using a pre-shared cryptographic key.
+motp | MOTP parameter is used for Multi-One Time Password authentication on API endpoints to ensure secure access and prevent unauthorized usage.
+did | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
 
 
 ### HTTP response
@@ -208,7 +208,7 @@ Authorization Key Required
 Parameter | Description
 --------- | ------- | -----------
 domainId |  Domain Id is the company/organization id within our Authnull platform.
-userIds | userId is used
+userIds |The userId is used to specify the unique identifier of a user to be added or removed from an endpoint.
 
 ### HTTP response
 
@@ -276,16 +276,16 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-userId | Id of the user
+userId |The userId is used to specify the unique identifier of a user to be added or removed from an endpoint.
 domainId |  Domain Id is the company/organization id within our Authnull platform.
-userType | Type of user
-credType | Credential Type
-passord | Password
-privilegedUser | privileged User
-userName | Name of User
-sshKey | sshKey
-motp | motp
-did | DID
+userType | Roles is the user is admin or user it signify.
+credType |The credType specifies the type of credential used for authentication or authorization purposes.
+passord |The password refers to the authentication credential used to verify the identity of the user making the request.
+privilegedUser | The privilegedUser allows certain users to have elevated access and permissions within the endpoint
+userName | an identification used by a person with access to a computer, network, or online service.
+sshKey |The sshKey allows for secure access to an endpoint using a pre-shared cryptographic key.
+motp | MOTP parameter is used for Multi-One Time Password authentication on API endpoints to ensure secure access and prevent unauthorized usage.
+did |The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
 
 
 ### HTTP response
@@ -344,9 +344,9 @@ Authorization Key Required
 Parameter | Description
 --------- | ------- | -----------
 domainId |  Domain Id is the company/organization id within our Authnull platform.
-epmUserId | EPM user Id
-userName | User Name
-instanceId | Instance Id
+epmUserId | The epmUserId is used to identify the unique user ID associated with a particular endpoint in order to perform user-specific operations.
+userName | an identification used by a person with access to a computer, network, or online service.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
 
 
 
@@ -408,14 +408,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name is for linux user.
-templateName | Template Name to inherit from existing password policy.
-minLen | Minimum Password length.
-maxLen | Maximum Password length.
-firstChar | Enforce first Character type.
-allowUpperLower | Flag to allow both upper and lower case.
-allowSpecial | Allow special characters flag.
-allowNumeric | Allow numeric characters flag.
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName | The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
 
 ### HTTP response
 
@@ -466,7 +466,7 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyId | Policy id is for linux user.
+policyId | The policyId specifies the unique identifier of a password policy to be retrieved, updated, or deleted.
 
 
 ### HTTP response
@@ -529,8 +529,8 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-pageId | Id for page.
-pageSize | Page size for page.
+pageId | Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
 
 ### HTTP response
 
@@ -593,8 +593,8 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyId | Policy id is for linux user.
-instanceId | id for the instance
+policyId | The policyId specifies the unique identifier of a password policy to be retrieved, updated, or deleted.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
 
 
 ### HTTP response
@@ -658,15 +658,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name.
-templateName | Template name.
-minLen | Minimum Password length.
-maxLen | Maximum password length.
-firstChar | Enforce first character type.
-allowUpperLower | Flag to allow both uppercase and lowercase characters.
-allowSpecial | Flag to allow special characters.
-allowNumeric | Flag to allow numberic characters.
-
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName |The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
 
 ### HTTP response
 
@@ -721,14 +720,15 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name to be validated.
-templateName | Template name.
-minLen | Minimum Password length.
-maxLen | Maximum Password length.
-firstChar | Enforce first character type.
-allowUpperLower | Flag to allow both uppercase and lowercase characters.
-allowSpecial | Flag to allowe special characters.
-allowNumeric | Flag to allow numberic characters.
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName |The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
+
 
 
 ### HTTP response

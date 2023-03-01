@@ -73,3 +73,48 @@ ActiveDirectory Configure successfully saved
 ## Restart the Agent
  For Restart the agent what will happen is the installation will complete and all the api incluging the Active Directory will configure and import the group and the user to active directory of the AuthNull.
 
+## Import Users From LDIF
+The Import Users API is a software component that can be integrated into the Active Directory API Communications module to enable the import of user data from external systems or sources. This API allows for the automation of user data management, simplifying the process of adding or updating user information in the Active Directory.
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/integrations/activeDirectory/importLdif' \
+--form 'file=@"/C:/Users/HP/Downloads/sample.ldif"' \
+--form 'fileName="paul.txt"' \
+--form 'domainId="1"'
+```
+
+```http
+POST /api/v1/integrations/activeDirectory/importLdif HTTP/1.1
+```
+
+```
+Multipart form data
+file:
+filename:
+domainId:
+```
+
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST /api/v1/integrations/activeDirectory/importLdif HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+file | File That needs to be imported.
+filename | Name of the file.
+domainId | Domain Id of the file.
+
+### HTTP response
+
+`Import Job Added to Queue`
+
+
+<aside class="success">
+Import Job Added to Queue
+</aside>
