@@ -2,14 +2,10 @@
 
 -
 
-To use the AuthNull service and custom PAM modules to authenticate users and import users from LDAP to the AuthNull platform, you will need to follow the steps provided by AuthNull.
-Here is a general outline of the steps you might need to follow:
+Privileged access management (PAM) is the combination of tools and technology used to secure, control and monitor access to an organization’s critical information and resources. Subcategories of PAM include shared access password management, privileged session management and application access management.
 
-1.Download and install the AuthNull agent and AuthNull daemon on your Linux system. You can find instructions for downloading and installing the AuthNull agent and AuthNull daemon in the AuthNull documentation.
+Privileged access management (PAM), a subdivision of Identity and Access Management (IAM), is a solution that provides organizations with better control and monitoring capabilities that decide who can have privileged access to critical assets, say, a computer or information system.
 
-2.Configure the AuthNull agent and authnull daemon to connect to the AuthNull service and your LDAP server. You will need to provide the AuthNull agent and AuthNull daemon with the necessary credentials and connection details to connect to the AuthNull service and your LDAP server.
+The solution should include the following functionalities:
 
-3.Start the AuthNull daemon. The AuthNull daemon should automatically import users from your LDAP server to the AuthNull platform.
-
-4.Restart the service that you want to authenticate users using the AuthNull service. The AuthNull agent should automatically configure PAM to use the custom PAM modules and the AuthNull service for authentication.
-To authenticate users using the AuthNull service, users will need to provide their login credentials to the service using a method such as Webauthn, SMS OTP, MOTP, or DID. The AuthNull documentation should provide instructions for using these authentication methods.
+Defining user roles Granting required privileges or access rights for the roles defined Distributing user information and access grants to all devices and systems that enforce access rights in organizations Monitoring privileged user activities and analyzing the same to detect anomalies

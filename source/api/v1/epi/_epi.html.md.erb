@@ -7,10 +7,10 @@ Endpoint management is the process of actively monitoring, detecting, and preven
 
 3.Workflows to control permissions
 
-4.Linux user management through Linux User Management Service.
+4.endpoint user management through Endpoint User Management Service.
 
-## List All Instances
-List All Instances lists all the instances that are present .
+## List Instances
+The List Instances API allows users to retrieve a list of computing instances that belong to an endpoint group in a system or application.This API provides a simple and convenient way to access information about computing instances within an endpoint group and their status, configuration, or usage metrics.
 
 ```shell
 curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/list' \
@@ -39,10 +39,10 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
-domainId | Domain Id of the Apps
-pageId | Id of the page
-pageSize | size of the page
-filter | filter
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+pageId |Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
+filter | filter is the search keyword for searching endpoint groups.
 
 ### HTTP Response
 
@@ -74,7 +74,8 @@ All the instances listed below.
 </aside>
 
 ## Add Instances
-Add Instances adds particular instances to the existing list.
+The Add Instance API allows users to add a new computing instance to an endpoint group in a system or application.This API provides a simple and secure way to add computing instances to an endpoint group and expand the computing infrastructure of an organization.
+
 
 ```shell
 curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addInstance
@@ -104,7 +105,7 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
-domainId | Domain Id
+domainId | Domain Id is the company/organization id within our Authnull platform.
 instanceName | Name of instance
 osId | Id of the OS used
 publicIp | Public Ip of the instance
@@ -128,7 +129,7 @@ Instance added to the list.
 
 
 ## Update Auth Type
-It updated the type of Authorization used.
+The Update Auth Type API allows users to update the authentication type used for a computing instance within an endpoint group in a system or application. This API provides a simple and flexible way to manage the authentication methods used within an endpoint group and ensure that they meet the security requirements of an organization.
 
 ```shell
 curl PUT https://api.authnull.kloudlearn.com/api/v1/instances/updateAuthType
@@ -159,7 +160,7 @@ PUT /api/v1/instances/updateAuthType HTTP/1.1
 Parameter  | Description
 ---------  | -----------
 instanceId | Instance Id 
-domainId   | domain Id
+domainId   | Domain Id is the company/organization id within our Authnull platform.
 authType   | Authorization type
 
 
@@ -177,9 +178,9 @@ Auth type updated
 </aside>
 
 
-## Assign  User to Machines
+## Assign  User to Endpoints
 
-It assign users to existing machines.
+The Assign User to Endpoints API allows users to assign one or more users to specific computing instances within an endpoint group in a system or application. This API provides a simple and secure way to manage user access to computing instances and ensure that only authorized users can access sensitive information or resources.
 
 ```shell
 curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines
@@ -198,6 +199,13 @@ POST /api/v1/instances/assignUsersToMachines HTTP/1.1
     "action" : "add"
 }
 
+{
+    "instanceIds":[1,2],
+    "domainId":1,
+    "userIds":[106,103],
+    "action" : "remove"
+}
+
 ```
 
 ### Access Token
@@ -209,7 +217,7 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
-domainId| Domain Id of the instances
+domainId| Domain Id is the company/organization id within our Authnull platform.
 instanceIds | Instance Id of the used
 userId | Users id of users
 action | Whether it is add or remove
@@ -217,7 +225,7 @@ action | Whether it is add or remove
 
 ### HTTP Response
 
-`Assign  user to Machine`
+`Assign  user to endpoint`
 
 ```json
 {
@@ -228,14 +236,14 @@ action | Whether it is add or remove
 ```
 
 <aside class="success">
-Group added to Machine
+Group added to endpoint
 </aside>
 
 
 
-## Assign Groups To Machines
+## Assign Groups To Endpoints
 
-It adds/removes groups to existing machines.
+The Assign Groups to Endpoints API allows users to assign one or more groups to specific computing instances within an endpoint group in a system or application.
 
 ```shell
 curl PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/assignGroupToMachines
@@ -274,7 +282,7 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
-domainId| Domain Id of the instances
+domainId| Domain Id is the company/organization id within our Authnull platform.
 instanceId | Instance Id of the used
 groupId | Group Id
 actions | whether Group is added to machines or not.
