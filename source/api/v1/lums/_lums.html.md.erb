@@ -6,7 +6,14 @@ The Endpoint User Management manages endpoint users creation, creates credential
 The Add User API allows users to add a new user to the system or application for endpoint user management. This API provides a simple and secure way to manage user accounts and ensure that only authorized users have access to sensitive information or resources.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userName":"sefali",
+    "authMethod":"su",
+    "userType":"3",
+    "customMapping":"4"
+}'
 ```
 
 ```http
@@ -59,7 +66,15 @@ successfully Added
 The List User API allows users to retrieve a list of all the users in the system or application for endpoint user management.The API may return a list of user details and any relevant permissions or access rights.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/listAllEpmUsers
+curl --location 'http://localhost:9090/api/v1/lums/listAllEpmUsers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1,
+    "pageId": 1,
+    "pageSize": 200,
+    "filter": "",
+    "instanceIds": [2, 1]
+}'
 ```
 
 ```http
@@ -111,7 +126,19 @@ successfully shown list of all endpoint user
 The Add Endpoint User Info API allows users to add endpoint-specific information to a user account in the system or application for endpoint user management. This API provides a simple and efficient way to manage user accounts and ensure that endpoint-specific information is associated with each user.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":4,
+"userName":"as",
+"userType":"12",
+"credType":"asd",
+"password":"XXXX",
+"motp":"",
+"did":"",
+"privilegedUser":"",
+"sshKey":"asdfg"
+}'
 ```
 
 ```http
@@ -177,7 +204,12 @@ User Added successfully
 The Get Endpoint User Detail API is a part of the User Management endpoint and is used to retrieve detailed information about a specific user. This API endpoint requires the user unique identifier as input and returns information and any associated metadata. It is useful for retrieving specific user information to display or manipulate within an application.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/getEpmUserDetail'
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/epmUserDetail' \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1,
+    "userId":25
+}'
 ```
 
 ```http
@@ -218,7 +250,7 @@ userIds |The userId is used to specify the unique identifier of a user to be add
 "userId":26,
 "userType":"Local",
 "credType":"password",
-"password":"manju",
+"password":"xxxx",
 "privilegedUser":"true",
 "userName":"testManjuupdate",
 "sshKey":"",
@@ -239,7 +271,20 @@ The Update Endpoint User Info API is a part of the User Management endpoint and 
 
 
 ```shell
-curl PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo' \
+--header 'Content-Type: application/json' \
+--data '{
+"userId":26,
+"domainId":1,
+"userType":"Local",
+"credType":"password",
+"password":"xxxx",
+"privilegedUser":"true",
+"userName":"testManjuupdate",
+"sshKey":"",
+"motp":"",
+"did":""
+}'
 ```
 
 ```http
@@ -254,7 +299,7 @@ PUT /api/v1/lums/updateEpmUserInfo HTTP/1.1
 "domainId":1,
 "userType":"Local",
 "credType":"password",
-"password":"manju",
+"password":"xxxx",
 "privilegedUser":"true",
 "userName":"testManjuupdate",
 "sshKey":"",
@@ -311,7 +356,14 @@ EPM User Info updated
 The Delete Endpoint User API is a part of the User Management endpoint and is used to delete a user account. This API endpoint requires the user unique identifier as input, and upon successful execution, the user account is removed from the system. This API is useful for administrative purposes, such as removing inactive or unauthorized user accounts.
 
 ```shell
-curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser' \
+--header 'Content-Type: application/json' \
+--data '[
+{
+    "linuxUserId": "1",
+    
+}
+]'
 ```
 
 ```http
@@ -374,7 +426,18 @@ A proper password complexity policy would be: eight characters for the length of
 The Add Password Policy API is a part of the Password Policy endpoint in User Management and is used to define the password requirements for user accounts. This API endpoint requires input such as password length, complexity rules, and expiration policies. Upon successful execution, the API returns a success message indicating that the password policy has been added. This API is useful for enforcing security standards for user passwords and reducing the risk of security breaches.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}'
 ```
 
 ```http
@@ -437,7 +500,11 @@ The Delete Password Policy API is a part of the Password Policy endpoint in User
 
 
 ```shell
-curl DELETE https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId":1
+}'
 ```
 
 ```http
@@ -497,7 +564,13 @@ successfully deleted Password Policy
 The List All Password Policy API is a part of the Password Policy endpoint in User Management and is used to retrieve a list of all existing password policies. This API endpoint returns a list of policies, each with its unique identifier and associated settings such as password length and complexity rules. This API is useful for administrative purposes, such as reviewing the current password policies or managing multiple policies for different user groups or applications.
 
 ```shell
-curlPOST  https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/listPasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "machineIds":[1,2,3],
+    "pageId":1,
+    "pageSize": 10
+}'
 ```
 
 ```http
@@ -560,7 +633,13 @@ successfully Listed All Password Policy
 The Assign Policy to Endpoints API is a part of the Password Policy endpoint in User Management and is used to assign an existing password policy to a specific endpoint or group of endpoints. This API endpoint requires the unique identifier of the policy and the identifier of the endpoint(s) to be assigned to as input. Upon successful execution, the API returns a success message indicating that the policy has been assigned to the specified endpoint(s). This API is useful for managing password policies for different applications or user groups and ensuring consistent security standards across multiple endpoints.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId":2,
+    "instanceId":1
+
+}'
 ```
 
 ```http
@@ -618,7 +697,19 @@ successfully Assigned Policy To endpoint
 The Update Password Policy API is a part of the Password Policy endpoint in User Management and is used to update an existing password policy. This API endpoint requires the unique identifier of the policy and the updated policy settings as input, such as password length, complexity rules, or expiration policies.This API is useful for modifying password policies to reflect changing security needs or standards. It is important to note that updating a password policy may affect the security of user accounts and should be done with caution.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId": 1,
+    "policyName":"testPolicy",
+    "minLen":"",
+    "maxLen": "",
+    "firstChar": "",
+    "allowUpperLower":"",
+    "allowSpecial":"",
+    "allowNumeric":""
+
+}'
 ```
 
 ```http
@@ -688,7 +779,15 @@ successfully updated Password Policy
 The Validate Password API is a part of the Password Policy endpoint in User Management and is used to validate if a password meets the specified password policy requirements. This API endpoint requires the user password as input and returns a success message indicating if the password meets the policy requirements or an error message indicating which policy requirements were not met. This API is useful for ensuring that user passwords meet the specified security standards and reducing the risk of security breaches. It is typically used in conjunction with other password policy management APIs.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/validatePassword' \
+--header 'Content-Type: application/json' \
+--data '{
+
+"machineId":"",
+
+"password":""
+
+}'
 ```
 
 ```http

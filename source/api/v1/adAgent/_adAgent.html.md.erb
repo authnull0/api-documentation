@@ -56,9 +56,9 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-directoryName | Name of Directory.
-appUrl | App URL is url for app.
-accountName | Name of the Account.
+directoryName | The directoryName specifies the name of the directory where the configuration data will be saved.
+appUrl | The appUrl is used to specify the URL of the application that is integrated with the Active Directory.
+accountName | The accountName specifies the name of the Active Directory account being configured.
 domainId | This is the unique ID assigned by the registry to the domain. 
 
 ### HTTP response
@@ -106,9 +106,9 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-file | File That needs to be imported.
-filename | Name of the file.
-domainId | Domain Id of the file.
+file | The file specifies the path and filename of the LDIF file containing the user data to be imported.
+filename | The filename specifies the name of the LDIF file containing the user data to be imported into the Active Directory.
+domainId | The domainId specifies the identifier of the Active Directory domain where the users are imported.
 
 ### HTTP response
 

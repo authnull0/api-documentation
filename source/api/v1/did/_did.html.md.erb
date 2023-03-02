@@ -17,7 +17,13 @@ https://api.did.kloudlearn.com/api/v1/did/createIssuerDid
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "method": "key",
+  "domainId": 1,
+   "name":  "Authnull"
+}'
 ```
 
 ```json
@@ -27,6 +33,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/create
 }
 
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `https://api.did.kloudlearn.com/api/v1/did/createIssuerDid`
 
@@ -54,7 +64,14 @@ A Holder DID is a Decentralized Identifier (DID) that is used by an user to stor
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createHolderDid'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createHolderDid'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "method": "key",
+  "domainId": 1 ,
+  "userId" : 104,
+  "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```http
@@ -69,6 +86,8 @@ POST /api/v1/did/createHolderDid HTTP/1.1
 }
 
 ```
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/did/createHolderDid HTTP/1.1`
@@ -101,7 +120,13 @@ issuerDid | The issuerDid is a required field used to identify the decentralized
 The Create Schema List API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+'
 ```
 
 ```http
@@ -110,7 +135,7 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 ```json
 {
-  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -130,6 +155,10 @@ POST /api/v1/schema/createSchema HTTP/1.1
 }
 
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/schema/createSchema HTTP/1.1`
 
@@ -155,7 +184,7 @@ sign | The sign is used to sign data with a private key associated with a decent
         "version": "1.0",
         "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
         "name": "EPM User",
-        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
+        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "authored": "2023-02-28T15:34:42Z",
         "Schema": {
             "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
@@ -184,7 +213,15 @@ sign | The sign is used to sign data with a private key associated with a decent
 Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
 
 ```shell
-curl --location --request POST https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential
+curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential'  \
+--header 'Content-Type: application/json' \
+--data '{
+	"domainId" : 1,
+    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxx",
+    "schemaId" : 2,
+    "metadata" : "password"
+}'
 ```
 
 ```http
@@ -194,12 +231,15 @@ POST /api/v1/credential/createCredential HTTP/1.1
 ```json
 {
 	"domainId" : 1,
-    "issuerDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
-	"holderDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
+    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "schemaId" : 2,
     "metadata" : "password"
 }
 ```
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/credential/createCredential HTTP/1.1`
 
@@ -228,6 +268,9 @@ metadata | These are the set of properties or claims.
 ## Assign Credential to wallet
 The Assign Credential to Wallet API in Decentralized Identities (DIDs) enables users to securely store and manage their verifiable credentials in a decentralized wallet. This API allows users to request, receive and store verifiable credentials issued by trusted issuers, providing them with greater control and ownership over their personal data.
 
+### Access Token
+Authorization Key Required 
+
 ## Issue Presentation Request
 The Issue Presentation Request API in Decentralized Identities (DIDs) enables verifiers to request specific verifiable credentials from holders in a secure and decentralized manner. The API allows verifiers to specify the attributes they require and issue a presentation request to the holder, who can then choose which credentials to present without revealing unnecessary or sensitive information.
 
@@ -242,14 +285,17 @@ POST /api/v1/verifierService/issuePR HTTP/1.1
 ```json
 {
     "username": "john",
-    "issuerDid": "did:key:z6MkqiwxHjgYq6mLRitGCcNDvjWVepyrGe4JTMztfPPhV9cy",
-    "holderDid": "did:key:z6MkqiwxHjgYq6mLRitGCcNDvjWVepyrGe4JTMztfPPhV9cy",
+    "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "walletUrl": "http://authnull.com/walletservice/wallets/1",
     "endpoint": "",
     "grouop": ""
 }
 
 ```
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/verifierService/issuePR HTTP/1.1`
 
@@ -296,6 +342,9 @@ POST /api/v1/walletService/submitPresentationResponse HTTP/1.1
 }
 
 ```
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/walletService/submitPresentationResponse HTTP/1.1`
 
@@ -333,7 +382,7 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 ```json
 {
-  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -353,6 +402,9 @@ POST /api/v1/schema/createSchema HTTP/1.1
 }
 
 ```
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/schema/createSchema HTTP/1.1`
 
@@ -378,7 +430,7 @@ sign | The sign is used to sign data with a private key associated with a decent
         "version": "1.0",
         "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
         "name": "EPM User",
-        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
+        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "authored": "2023-02-28T15:34:42Z",
         "Schema": {
             "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
@@ -407,7 +459,13 @@ sign | The sign is used to sign data with a private key associated with a decent
 The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+'
 ```
 
 ```http
@@ -417,10 +475,15 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 ```json
 {
    "domainId": 1,
-   "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/credentialSchemaList HTTP/1.1`
 
@@ -449,7 +512,14 @@ issuerDID |The issuerDid is a required field used to identify the decentralized 
 The Revoke Credential API in Decentralized Identities (DIDs) enables issuers to revoke previously issued verifiable credentials in a secure and decentralized manner. The API allows issuers to specify the reason for revocation and publish the revocation status to the decentralized network, ensuring that the revoked credential can no longer be used or presented by the holder.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "vcid": 2,
+  "domainId": 2,
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```http
@@ -459,10 +529,15 @@ POST /api/v1/credential/revokecredential HTTP/1.1
 {
   "vcid": 2,
   "domainId": 2,
-  "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn",
-  "holderDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST https://api.authnull.kloudlearn.com/api/v1/presentationRequest HTTP/1.1`
 
@@ -503,6 +578,10 @@ POST /api/v1/did/credentialPR HTTP/1.1
   "verifierId": 123
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST https://api.authnull.kloudlearn.com/api/v1/did/credentialPR HTTP/1.1`
 
@@ -530,7 +609,11 @@ The Credential List API in Decentralized Identities (DIDs) enables users to acce
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialList' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1
+}'
 ```
 
 ```http
@@ -542,6 +625,8 @@ POST /api/v1/credential/credentialList HTTP/1.1
    "domainId": 1
 }
 ```
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/credential/credentialList HTTP/1.1`
@@ -615,15 +700,25 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialSchemaList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialSchemaList'  \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```json
 {
    "domainId": 1,
-   "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/credentialSchemaList HTTP/1.1`
 
@@ -655,7 +750,13 @@ POST /api/v1/did/DIDList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "issuerId": 2,
+  "userId": 104  
+}'
 ```
 
 ```json
@@ -665,6 +766,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDLis
   "userId": 104  
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/DIDList HTTP/1.1`
 
@@ -680,7 +785,7 @@ userId | The userId specifies the unique identifier associated with a user, enab
     {
         "DIDType": "Issuer",
         "domainId": 1,
-        "did": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a issuer DID",
@@ -689,7 +794,7 @@ userId | The userId specifies the unique identifier associated with a user, enab
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6Mkk6VNNoj2feojkoRFsek7HKqJJQeNZBLdz3TJ3T5P8Fq6",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -698,7 +803,7 @@ userId | The userId specifies the unique identifier associated with a user, enab
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6MkjqGS4QGmpSWNgvuHnySrwkYc9vbsgEix7udHLQjvNRab",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -707,7 +812,7 @@ userId | The userId specifies the unique identifier associated with a user, enab
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6Mkm7wnq1bDQhiaaFeMwswZXDej2nYtBZfxNEJzJgSxJxUN",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -730,7 +835,14 @@ POST /api/v1/credential/assignVC HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/assignVC'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/assignVC'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "vcId": 1234
+}'
 ```
 
 ```json
@@ -742,6 +854,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
   "action": "Assign"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/assignVC HTTP/1.1`
 
@@ -805,6 +922,9 @@ verifier | The verifier refers to an entity responsible for verifying and valida
 }
 ```
 
+### Access Token
+Authorization Key Required 
+
 ### HTTP Response
 `Successfully VC verified`
 
@@ -829,6 +949,11 @@ curl --location --request POST https://api.did.kloudlearn.com/api/v1/did/signVer
   "vcId": "123"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/signVerifiableCredential HTTP/1.1`
 
@@ -872,6 +997,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/presen
   "verifierId": ""
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/presentVerifiableCredential HTTP/1.1`
 
@@ -907,6 +1036,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/vcVeri
   "vcDid": "did:bcm:yyyy"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/vcVerifyRequest HTTP/1.1`
 
@@ -936,9 +1070,14 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletServ
 ```json
 {
   "email": "hussain@kloudone.com",
-  "walletKey": "dnfdm-dfdsfdf-dfdfd=dfdasfn"
+  "walletKey": "xxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/walletService/registerDevice HTTP/1.1`
 
@@ -980,6 +1119,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/GetCre
   "credentialId": 100
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/GetCredential HTTP/1.1`
 
@@ -1018,6 +1162,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/wallet/use
   "domainId": 1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/wallet/users HTTP/1.1`
 
@@ -1072,6 +1221,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
   "listOfWallets": [1, 2, 3]
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credentials/createEpmUserCredential HTTP/1.1`
 
@@ -1110,7 +1264,11 @@ POST /api/v1/did/userList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userList'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1
+}'
 ```
 
 ```json
@@ -1118,6 +1276,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userLi
   "domainId": 1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/assignVC HTTP/1.1`
 
@@ -1165,7 +1328,11 @@ POST /api/v1/did/issuerList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuerList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuerList'  \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1
+}'
 ```
 
 ```json
@@ -1173,6 +1340,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuer
     "domainId":1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/issuerList HTTP/1.1`
 
@@ -1224,7 +1395,11 @@ POST /api/v1/credential/GetCredential HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'
+curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'  \
+--header 'Content-Type: application/json' \
+--data '{
+   "credentialId": "430d2578-4382-4e74-a8b6-af7c1a960100"
+ }'
 ```
 
 ```json
@@ -1232,6 +1407,11 @@ curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'
    "credentialId": "430d2578-4382-4e74-a8b6-af7c1a960100"
  }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/GetCredential HTTP/1.1`
 
@@ -1253,11 +1433,11 @@ credentialId |The credentialId specifies the unique identifier associated with a
       "type": [
         "VerifiableCredential"
       ],
-      "issuer": "did:key:z6Mkhz4FAJRes2ocHPonoWFh4orCHSUrY7UPbd1n69SJyfDn",
+      "issuer": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       "issuanceDate": "2023-02-16T12:02:53Z",
       "expirationDate": "2051-10-05T14:48:00.000Z",
       "credentialSubject": {
-        "id": "did:key:z6Mkhz4FAJRes2ocHPonoWFh4orCHSUrY7UPbd1n69SJyfDn",
+        "id": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "password": "XXXXXXXX"
       },
       "credentialSchema": {
@@ -1280,16 +1460,27 @@ POST /api/v1/walletService/assignWalletUser HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser
+curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId": 1,
+  "user_id": 104,
+  "credential_id": 10
+}'
 ```
 
 ```json
 {
-  "wallet_id": 1,
-  "user_id": 104,
-  "credential_id": 10
+  "walletId": 1,
+  "userId": 104,
+  "credentialId": 10
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/walletService/assignWalletUser HTTP/1.1`
 
@@ -1323,19 +1514,33 @@ POST /api/v1/verifierService/validateUser HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/verifierService/validateUser'
+curl --location 'https://api.did.kloudlearn.com/api/v1/verifierService/validateUser' \
+--header 'Content-Type: application/json' \
+--data '{
+  "username" :"Durai",
+  "issuerDid" :"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid":"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "walletUrl":"wallet.brcm.connect.com",
+  "endpoint":"database-server",
+  "group":"lsfjobs"
+}'
 ```
 
 ```json
 {
   "username" :"Durai",
-  "issuerDid" :"did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
-  "holderDid":"did:key:z6MkqiwxHjgYq6mLRitGCcNDvjWVepyrGe4JTMztfPPhV9cy",
+  "issuerDid" :"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid":"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "walletUrl":"wallet.brcm.connect.com",
   "endpoint":"database-server",
   "group":"lsfjobs"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/verifierService/validateUser HTTP/1.1`
 
