@@ -268,6 +268,52 @@ metadata | These are the set of properties or claims.
 ## Assign Credential to wallet
 The Assign Credential to Wallet API in Decentralized Identities (DIDs) enables users to securely store and manage their verifiable credentials in a decentralized wallet. This API allows users to request, receive and store verifiable credentials issued by trusted issuers, providing them with greater control and ownership over their personal data.
 
+```shell
+curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId":[1],
+  "userId": [104],
+  "credentialId": [10]
+}'
+```
+
+```http
+POST /api/v1/walletService/assignWalletUser HTTP/1.1
+```
+
+```json
+{
+  "walletId":[1],
+  "userId": [104],
+  "credentialId": [10]
+}
+
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/walletService/assignWalletUser HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+walletId | The walletId  is an optional field used to specify the unique identifier of the digital wallet containing the users decentralized identity credentials.
+userId | The userId specifies the unique identifier associated with a decentralized identity and is typically used to authenticate and authorize access to specific resources or data.
+credentialId |  The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
+```json
+{
+    "code": 200,
+    "message": "Successfully Assigned Wallet",
+    "status": "Success"
+}
+```
+
+### HTTP Response
+`Presentation Request raised Successfully`
+
 ### Access Token
 Authorization Key Required 
 
@@ -288,8 +334,8 @@ POST /api/v1/verifierService/issuePR HTTP/1.1
     "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "walletUrl": "http://authnull.com/walletservice/wallets/1",
-    "endpoint": "",
-    "grouop": ""
+    "endpoint": "ubuntuVm",
+    "grouop": "R&D and Engineering"
 }
 
 ```
@@ -338,7 +384,7 @@ POST /api/v1/walletService/submitPresentationResponse HTTP/1.1
 {
     "walletId": 1,
     "presentationRequestId": 1,
-    "presentationSubmissionBytes": "abcxz"
+    "presentationSubmissionBytes": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Nzc3NjcxNjgsImlhdCI6MTY3Nzc2Njg2OCwidnAiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6IlZlcmlmaWFibGVQcmVzZW50YXRpb24iLCJ2ZXJpZmlhYmxlQ3JlZGVudGlhbCI6W3siQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsIlVuaXZlcnNpdHlEZWdyZWVDcmVkZW50aWFsIl0sImlzc3VlciI6ImRpZDpleGFtcGxlOjEyMyJ9XSwiaG9sZGVyIjoiZGlkOmV4YW1wbGU6NDU2In19.ayUHgpgzQs3dHvgETyHFgC4rFx_oEg"
 }
 
 ```
@@ -1464,8 +1510,8 @@ curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalle
 --header 'Content-Type: application/json' \
 --data '{
   "walletId": 1,
-  "user_id": 104,
-  "credential_id": 10
+  "userId": 104,
+  "credentialId": 10
 }'
 ```
 
