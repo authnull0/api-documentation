@@ -1,5 +1,15 @@
 # Decentralized Identities
-## Create Issuer DID
+Decentralized identities (DIDs) are a type of digital identity that is not controlled by any central authority or organization. Instead, DIDs are created and managed by the individual user, giving them greater control and ownership over their personal data and online presence.
+
+DIDs are typically based on blockchain technology, which provides a secure and transparent way to store and manage identity information. Each DID is assigned a unique identifier, which can be used to authenticate and verify the identity of the user in a variety of contexts, such as logging into websites, accessing financial services, or participating in online communities.
+
+One of the key benefits of DIDs is that they allow individuals to maintain their privacy and control over their personal data. Instead of relying on centralized databases or third-party identity providers, DIDs are stored locally on the users device and can be selectively shared with others as needed. This enables users to share only the information that is necessary, without revealing unnecessary or sensitive details.
+
+DIDs are also designed to be interoperable, meaning that they can be used across different platforms and applications. This enables users to maintain a consistent identity across different services, without having to create and manage multiple accounts or identities.
+
+Overall, DIDs represent a promising new approach to digital identity management that prioritizes user control and privacy. As the technology continues to evolve, it has the potential to transform the way that individuals interact with the digital world, enabling greater security, privacy, and trust in online interactions.
+
+## Create DID for Issuer
 Verifiable credentials are a form of digital identity that allows individuals and organizations to securely and selectively share information about themselves. By creating an Issuer DID, an entity can establish a trusted identity on a decentralized network, and issue verifiable credentials that can be cryptographically verified by third parties.
 
 ```http
@@ -7,17 +17,26 @@ https://api.did.kloudlearn.com/api/v1/did/createIssuerDid
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "method": "key",
+  "domainId": 1,
+   "name":  "Authnull"
+}'
 ```
 
 ```json
 {
-  "method": "key",
   "domainId": 1,
-   "name":  "Authnull"
-   "description": "This is a Issuer DID"
+  "method": "web" 
 }
+
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `https://api.did.kloudlearn.com/api/v1/did/createIssuerDid`
 
@@ -26,27 +45,33 @@ Parameter | Description
 --------- | -----------
 method    |This refers to the specific DID method that will be used to create the DID. A DID method is a set of rules and specifications that govern how a DID is created, stored, and used. There are many different DID methods available, each with its own unique features and requirements. 
 domainId |This refers to the company or organization who is using the service.
-name      |This refers to a department or a group in a company or an organization. 
-description | Description of the Issuer DID
+
 
 ```json
 {
-    "id": "did:key:z6MkpmebgMcPGrgg6gLwH4vjtR3EqjjGFTXEcmVBXaTmxATF",
-    "code": 200,
-    "message": "Successfully created DID",
-    "status": "Success"
+
+“did spec“
+
 }
+
 ```
 
 ### HTTP Response
 `Successfully created DID`
 
-## Create Holder DID
+## Create DID for Holder
 A Holder DID is a Decentralized Identifier (DID) that is used by an user to store and control their own verifiable credentials.
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createHolderDid'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createHolderDid'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "method": "key",
+  "domainId": 1 ,
+  "userId" : 104,
+  "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```http
@@ -54,13 +79,15 @@ POST /api/v1/did/createHolderDid HTTP/1.1
 ```
 ```json
 {
-  "method": "key",
-  "domainId": 1 ,
-  "userId" : 104,
-  "issuerDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY"
-  "description": "This is a User DID"
+  "domainId": 1,
+  "method": "bcm",
+  "userId": 123,
+  "issuerDid": "did:web:xxxxx" 
 }
+
 ```
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/did/createHolderDid HTTP/1.1`
@@ -72,26 +99,34 @@ Parameter | Description
  method   |This refers to the specific DID method that will be used to create the DID. A DID method is a set of rules and specifications that govern how a DID is created, stored, and used. There are many different DID methods available, each with its own unique features and requirements.  
 domainId |This refers to the company or organization which the user is part of. 
 userId   |This refers to the unique ID of the user. 
-issuerDid | This refers to the DID of the issuing organization or company.
-description | Description of the User DID
+issuerDid | The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
 
 ```json
 {
-    "id": "did:key:z6MkpAmMgW8szKWB36LNY7kvvAF88hULEEsFqX9jCSFbAik2",
-    "code": 200,
-    "message": "Successfully created DID",
-    "status": "Success"
+
+“did spec“
+
 }
+
 ```
 
 ### HTTP Response
 `Successfully created DID`
 
+## Create Credential Definition
 
-## Create Schema List 
+
+### Create Schema List
+The Create Schema List API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+'
 ```
 
 ```http
@@ -100,7 +135,7 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 ```json
 {
-  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -120,6 +155,10 @@ POST /api/v1/schema/createSchema HTTP/1.1
 }
 
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/schema/createSchema HTTP/1.1`
 
@@ -127,15 +166,15 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 Parameter | Description
 --------- | -----------
-author  | Author
-name | This refers to the name.
-schema | This refers to schema
-description | Description
-type | Type 
-properties | Properties 
-userId | Id of the user.
-additionalProperties | Additional Properties 
-sign | sign
+author  | The author is used to identify the entity or individual who created the decentralized identity credentials or the verifiable presentation request.
+name | The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
+schema | The schema is a required field used to define the data structure and format of the verifiable credential or presentation, ensuring interoperability and standardization across different identity systems.
+description | The description allows developers to provide additional information and context about the data being shared or requested within a decentralized identity ecosystem.
+type | The type  specifies the type of data being shared or requested within a decentralized identity ecosystem, such as a public key or verifiable credential. 
+properties | The properties allows developers to define additional metadata or attributes about the data being shared or requested within a decentralized identity ecosystem, such as the issuer or expiration date of a verifiable credential. 
+userId | The userId specifies the unique identifier associated with a decentralized identity and is typically used to authenticate and authorize access to specific resources or data.
+additionalProperties | The additionalProperties allows developers to define custom or non-standard properties and values for the data being shared or requested within a decentralized identity ecosystem.
+sign | The sign is used to sign data with a private key associated with a decentralized identity, providing proof of ownership and enabling secure data exchange within a decentralized identity ecosystem.
 
 ```json
 {
@@ -145,7 +184,253 @@ sign | sign
         "version": "1.0",
         "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
         "name": "EPM User",
-        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
+        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "authored": "2023-02-28T15:34:42Z",
+        "Schema": {
+            "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "additionalProperties": false,
+            "description": "EPM User Schema",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
+```
+
+### HTTP Response
+`Schema List created`
+
+
+## Create Verifiable Credential
+Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
+
+```shell
+curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential'  \
+--header 'Content-Type: application/json' \
+--data '{
+	"domainId" : 1,
+    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxx",
+    "schemaId" : 2,
+    "metadata" : "password"
+}'
+```
+
+```http
+POST /api/v1/credential/createCredential HTTP/1.1
+```
+
+```json
+{
+	"domainId" : 1,
+    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "schemaId" : 2,
+    "metadata" : "password"
+}
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/credential/createCredential HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+domainId | This refers to the company or organization who is issuing the VC or Verifiable Credential. 
+issuerDid | The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+holderDid |The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
+schemaId | It refers to the schema used to create the verifiable credential.
+metadata | These are the set of properties or claims.
+ 
+
+ ```json
+ {
+    "code": 200,
+    "message": "Credential Assigned successfully",
+    "status": "SUCCESS"
+}
+```
+
+### HTTP Response
+`Credential Assigned successfully`
+
+## Assign Credential to wallet
+The Assign Credential to Wallet API in Decentralized Identities (DIDs) enables users to securely store and manage their verifiable credentials in a decentralized wallet. This API allows users to request, receive and store verifiable credentials issued by trusted issuers, providing them with greater control and ownership over their personal data.
+
+### Access Token
+Authorization Key Required 
+
+## Issue Presentation Request
+The Issue Presentation Request API in Decentralized Identities (DIDs) enables verifiers to request specific verifiable credentials from holders in a secure and decentralized manner. The API allows verifiers to specify the attributes they require and issue a presentation request to the holder, who can then choose which credentials to present without revealing unnecessary or sensitive information.
+
+```shell
+curl POST https://api.did.kloudlearn.com/api/v1/verifierService/issuePR
+```
+
+```http
+POST /api/v1/verifierService/issuePR HTTP/1.1
+```
+
+```json
+{
+    "username": "john",
+    "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "walletUrl": "http://authnull.com/walletservice/wallets/1",
+    "endpoint": "",
+    "grouop": ""
+}
+
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/verifierService/issuePR HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+username  | The username is an optional field used to associate a user-friendly identifier with a decentralized identity, making it easier for users to manage their digital identities.
+issuerDid | The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+holderDid | The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
+walletUrl | The walletUrl is an optional field used to specify the URL location of the digital wallet containing the users decentralized identity credentials.
+endpoint | The endpoint is a required field used to specify the network endpoint for communicating with the decentralized identity infrastructure.
+groupop |The groupop is an optional field used to specify the group operation to be performed, such as creating a new group or adding/removing members from an existing group.
+
+```json
+{
+    "presentationRequestId": 7,
+    "message": "PR Raised Successfully",
+    "status": "Success",
+    "code": 200
+}
+```
+
+### HTTP Response
+`Presentation Request raised Successfully`
+
+
+## Submit Presentation Response
+The Submit Presentation Response API in Decentralized Identities (DIDs) enables holders to respond to presentation requests from verifiers by submitting a verifiable presentation that meets the requested criteria. The API allows holders to selectively disclose only the information that is necessary, while maintaining control and ownership over their personal data.
+
+```shell
+curl POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentationResponse
+```
+
+```http
+POST /api/v1/walletService/submitPresentationResponse HTTP/1.1
+```
+
+```json
+{
+    "walletId": 1,
+    "presentationRequestId": 1,
+    "presentationSubmissionBytes": "abcxz"
+}
+
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/walletService/submitPresentationResponse HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+walletId | The walletId  is an optional field used to specify the unique identifier of the digital wallet containing the users decentralized identity credentials.
+presentationRequestId | The presentationRequestId is a required field used to identify the request for a verifiable credential presentation, allowing the holder of the credential to provide the necessary proof of identity for authentication or authorization purposes.
+presentationSubmissionBytes | The presentationSubmissionBytes is an optional field used to specify the verifiable credential presentation data in a serialized format, which can be used to verify the authenticity and validity of the presented credentials.
+
+```json
+{
+    "code": 200,
+    "status": "Success",
+    "message": "Successfully submitted presentation response"
+}
+```
+
+### HTTP Response
+`Successfully submitted presentation response`
+
+
+
+## Create Schema List
+The Create Schema List API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema
+```
+
+```http
+POST /api/v1/schema/createSchema HTTP/1.1
+```
+
+```json
+{
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
+  "name": "EPM User",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "EPM User Schema",
+    "type": "object",
+    "properties": {
+      "userId": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "sign": false
+}
+
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/schema/createSchema HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+author  | The author is used to identify the entity or individual who created the decentralized identity credentials or the verifiable presentation request.
+name | The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
+schema | The schema is a required field used to define the data structure and format of the verifiable credential or presentation, ensuring interoperability and standardization across different identity systems.
+description | The description allows developers to provide additional information and context about the data being shared or requested within a decentralized identity ecosystem.
+type | The type  specifies the type of data being shared or requested within a decentralized identity ecosystem, such as a public key or verifiable credential. 
+properties | The properties allows developers to define additional metadata or attributes about the data being shared or requested within a decentralized identity ecosystem, such as the issuer or expiration date of a verifiable credential. 
+userId | The userId specifies the unique identifier associated with a decentralized identity and is typically used to authenticate and authorize access to specific resources or data.
+additionalProperties | The additionalProperties allows developers to define custom or non-standard properties and values for the data being shared or requested within a decentralized identity ecosystem.
+sign | The sign is used to sign data with a private key associated with a decentralized identity, providing proof of ownership and enabling secure data exchange within a decentralized identity ecosystem.
+
+```json
+{
+    "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+    "Schema": {
+        "type": "https://w3c-ccg.github.io/vc-json-schemas/schema/2.0/schema.json",
+        "version": "1.0",
+        "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
+        "name": "EPM User",
+        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "authored": "2023-02-28T15:34:42Z",
         "Schema": {
             "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
@@ -171,10 +456,16 @@ sign | sign
 
 
 ## Credential Schema List 
-This API retrieves all the available schemas for creating a Verifiable Credential.
+The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+'
 ```
 
 ```http
@@ -184,10 +475,15 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 ```json
 {
    "domainId": 1,
-   "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/credentialSchemaList HTTP/1.1`
 
@@ -196,7 +492,7 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 Parameter | Description
 --------- | -----------
 domainId  | This refers to the company or organization which the user is part of. 
-issuerDID |This refers to the DID of the issuing organization or company.
+issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
 
 ```json
 [
@@ -210,56 +506,20 @@ issuerDID |This refers to the DID of the issuing organization or company.
 ### HTTP Response
 `Credential Schema Listed`
 
-## Create Verifiable Credential
-Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
 
-```shell
-curl --location --request POST https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential
-```
-
-```http
-POST /api/v1/credential/createCredential HTTP/1.1
-```
-
-```json
-{
-	"domainId" : 1,
-    "issuerDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
-	"holderDid" : "did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
-    "schemaId" : 2,
-    "metadata" : "password"
-}
-```
-### HTTP Request
-`POST /api/v1/credential/createCredential HTTP/1.1`
-
-### Query Parameters
-
-Parameter | Description
---------- | -----------
-domainId | This refers to the company or organization who is issuing the VC or Verifiable Credential. 
-issuerDid | This refers to the DID of the issuing organization or company.
-holderDid |Holder DID refers to the recipient of the verifiable credential. 
-schemaId | It refers to the schema used to create the verifiable credential.
-metadata | These are the set of properties or claims.
- 
-
- ```json
- {
-    "code": 200,
-    "message": "Credential Assigned successfully",
-    "status": "SUCCESS"
-}
-```
-
-### HTTP Response
-`Credential Assigned successfully`
 
 ## Revoke Credential 
-Revoking a credential refers to the process of invalidating a previously issued digital credential.
+The Revoke Credential API in Decentralized Identities (DIDs) enables issuers to revoke previously issued verifiable credentials in a secure and decentralized manner. The API allows issuers to specify the reason for revocation and publish the revocation status to the decentralized network, ensuring that the revoked credential can no longer be used or presented by the holder.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "vcid": 2,
+  "domainId": 2,
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```http
@@ -269,20 +529,25 @@ POST /api/v1/credential/revokecredential HTTP/1.1
 {
   "vcid": 2,
   "domainId": 2,
-  "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn",
-  "holderDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST https://api.authnull.kloudlearn.com/api/v1/presentationRequest HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | -----------
-vcid | VC ID
+vcid | The vcid specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
 domainId | This refers to the company or organization which the user is part of. 
-issuerDid |This refers to the DID of the issuing organization or company.
-holderDid |Holder DID refers to the recipient of the verifiable credential.
+issuerDid |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+holderDid |The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
 
 
 ```json
@@ -297,7 +562,7 @@ holderDid |Holder DID refers to the recipient of the verifiable credential.
 `Credential Revoked successfully`
 
 ## Credential PR 
-
+The Credential PR in Decentralized Identities (DIDs) enables verifiers to request specific verifiable credentials from holders in a secure and decentralized manner. The API allows verifiers to specify the attributes they require and issue a presentation request to the holder, who can then choose which credentials to present without revealing unnecessary or sensitive information.
 
 ```shell
 curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/credentialPR'
@@ -313,6 +578,10 @@ POST /api/v1/did/credentialPR HTTP/1.1
   "verifierId": 123
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST https://api.authnull.kloudlearn.com/api/v1/did/credentialPR HTTP/1.1`
 
@@ -321,8 +590,8 @@ Parameter | Description
 --------- | -----------
 
 domainId | This refers to the company or organization which the user is part of. 
-did | DID
-verifierId | Verifier Id
+did | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
+verifierId | The verifierId specifies the unique identifier associated with a verifier, allowing for verification and validation of verifiable credentials and other data within a decentralized identity ecosystem.
 
 
 ```json
@@ -336,10 +605,15 @@ verifierId | Verifier Id
 
 
 ## Credential List
+The Credential List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credentials issued to them or stored in their decentralized wallet. The API allows users to search and filter the list based on their specific needs and requirements, providing them with greater control and ownership over their personal data.
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialList' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1
+}'
 ```
 
 ```http
@@ -351,6 +625,8 @@ POST /api/v1/credential/credentialList HTTP/1.1
    "domainId": 1
 }
 ```
+### Access Token
+Authorization Key Required 
 
 ### HTTP Request
 `POST /api/v1/credential/credentialList HTTP/1.1`
@@ -416,6 +692,7 @@ domainId | This refers to the company or organization which the user is part of.
 
 
 ## Credential Schema List
+The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
 
 
 ```http
@@ -423,15 +700,25 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialSchemaList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialSchemaList'  \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
 ```
 
 ```json
 {
    "domainId": 1,
-   "issuerDid": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn"
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/credentialSchemaList HTTP/1.1`
 
@@ -439,7 +726,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-issuerDID      |This refers to the DID of the issuing organization or company. 
+issuerDID      |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
 
 ```json
 [
@@ -455,6 +742,7 @@ issuerDID      |This refers to the DID of the issuing organization or company.
 
 
 ## DID List
+The DID List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available Decentralized Identifiers (DIDs) registered on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, providing them with a way to discover and connect with other participants in the decentralized identity ecosystem.
 
 
 ```http
@@ -462,7 +750,13 @@ POST /api/v1/did/DIDList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "issuerId": 2,
+  "userId": 104  
+}'
 ```
 
 ```json
@@ -472,6 +766,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDLis
   "userId": 104  
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/DIDList HTTP/1.1`
 
@@ -479,15 +777,15 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDLis
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-issuerDID |This refers to the DID of the issuing organization or company.
-userId | Id of the user. 
+issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
 
 ```json
 [
     {
         "DIDType": "Issuer",
         "domainId": 1,
-        "did": "did:brcm:z6MkvqWej7s1F39piFRHJ52QPmwHsQcEoo4EYb3RPbxtfoZn",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a issuer DID",
@@ -496,7 +794,7 @@ userId | Id of the user.
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6Mkk6VNNoj2feojkoRFsek7HKqJJQeNZBLdz3TJ3T5P8Fq6",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -505,7 +803,7 @@ userId | Id of the user.
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6MkjqGS4QGmpSWNgvuHnySrwkYc9vbsgEix7udHLQjvNRab",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -514,7 +812,7 @@ userId | Id of the user.
     {
         "DIDType": "User",
         "domainId": 1,
-        "did": "did:brcm:z6Mkm7wnq1bDQhiaaFeMwswZXDej2nYtBZfxNEJzJgSxJxUN",
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "issuerName": "Broadcom",
         "credentialIssued": 1,
         "desc": "This a User DID",
@@ -529,6 +827,7 @@ userId | Id of the user.
 
 
 ## Assign VC
+The Assign VC API in Decentralized Identities (DIDs) enables users to securely store and manage their verifiable credentials in a decentralized wallet. This API allows users to request, receive and store verifiable credentials issued by trusted issuers, providing them with greater control and ownership over their personal data.
 
 
 ```http
@@ -536,7 +835,14 @@ POST /api/v1/credential/assignVC HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/assignVC'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/assignVC'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "vcId": 1234
+}'
 ```
 
 ```json
@@ -548,6 +854,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
   "action": "Assign"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/assignVC HTTP/1.1`
 
@@ -555,10 +866,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-issuerDID      |This refers to the DID of the issuing organization or company. 
-userId | Id of the user
-credentialId | Credential Id
-action | Action
+issuerDID      |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem.
+credentialId | The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
+action | The action specifies the type of action to be performed within a decentralized identity ecosystem, such as creating or deleting a verifiable credential or requesting data access.
 
 
 ```json
@@ -574,6 +885,7 @@ action | Action
 
 
 ## Verify VC
+The Verify VC API in Decentralized Identities (DIDs) enables verifiers to verify the authenticity and validity of verifiable credentials presented by holders in a secure and decentralized manner. The API allows verifiers to verify the cryptographic proofs and signatures embedded in the verifiable credential, ensuring that it has not been tampered with and was issued by a trusted issuer.
 
 
 ```http
@@ -599,9 +911,9 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/verify
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-did | did
-claims | claims
-verifier | Verifier
+did | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
+claims | The claims contains the verifiable claims associated with a decentralized identity, providing a secure and tamper-proof way of sharing and verifying personal data within a decentralized identity ecosystem.
+verifier | The verifier refers to an entity responsible for verifying and validating the authenticity and accuracy of data within a decentralized identity ecosystem.
 
 
 ```json
@@ -610,11 +922,15 @@ verifier | Verifier
 }
 ```
 
+### Access Token
+Authorization Key Required 
+
 ### HTTP Response
 `Successfully VC verified`
 
 
 ## Sign VC
+The Sign VC API in Decentralized Identities (DIDs) enables issuers to digitally sign verifiable credentials using their private key, ensuring the integrity and authenticity of the credential. The API allows issuers to generate a cryptographic proof that links the issuers DID with the verifiable credential, providing a way for verifiers to verify the credential and ensuring that it has not been tampered with.
 
 
 ```http
@@ -622,7 +938,7 @@ POST /api/v1/did/signVerifiableCredential HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/signVerifiableCredential'
+curl --location --request POST https://api.did.kloudlearn.com/api/v1/did/signVerifiableCredential
 ```
 
 ```json
@@ -633,6 +949,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/signVe
   "vcId": "123"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/signVerifiableCredential HTTP/1.1`
 
@@ -640,9 +961,9 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/signVe
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-issuerDid |This refers to the DID of the issuing organization or company.
-holderDid |Holder DID refers to the recipient of the verifiable credential.
-vcId | Verifiable Credential Id
+issuerDid |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+holderDid |The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
+vcId | The vcId refers to the unique identifier of a verifiable credential that can be used to verify claims about a person or entity.
 
 
 ```json
@@ -657,6 +978,7 @@ vcId | Verifiable Credential Id
 
 
 ## Present VC
+The Present VC API in Decentralized Identities (DIDs) enables holders to selectively disclose verifiable credentials to verifiers without revealing any unnecessary or sensitive information. The API allows holders to choose which credentials to present and which attributes to disclose based on the verifiers presentation request. This ensures that holders maintain control and ownership over their personal data while still providing verifiers with the necessary information to make informed decisions.
 
 
 ```http
@@ -675,6 +997,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/presen
   "verifierId": ""
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/presentVerifiableCredential HTTP/1.1`
 
@@ -682,9 +1008,9 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/presen
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-walletId | Wallet Id
-vcDid | Verifiable Credential Did
-verifierId | verifier Id
+walletId | The walletId parameter in the API of Decentralized Identities refers to the unique identifier of a digital wallet that holds a users decentralized identities, verifiable credentials, and other related data.
+vcDid | The vcDid refers to the unique identifier of a Decentralized Identifier (DID) associated with a verifiable credential, which allows for secure and decentralized identity verification without the need for a central authority.
+verifierId | The verifierId refers to the unique identifier of a verifier, who is responsible for verifying the authenticity of a verifiable credential and can be used to access their verification services.
 
 
 ### HTTP Response
@@ -692,6 +1018,7 @@ verifierId | verifier Id
 
 
 ## VC-Verify-Request
+The Verifiable Credential (VC) Verify Request API in Decentralized Identities (DIDs) enables verifiers to request and receive verifiable credentials from holders and verify their authenticity and validity. The API allows verifiers to specify the required credentials and attributes they need to make informed decisions, and holders can choose which credentials to present without revealing unnecessary or sensitive information. This provides a secure and decentralized way to verify a person identity and credentials.
 
 
 ```http
@@ -709,6 +1036,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/vcVeri
   "vcDid": "did:bcm:yyyy"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/vcVerifyRequest HTTP/1.1`
 
@@ -716,14 +1048,15 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/vcVeri
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-vcDid | Verifiable Credential Did
-verifierId | verifier Id
+vcDid | The vcDid refers to the unique identifier of a Decentralized Identifier (DID) associated with a verifiable credential, which allows for secure and decentralized identity verification without the need for a central authority.
+verifierId |The verifierId refers to the unique identifier of a verifier, who is responsible for verifying the authenticity of a verifiable credential and can be used to access their verification services.
 
 
 ### HTTP Response
 `Successfully VC verify request sent`
 
 ## Register Wallet
+The Register Wallet API in Decentralized Identities (DIDs) enables users to register and create a decentralized wallet to securely store and manage their verifiable credentials and Decentralized Identifiers (DIDs). The API allows users to generate a private key and DID for their wallet, which can be used to authenticate and authorize transactions on the decentralized network.
 
 
 ```http
@@ -737,17 +1070,22 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletServ
 ```json
 {
   "email": "hussain@kloudone.com",
-  "walletKey": "dnfdm-dfdsfdf-dfdfd=dfdasfn"
+  "walletKey": "xxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/walletService/registerDevice HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-email | email address
-walletKey | Wallet key
+email | The email  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
+walletKey | The walletKey parameter in API of Decentralized Identities (DIDs) is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
 
 
 
@@ -764,6 +1102,7 @@ walletKey | Wallet key
 
 
 ## Get-Credential-json
+The Get-Credential-json API is a feature in decentralized identity systems that allows users to retrieve and securely store their credentials in a JSON format. This API enables users to authenticate themselves without revealing their personal information to third-party services, thereby increasing their privacy and security online. By using this API, users can have greater control over their digital identities and how they are used across different applications and services.
 
 
 ```http
@@ -780,14 +1119,19 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/GetCre
   "credentialId": 100
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/did/GetCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-email | email address
-walletKey | Wallet key
+email | The email  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
+walletKey |  The walletKey parameter in API of Decentralized Identities (DIDs) is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
 
 
 
@@ -802,6 +1146,7 @@ walletKey | Wallet key
 
 
 ## Wallet User List
+The Wallet User List API is a feature in decentralized identity systems that allows users to retrieve a list of their identities or DIDs (decentralized identifiers) from their digital wallets. This API enables users to manage their digital identities across different applications and services from a single location, providing greater convenience and control over their personal data. By using this API, developers can create applications that support decentralized identities and enable users to seamlessly switch between identities without the need for multiple logins or authentication processes.
 
 
 ```http
@@ -817,6 +1162,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/wallet/use
   "domainId": 1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/wallet/users HTTP/1.1`
 
@@ -847,6 +1197,7 @@ domainId |This refers to the company or organization who is using the service.
 
 
 ## Create EPM User Verifiable Credential
+The Create EPM User Verifiable Credential API is a feature in decentralized identity systems that allows users to create and issue verifiable credentials for themselves or for others. Verifiable credentials are digital documents that contain information about a person, organization, or thing that can be verified by third-party services. This API enables users to generate and manage their own credentials, providing greater control over their personal data and privacy. By using this API, developers can create applications that support verifiable credentials and enable users to securely share their credentials with others, without revealing their personal information.
 
 
 ```http
@@ -870,21 +1221,26 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
   "listOfWallets": [1, 2, 3]
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credentials/createEpmUserCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-epmUserId | epm User Id
-epmUsername | epm User Name
-credentialType | Credential Type
-credentialValue Value of the credential
-privilegedUser | privileged User
-userType | Type of users
-listOfEndpoints | List of endpoints
-listOfGroups | List of groups
-listOfWallets | list of wallets
+epmUserId | The epmUserId represents the unique identifier of a user within a particular DID method or network.
+epmUsername | The epmUsername represents the human-readable identifier of a user within a particular DID method or network.
+credentialType | The credentialType specifies the type or category of a credential being issued or requested
+credentialValue | The credentialValue represents the value or content of a specific credential issued to an identity.
+privilegedUser | The privilegedUser refers to a user or entity that has elevated permissions or access rights to perform certain actions within the identity system.
+userType | The userType is used to classify the type or category of a user or identity within a particular context or community.
+listOfEndpoints | The listOfEndpoints refers to a list of endpoints or URLs that can be used to access and interact with various services or resources associated with an identity or identity system.
+listOfGroups | The listOfGroups represents a collection of groups or communities within which an identity is a member or has access to specific resources or permissions.
+listOfWallets | The listOfWallets refers to a collection of wallets or digital storage containers where an identity can store and manage their cryptographic keys and other sensitive information.
 
 
 
@@ -901,14 +1257,18 @@ listOfWallets | list of wallets
 
 
 ## User List
-
+The User List API is a feature in decentralized identity systems that allows developers to retrieve a list of users or decentralized identifiers (DIDs) from a given network or service. This API enables developers to build applications that support decentralized identities and enable users to manage their personal data across different services and applications. By using this API, developers can provide users with greater control over their digital identities, making it easier for them to manage and switch between different identities without the need for multiple logins or authentication processes.
 
 ```http
 POST /api/v1/did/userList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userList'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1
+}'
 ```
 
 ```json
@@ -916,6 +1276,11 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/userLi
   "domainId": 1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/assignVC HTTP/1.1`
 
@@ -955,6 +1320,7 @@ domainId |This refers to the company or organization who is using the service.
 `Successfully User Listed`
 
 ## Issuer List
+The Issuer List API is a feature in decentralized identity systems that allows developers to retrieve a list of trusted issuers from a given network or service. An issuer is an organization or entity that issues verifiable credentials to users. This API enables developers to build applications that support decentralized identities and enable users to verify the authenticity of the credentials they receive. By using this API, developers can ensure that only trusted issuers are allowed to issue verifiable credentials within their applications, thereby enhancing the security and reliability of their services.
 
 
 ```http
@@ -962,7 +1328,11 @@ POST /api/v1/did/issuerList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuerList'
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuerList'  \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1
+}'
 ```
 
 ```json
@@ -970,6 +1340,10 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/issuer
     "domainId":1
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
 ### HTTP Request
 `POST /api/v1/did/issuerList HTTP/1.1`
 
@@ -1013,6 +1387,7 @@ domainId |This refers to the company or organization who is using the service.
 `Successfully listed Issuer List`
 
 ## Get Credential
+The Get Credential API is a feature in decentralized identity systems that allows developers to retrieve verifiable credentials issued to a specific user or decentralized identifier (DID). Verifiable credentials are digital documents that contain information about a person, organization, or thing that can be verified by third-party services. This API enables developers to build applications that support decentralized identities and enable users to manage and share their verifiable credentials across different services and applications. By using this API, developers can ensure that only authorized users are able to access and share their verifiable credentials, thereby enhancing the security and privacy of their services.
 
 
 ```http
@@ -1020,7 +1395,11 @@ POST /api/v1/credential/GetCredential HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'
+curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'  \
+--header 'Content-Type: application/json' \
+--data '{
+   "credentialId": "430d2578-4382-4e74-a8b6-af7c1a960100"
+ }'
 ```
 
 ```json
@@ -1028,13 +1407,18 @@ curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'
    "credentialId": "430d2578-4382-4e74-a8b6-af7c1a960100"
  }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/credential/GetCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-credentialId |Credential Id.
+credentialId |The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
 
 
 
@@ -1049,11 +1433,11 @@ credentialId |Credential Id.
       "type": [
         "VerifiableCredential"
       ],
-      "issuer": "did:key:z6Mkhz4FAJRes2ocHPonoWFh4orCHSUrY7UPbd1n69SJyfDn",
+      "issuer": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
       "issuanceDate": "2023-02-16T12:02:53Z",
       "expirationDate": "2051-10-05T14:48:00.000Z",
       "credentialSubject": {
-        "id": "did:key:z6Mkhz4FAJRes2ocHPonoWFh4orCHSUrY7UPbd1n69SJyfDn",
+        "id": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "password": "XXXXXXXX"
       },
       "credentialSchema": {
@@ -1068,6 +1452,7 @@ credentialId |Credential Id.
 `Successfully Credential displayed`
 
 ## Assign Wallet User
+The Wallet User API in Decentralized Identities (DIDs) is an interface that allows users to manage their decentralized identity credentials, such as public keys and attestations, through a digital wallet. It enables users to securely store and manage their identity information while maintaining full control over their data. With the Wallet User API, users can easily authenticate and authorize themselves for various digital services and applications without relying on traditional centralized identity providers.
 
 
 ```http
@@ -1075,25 +1460,36 @@ POST /api/v1/walletService/assignWalletUser HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser
+curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId": 1,
+  "user_id": 104,
+  "credential_id": 10
+}'
 ```
 
 ```json
 {
-  "wallet_id": 1,
-  "user_id": 104,
-  "credential_id": 10
+  "walletId": 1,
+  "userId": 104,
+  "credentialId": 10
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/walletService/assignWalletUser HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-walletId |Wallet Id
-userId | User ID
-credentialId | Credential Id
+walletId |The walletId parameter in the API of Decentralized Identities refers to the unique identifier of a digital wallet that holds a users decentralized identities, verifiable credentials, and other related data.
+userId |  The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem.
+credentialId | The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
 
 
 
@@ -1110,6 +1506,7 @@ credentialId | Credential Id
 
 
 ## Validate User
+The Validate User API in Decentralized Identities (DIDs) is an interface that allows service providers to verify the authenticity and validity of a users decentralized identity credentials. By using the Validate User API, service providers can ensure that the users credentials are trustworthy and have not been tampered with. The API can be used to verify digital signatures, attestations, and other types of proof that are associated with a users decentralized identity. This helps to create a more secure and trustworthy digital environment where users can confidently access services and applications without compromising their personal data.
 
 
 ```http
@@ -1117,31 +1514,45 @@ POST /api/v1/verifierService/validateUser HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/verifierService/validateUser'
+curl --location 'https://api.did.kloudlearn.com/api/v1/verifierService/validateUser' \
+--header 'Content-Type: application/json' \
+--data '{
+  "username" :"Durai",
+  "issuerDid" :"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid":"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "walletUrl":"wallet.brcm.connect.com",
+  "endpoint":"database-server",
+  "group":"lsfjobs"
+}'
 ```
 
 ```json
 {
   "username" :"Durai",
-  "issuerDid" :"did:key:z6MkkpN6GJP63BAS6SnBtLzxCE116KSUfHnyqJ7JAzkPYRvY",
-  "holderDid":"did:key:z6MkqiwxHjgYq6mLRitGCcNDvjWVepyrGe4JTMztfPPhV9cy",
+  "issuerDid" :"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "holderDid":"did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "walletUrl":"wallet.brcm.connect.com",
   "endpoint":"database-server",
   "group":"lsfjobs"
 }
 ```
+
+### Access Token
+Authorization Key Required 
+
+
 ### HTTP Request
 `POST /api/v1/verifierService/validateUser HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
 --------- | ----------- 
-username | username
-issuerDid | Issuer DID
-holderDid | Holder DID
+username | The username is an optional field used to associate a user-friendly identifier with a decentralized identity, making it easier for users to manage their digital identities.
+issuerDid | The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+holderDid | The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
 walletUrl | Url of the wallet
-endpoint | endpoint
-group | Group
+endpoint | The endpoint is a required field used to specify the network endpoint for communicating with the decentralized identity infrastructure.
+group | The group is used to specify the context or community within which an identity is being created or accessed.
 
 
 

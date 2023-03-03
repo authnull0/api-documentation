@@ -1,21 +1,19 @@
 # Endpoint User Management
-This is a PRD for Endpoint Management (EPM) covering the following use case:
+The Endpoint User Management manages endpoint users creation, creates credentials based on credential type and assigns them to wallets. The users are also imported from the Authnull Agent running per instance, and are assigned to wallets. All the synchronization happens with the Authnull Agent for endpoint users 
 
-1.Provision new users from a SSO console
-
-2.Provision users with temporary passwords
-
-3.Do password management of all local users with a secrets management service like Vault. 
-
-4.Provision users with temporary ssh keys
-
-5.Provision and manage users with Just In Time (JIT) entitlements., i.e. escalate privileges. 
 
 ## Add User
-
+The Add User API allows users to add a new user to the system or application for endpoint user management. This API provides a simple and secure way to manage user accounts and ensure that only authorized users have access to sensitive information or resources.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info' \
+--header 'Content-Type: application/json' \
+--data '{
+    "userName":"sefali",
+    "authMethod":"su",
+    "userType":"3",
+    "customMapping":"4"
+}'
 ```
 
 ```http
@@ -50,7 +48,7 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-userName | an identification used by a person with access to a computer, network, or online service..
+userName | an identification used by a person with access to a computer, network, or online service.
 authMethod | Authentication is the process of determining whether someone or something is, in fact, who or what it says it is..
 userType | Roles is the user is admin or user it signify.
 customMapping | It expresses ideas, thoughts and relationships among and between different spatial elements in multiple dimensions..
@@ -64,11 +62,19 @@ customMapping | It expresses ideas, thoughts and relationships among and between
 successfully Added
 </aside>
  
-## List All User
-
+## List User
+The List User API allows users to retrieve a list of all the users in the system or application for endpoint user management.The API may return a list of user details and any relevant permissions or access rights.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/listAllEpmUsers
+curl --location 'http://localhost:9090/api/v1/lums/listAllEpmUsers' \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1,
+    "pageId": 1,
+    "pageSize": 200,
+    "filter": "",
+    "instanceIds": [2, 1]
+}'
 ```
 
 ```http
@@ -80,12 +86,13 @@ POST /api/v1/lums/listAllEpmUsers HTTP/1.1
 
 ```json
 {
-"pageId": 1,
-"pageSize": 50,
-"domainId": 1,
-"instanceId":0,
-"Filter":
-{"filterBy": "localGroups", "value": ""}}
+    "domainId":1,
+    "pageId":1,
+    "pageSize":10,
+    "filter":"",
+    "instanceIds":[17]
+
+}
 ```
 
 
@@ -100,25 +107,38 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-pageId | Page Id
-pageSize | Page Size
-domainId | Domain Id
-instanceId | Instance Id
-filter | Filter
+pageId | Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
+filter | filter is the search keyword for searching endpoint groups.
 
 ### HTTP response
 
-`successfully shown list of all linux user`
+`successfully shown list of all endpoint user`
 
 
 <aside class="success">
-successfully shown list of all linux user
+successfully shown list of all endpoint user
 </aside>
  
 ## Add Endpoint User Info
+The Add Endpoint User Info API allows users to add endpoint-specific information to a user account in the system or application for endpoint user management. This API provides a simple and efficient way to manage user accounts and ensure that endpoint-specific information is associated with each user.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo'
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/addEpmUserInfo' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":4,
+"userName":"as",
+"userType":"12",
+"credType":"asd",
+"password":"XXXX",
+"motp":"",
+"did":"",
+"privilegedUser":"",
+"sshKey":"asdfg"
+}'
 ```
 
 ```http
@@ -132,7 +152,7 @@ POST /api/v1/lums/addEpmUserInfo HTTP/1.1
 "domainId":1,
 "userType":"Local",
 "credType":"password",
-"password":"manju",
+"password":"",
 "privilegedUser":"true",
 "userName":"testManjuupdate",
 "sshKey":"",
@@ -153,15 +173,15 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-domainId | Domain Id
-userType | Type of Users
-credType | Credential Type
-password | Password
-privilegedUser | Priveleged User
-userName | Name of user
-sshKey | sshKey
-motp | motp
-did | DID
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+userType | Roles is the user is admin or user it signify.
+credType | The credType specifies the type of credential used for authentication or authorization purposes.
+password | The password refers to the authentication credential used to verify the identity of the user making the request.
+privilegedUser |The privilegedUser allows certain users to have elevated access and permissions within the endpoint.
+userName | an identification used by a person with access to a computer, network, or online service.
+sshKey | The sshKey allows for secure access to an endpoint using a pre-shared cryptographic key.
+motp | MOTP parameter is used for Multi-One Time Password authentication on API endpoints to ensure secure access and prevent unauthorized usage.
+did | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
 
 
 ### HTTP response
@@ -181,10 +201,15 @@ User Added successfully
 </aside>
 
 ## Get Endpoint User detail
-
+The Get Endpoint User Detail API is a part of the User Management endpoint and is used to retrieve detailed information about a specific user. This API endpoint requires the user unique identifier as input and returns information and any associated metadata. It is useful for retrieving specific user information to display or manipulate within an application.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/lums/getEpmUserDetail'
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/lums/epmUserDetail' \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId":1,
+    "userId":25
+}'
 ```
 
 ```http
@@ -214,8 +239,8 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-domainId | Domain Id of the instances.
-userIds | userId is used
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+userIds |The userId is used to specify the unique identifier of a user to be added or removed from an endpoint.
 
 ### HTTP response
 
@@ -225,7 +250,7 @@ userIds | userId is used
 "userId":26,
 "userType":"Local",
 "credType":"password",
-"password":"manju",
+"password":"xxxx",
 "privilegedUser":"true",
 "userName":"testManjuupdate",
 "sshKey":"",
@@ -242,9 +267,24 @@ Epm User Detail Fetched
 
 
 ## Update Endpoint User Info
+The Update Endpoint User Info API is a part of the User Management endpoint and is used to update a user information. This API endpoint requires the user unique identifier and the updated information as input. Upon successful execution, the API returns a success message indicating that the user information has been updated. 
+
 
 ```shell
-curl PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/lums/updateEpmUserInfo' \
+--header 'Content-Type: application/json' \
+--data '{
+"userId":26,
+"domainId":1,
+"userType":"Local",
+"credType":"password",
+"password":"xxxx",
+"privilegedUser":"true",
+"userName":"testManjuupdate",
+"sshKey":"",
+"motp":"",
+"did":""
+}'
 ```
 
 ```http
@@ -259,7 +299,7 @@ PUT /api/v1/lums/updateEpmUserInfo HTTP/1.1
 "domainId":1,
 "userType":"Local",
 "credType":"password",
-"password":"manju",
+"password":"xxxx",
 "privilegedUser":"true",
 "userName":"testManjuupdate",
 "sshKey":"",
@@ -281,19 +321,27 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-userId | Id of the user
-domainId | Domain Id
-userType | Type of user
-credType | Credential Type
-passord | Password
-privilegedUser | privileged User
-userName | Name of User
-sshKey | sshKey
-motp | motp
-did | DID
+userId |The userId is used to specify the unique identifier of a user to be added or removed from an endpoint.
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+userType | Roles is the user is admin or user it signify.
+credType |The credType specifies the type of credential used for authentication or authorization purposes.
+passord |The password refers to the authentication credential used to verify the identity of the user making the request.
+privilegedUser | The privilegedUser allows certain users to have elevated access and permissions within the endpoint
+userName | an identification used by a person with access to a computer, network, or online service.
+sshKey |The sshKey allows for secure access to an endpoint using a pre-shared cryptographic key.
+motp | MOTP parameter is used for Multi-One Time Password authentication on API endpoints to ensure secure access and prevent unauthorized usage.
+did |The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
 
 
 ### HTTP response
+
+```json
+{
+    "status": "Success",
+    "message": "User Updated successfully",
+    "userId": "26"
+}
+```
 
 `EPM User Info updated`
 
@@ -305,9 +353,17 @@ EPM User Info updated
 
 
 ## Delete Endpoint User
+The Delete Endpoint User API is a part of the User Management endpoint and is used to delete a user account. This API endpoint requires the user unique identifier as input, and upon successful execution, the user account is removed from the system. This API is useful for administrative purposes, such as removing inactive or unauthorized user accounts.
 
 ```shell
-curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/lums/deleteEpmUser' \
+--header 'Content-Type: application/json' \
+--data '[
+{
+    "linuxUserId": "1",
+    
+}
+]'
 ```
 
 ```http
@@ -339,10 +395,10 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-domainId | Domain Id
-epmUserId | EPM user Id
-userName | User Name
-instanceId | Instance Id
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+epmUserId | The epmUserId is used to identify the unique user ID associated with a particular endpoint in order to perform user-specific operations.
+userName | an identification used by a person with access to a computer, network, or online service.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
 
 
 
@@ -367,10 +423,21 @@ A proper password complexity policy would be: eight characters for the length of
 
 
 ## Add Password Policy 
-
+The Add Password Policy API is a part of the Password Policy endpoint in User Management and is used to define the password requirements for user accounts. This API endpoint requires input such as password length, complexity rules, and expiration policies. Upon successful execution, the API returns a success message indicating that the password policy has been added. This API is useful for enforcing security standards for user passwords and reducing the risk of security breaches.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyName":"PolicynonMachineTest",
+    "templateName":"Template1",
+    "minLen":"5",
+    "maxLen":"10",
+    "firstChar":"",
+    "allowUpperLower":"",
+    "allowSpecial":"yes",
+    "allowNumeric":"yes"
+}'
 ```
 
 ```http
@@ -404,14 +471,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name is for linux user.
-templateName | Template Name to inherit from existing password policy.
-minLen | Minimum Password length.
-maxLen | Maximum Password length.
-firstChar | Enforce first Character type.
-allowUpperLower | Flag to allow both upper and lower case.
-allowSpecial | Allow special characters flag.
-allowNumeric | Allow numeric characters flag.
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName | The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
 
 ### HTTP response
 
@@ -429,9 +496,15 @@ successfully Added Password Policy
 </aside>
 
 ## Delete Password Policy
+The Delete Password Policy API is a part of the Password Policy endpoint in User Management and is used to remove an existing password policy. This API endpoint requires the unique identifier of the policy to be deleted as input, and upon successful execution, the policy is removed from the system. This API is useful for administrative purposes, such as updating password policies or removing outdated policies. It is important to note that removing a password policy may affect the security of user accounts and should be done with caution.
+
 
 ```shell
-curl DELETE https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId":1
+}'
 ```
 
 ```http
@@ -460,7 +533,7 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyId | Policy id is for linux user.
+policyId | The policyId specifies the unique identifier of a password policy to be retrieved, updated, or deleted.
 
 
 ### HTTP response
@@ -488,10 +561,16 @@ successfully deleted Password Policy
 </aside>
 
 ## List All Password Policy
-
+The List All Password Policy API is a part of the Password Policy endpoint in User Management and is used to retrieve a list of all existing password policies. This API endpoint returns a list of policies, each with its unique identifier and associated settings such as password length and complexity rules. This API is useful for administrative purposes, such as reviewing the current password policies or managing multiple policies for different user groups or applications.
 
 ```shell
-curlPOST  https://api.authnull.kloudlearn.com/api/v1/instances/listAllPasswordPolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/listPasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "machineIds":[1,2,3],
+    "pageId":1,
+    "pageSize": 10
+}'
 ```
 
 ```http
@@ -523,8 +602,8 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-pageId | Id for page.
-pageSize | Page size for page.
+pageId | Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
 
 ### HTTP response
 
@@ -550,10 +629,17 @@ pageSize | Page size for page.
 successfully Listed All Password Policy
 </aside>
 
-## Assign Policy To Machine
+## Assign Policy To Endpoints
+The Assign Policy to Endpoints API is a part of the Password Policy endpoint in User Management and is used to assign an existing password policy to a specific endpoint or group of endpoints. This API endpoint requires the unique identifier of the policy and the identifier of the endpoint(s) to be assigned to as input. Upon successful execution, the API returns a success message indicating that the policy has been assigned to the specified endpoint(s). This API is useful for managing password policies for different applications or user groups and ensuring consistent security standards across multiple endpoints.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId":2,
+    "instanceId":1
+
+}'
 ```
 
 ```http
@@ -586,39 +672,44 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyId | Policy id is for linux user.
-instanceId | id for the instance
+policyId | The policyId specifies the unique identifier of a password policy to be retrieved, updated, or deleted.
+instanceId | The instanceId is used to specify the ID of the instances that are part of the endpoint.
 
 
 ### HTTP response
 
-`successfully Assigned Policy To Machine`
+`successfully Assigned Policy To endpoint`
 
 ```json
-[
-  {
-    "policyName":"PolicynonMachineTest",
-    "templateName":"Template1",
-    "minLen":"5",
-    "maxLen":"10",
-    "firstChar":"",
-    "allowUpperLower":"",
-    "allowSpecial":"yes",
-    "allowNumeric":"yes"
+{
+    "code": 200,
+    "message": "Successfully Assigned Password Policy To Endpoint"
 }
-]
 
 ```
 
 <aside class="success">
-successfully Assigned Policy To Machine
+successfully Assigned Policy To endpoint
 </aside>
 
 
 ## Update Password Policy
+The Update Password Policy API is a part of the Password Policy endpoint in User Management and is used to update an existing password policy. This API endpoint requires the unique identifier of the policy and the updated policy settings as input, such as password length, complexity rules, or expiration policies.This API is useful for modifying password policies to reflect changing security needs or standards. It is important to note that updating a password policy may affect the security of user accounts and should be done with caution.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyId": 1,
+    "policyName":"testPolicy",
+    "minLen":"",
+    "maxLen": "",
+    "firstChar": "",
+    "allowUpperLower":"",
+    "allowSpecial":"",
+    "allowNumeric":""
+
+}'
 ```
 
 ```http
@@ -658,15 +749,14 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name.
-templateName | Template name.
-minLen | Minimum Password length.
-maxLen | Maximum password length.
-firstChar | Enforce first character type.
-allowUpperLower | Flag to allow both uppercase and lowercase characters.
-allowSpecial | Flag to allow special characters.
-allowNumeric | Flag to allow numberic characters.
-
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName |The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
 
 ### HTTP response
 
@@ -686,9 +776,18 @@ successfully updated Password Policy
 </aside>
 
 ## Validate Password
+The Validate Password API is a part of the Password Policy endpoint in User Management and is used to validate if a password meets the specified password policy requirements. This API endpoint requires the user password as input and returns a success message indicating if the password meets the policy requirements or an error message indicating which policy requirements were not met. This API is useful for ensuring that user passwords meet the specified security standards and reducing the risk of security breaches. It is typically used in conjunction with other password policy management APIs.
 
 ```shell
-curl POST https://api.authnull.kloudlearn.com/api/v1/instances/validatePolicy
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/validatePassword' \
+--header 'Content-Type: application/json' \
+--data '{
+
+"machineId":"",
+
+"password":""
+
+}'
 ```
 
 ```http
@@ -698,20 +797,13 @@ POST /api/v1/instances/validatePolicy HTTP/1.1
 
 
 ```json
-[
-  {
-        "policyId":2,
-        "policyName":"PolicyManjuTest1",
-        "minLen":"3",
-        "maxLen":"5",
-        "firstChar":"",
-        "allowUpperLower":"",
-        "allowSpecial":"",
-        "allowNumeric":""
-  
-    
-    }
-]
+{
+
+machineId:””
+
+password:””
+
+}
 ```
 
 This will validate Password Policy.
@@ -727,14 +819,15 @@ Authorization Key Required
 
 Parameter | Description
 --------- | ------- | -----------
-policyName | Policy name to be validated.
-templateName | Template name.
-minLen | Minimum Password length.
-maxLen | Maximum Password length.
-firstChar | Enforce first character type.
-allowUpperLower | Flag to allow both uppercase and lowercase characters.
-allowSpecial | Flag to allowe special characters.
-allowNumeric | Flag to allow numberic characters.
+policyName | The policyName refers to the name of the policy that should be applied to the specified endpoint.
+templateName |The templateName refers to the name of the password policy template that is being used to apply a set of rules and restrictions for creating and managing user passwords.
+minLen | The minLen sets the minimum required length for a users password.
+maxLen | The minLen sets the Maximum required length for a users password.
+firstChar | The firstChar specifies whether the password requires the first character to be uppercase, lowercase, or a digit.
+allowUpperLower | The allowUpperLower specifies whether the password policy allows the use of both uppercase and lowercase letters in passwords.
+allowSpecial | The allowSpecial determines whether special characters are allowed in user passwords.
+allowNumeric | The allowNumeric specifies whether or not numeric characters are allowed in user passwords.
+
 
 
 ### HTTP response
@@ -744,7 +837,7 @@ allowNumeric | Flag to allow numberic characters.
 ```json
 [
  {
-  "Update Successfully"
+  "Validation Successful"
  }
 ]
 

@@ -1,10 +1,28 @@
 # Endpoint Group Management
-Enterprise Performance Management (EPM) is the process of managing a group of Linux endpoints. By managing a group of endpoints, administrators can ensure that all devices within the group are in compliance with organizational policies and security standards.
-## List All Endpoint Group
-It list all the Endpoint that are present.
+The Endpoint Group Management module is a software component that enables the management of groups of endpoints within a system. This module provides a user interface for adding, modifying, and deleting endpoint groups, as well as associating endpoint users with these groups.
+
+To add endpoint users to an endpoint group, simply select the desired group from the Endpoint Group Management module and navigate to the Endpoint Users section. From here, you can add or remove users as necessary.
+
+Once endpoint users have been added to an endpoint group, you can generate an authentication flow for the group. This authentication flow determines how users in the group will be authenticated when accessing resources and applications within the system.
+
+To generate an authentication flow for an endpoint group, select the desired group from the Endpoint Group Management module and navigate to the Authentication Flow section. From here, you can configure the authentication flow based on the specific needs of the group.
+
+It is important to ensure that endpoint groups and associated authentication flows are properly configured and maintained to ensure secure and efficient access to resources and applications within the system. Regular monitoring and troubleshooting of the Endpoint Group Management module may be necessary to ensure its proper functioning.
+
+
+
+## List Endpoint Group
+This lists all the Endpoint groups that are present. Endpoint groups refer to a collection of  Linux endpoints
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/listEndpointGroup
+curl --location --request POST https://api.authnull.kloudlearn.com/api/v1/instanceGroup/listEndpointGroup \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId" :"1",
+     "filter" : "",
+      "pageId": 1 , 
+      "pageSize" :100
+}'
 ```
 
 ```http
@@ -29,10 +47,10 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- pageId | Page id
-pageSize | Size of the Page
-filter | filter
+ domainId| The domainId is used to specify the domain ID associated with the endpoint group.
+ pageId | Page ID refers to the page number.
+ pageSize | Page size refers to the number of endpoints groups to be fetched.
+ filter | filter is the search keyword for searching endpoint groups.
 
 ### HTTP Response
 `Endpoint listed.`
@@ -59,10 +77,19 @@ Endpoint listed.
 </aside>
 
 ## Add Endpoint Group
-It adds the Endpoint to the present list.
+The Add Endpoint groups API allows users to add new Endpoint groups to a system or application.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.comapi/v1/instanceGroup/addInstanceGroup
+curl --location --request POST https://api.authnull.kloudlearn.comapi/v1/instanceGroup/addInstanceGroup  \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":1,
+"instanceIds":[1,3],
+"groupName":"SumanGhimiray",
+"ou":"",
+"cn":"",
+"dc":""
+}'
 ```
 
 ```http
@@ -90,12 +117,12 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- instanceIds | Instance Id 
- groupName | Name of the group
- ou | organization unit
- cn | common name
- dc | domain component
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ instanceIds | The instanceIds is used to specify the IDs of the instances that are part of the endpoint group.
+ groupName | The groupName is used to specify the name of the endpoint group being created or modified.
+ ou | The ou (organizational unit) is an optional parameter used to specify the organizational unit of the resources associated with the endpoint group.
+ cn | The cn (common name) is an optional parameter used to specify the common name of the resources associated with the endpoint group.
+ dc | The dc (domain component) is an optional parameter used to specify the domain component of the resources associated with the endpoint group.
  
 
 
@@ -104,7 +131,7 @@ Parameter  | Description
 
 ```json
 {
-    "Instance_id": 63,
+    "instanceId": 63,
     "Code": "200",
     "Message": "Successfully Updated Endpoint Group"
 }
@@ -114,10 +141,17 @@ Endpoint added.
 </aside>
 
 ## Delete Endpoint Group
-It is used to delete the Endpoint from the existing list.
+The Delete Endpoint Group API  allows users to delete an existing Endpoint group from a system or application.This API provides a straightforward and secure way to remove Endpoint groups that are no longer needed or that have become obsolete. It can be used by administrators, security teams, or developers who need to manage or monitor endpoint groups in an organization.
+
+
 
 ```shell
-curl DELETE 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/deleteEndpointGroup
+curl --location --request DELETE https://api.authnull.kloudlearn.com/api/v1/instanceGroup/deleteEndpointGroup  \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId" : 2,
+    "id": [555]
+}'
 ```
 ```http
 DELETE api/v1/instanceGroup/deleteEndpointGroup
@@ -139,8 +173,8 @@ Authorization Key Required
 ### Query Parameter
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- epmGroupId | Id of the group
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ epmGroupId | The epmGroupId is used to specify the ID of an existing endpoint group to modify or retrieve its configuration.
  
  
 
@@ -158,10 +192,17 @@ Endpoint  deleted.
 </aside>
 
 ## Edit Endpoint Groups
-It updates Endpoint status.
+The Edit Endpoint Group API allows users to modify an existing Endpoint group in a system or application.This API provides a simple and secure way to update Endpoint groups with new information or to modify existing attributes, such as the groups name, description, or metadata.
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/editInstanceGroup
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/editInstanceGroup' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":1,
+"instanceIds":[3,5,6],
+"groupName":"sefali",
+"groupId" :22
+}'
 ```
 
 ```http
@@ -185,9 +226,9 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- instanceIds| Instance Id of the group
- groupName | Name of the group
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ instanceIds|The instanceIds is used to specify the IDs of the instances that are part of the endpoint group.
+ groupName | The groupName is used to specify the name of the endpoint group being created or modified.
  
 
 
@@ -206,10 +247,17 @@ Endpoint Status Updated.
 </aside>
 
 ## Assign Users To Endpoint Group
-It assign users to Endpoint Group
+The Assign users to Endpoint Group API allows users to assign or add users to an existing Endpoint group in a system or application.This API provides a convenient and secure way to manage user access to Endpoint groups and ensure that only authorized users can access or modify endpoints within the group.
 
 ```shell
-curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToEndpointGroup
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/assignUsersToEndpointGroup' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":1234,
+"groupId":9,
+"userIds":[2,3],
+"action":"add"
+}'
 ```
 
 ```http
@@ -241,10 +289,10 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
- action | action
- userId | User Id
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId | The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
+ action | The action is used to specify the type of action to be performed on a group, such as add or remove a group.
+ userId | The userId is used to specify the unique identifier of a user to be added or removed from a group.
  
 
 
@@ -265,10 +313,18 @@ Endpoint Status Updated.
 
 
 ## Add Auth Flow
-It adds the authentication flow
+The Add Authflow API allows users to add a new authentication flow to an existing Endpoint group in a system or application. Authentication flow is the process that users go through to verify their identity before accessing an endpoint or device.
+
+This API provides a simple and secure way to manage authentication flows for Endpoint groups and ensure that only authorized users can access or modify endpoints within the group. 
 
 ```shell
-curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/addAuthFlowToInstanceGroup
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/addAuthFlowToInstanceGroup' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":1234,
+"groupId":13,
+"authFlow":"SSH,DID"
+}'
 ```
 
 ```http
@@ -292,9 +348,9 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
- authFlow | authentication flow
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId | The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
+ authFlow | The authFlow is used to specify the type of authentication flow to be used for accessing the group management API
 
 
 ### HTTP Response
@@ -303,9 +359,9 @@ Parameter  | Description
 
 ```json
 {
-    "Instance_id": "9",
-    "Code": "auth  \t   required  pam_securetty.so\nauth      required  pam_unix.so shadow nullok\naccount   required  pam_unix.so\npassword  required  pam_cracklib.so retry=3\nsession   required  pam_unix.so\n",
-    "Message": "Successfully Updated Auth Flow.\n The PAM Config File can be downloaded at {url}:{port}/files/pam.txt"
+    "instanceId": 13,
+    "code": "200",
+    "message": "Auth Flow Updated"
 }
 ```
 <aside class="success">
@@ -315,10 +371,16 @@ Auth flow added
 
 
 ## Update Instance Group Status
-It updates the instance group status 
+The Update Instance Group Status API allows users to update the status of an instance group in a system or application. This API provides a simple and secure way to manage the status of instance groups and ensure that they are running smoothly and efficiently.
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/updateInstanceGroupStatus
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/updateInstanceGroupStatus' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":1234,
+"groupId":9,
+"status":"Disabled"
+}'
 ```
 
 ```http
@@ -342,9 +404,9 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
- status | Status
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId | The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
+ status | The status parameter for API endpoint group management is used to specify the current status of a group, such as whether it is active or inactive
 
 
 ### HTTP Response
@@ -364,10 +426,15 @@ Instance Group status updated
 
 
 ## Fetch Instance Group Detail
-It give the group detail for the instance
+The Fetch Instance Group Detail API that allows users to retrieve detailed information about an instance group in a system or application.This API provides a convenient and secure way to access detailed information about instance groups .
 
 ```shell
-curl-- POST 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/fetchInstanceGroupDetail
+curl --location 'http://localhost:9090/api/v1/instanceGroup/fetchInstanceGroupDetail' \
+--header 'Content-Type: application/json' \
+--data '{
+"domainId":4,
+"groupId":45
+}'
 ```
 
 ```http
@@ -389,9 +456,8 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
-
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId | The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
 
 ### HTTP Response
 
@@ -415,10 +481,20 @@ Instance group detail fetched
 
 
 ## Update Credential Policy
-It updated or modifies the Credential Policyof the particular instance.
+The Update Credential Policy API allows users to update the credential policy for an endpoint group in a system or application.This API provides a simple and secure way to manage credential policies for endpoint groups and ensure that they are configured to meet the security requirements of an organization. 
 
 ```shell
-curl-- PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateCredentialPolicyToEndpointGroup
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateCredentialPolicyToEndpointGroup' \
+--header 'Content-Type: application/json' \
+--data '{
+
+"groupId":1,
+"domainId":1,
+"ttlUser":"",
+"priviligedUser":"",
+"policyId":"",
+"homeDir":""
+}'
 ```
 
 ```http
@@ -445,12 +521,12 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
- ttlUser | ttl user
- priviligedUser | priviliged User
- policyId | Policy Id
- homeDir | Home directory
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId | The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
+ ttlUser | The ttlUser refers to the Time-to-Live (TTL) value for user sessions.
+ priviligedUser | The privilegedUser allows certain users to have elevated access and permissions within the endpoint group.
+ policyId | The policyId specifies the ID of the policy associated with the group.
+ homeDir | The homeDir specifies the default directory path for users accessing the endpoint group.
 
 
 ### HTTP Response
@@ -471,10 +547,16 @@ Credential Policy Updated
 
 
 ## Delete Credential Policy
-It deletes the Credential Policyof the particular instance.
+The Delete Credential Policy API allows users to delete the credential policy for an endpoint group in a system or application.It typically requires authentication to ensure that only authorized users can delete credential policies.
 
 ```shell
-curl-- DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deleteCredentialPolicyToEndpointGroup
+curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deleteCredentialPolicyToEndpointGroup' \
+--header 'Content-Type: application/json' \
+--data '{
+"groupId":1,
+"domainId":1,
+"credPolicyId":""
+}'
 ```
 
 ```http
@@ -497,9 +579,9 @@ Authorization Key Required
 
 Parameter  | Description
 --------- | -----------
- domainId| Domain Id of the instances
- groupId | Id of the group
- credPolicyId | Id of the Credential Policy
+ domainId| Domain Id is the company/organization id within our Authnull platform.
+ groupId |The groupId is used to specify the unique identifier of a group to retrieve, update or delete its information.
+ credPolicyId | The credPolicyId specifies the credential policy to be associated with the endpoint group.
 
 ### HTTP Response
 

@@ -1,0 +1,174 @@
+# Active Directory API Communications 
+The Active Directory API Communications involves the use of APIs to synchronize user and group information between a SaaS platform and an Active Directory (AD) server. In this process, the AD APIs in Authnull, a middleware component, communicate with the agent to push the user and group information from the SaaS platform to the AD server.
+
+The synchronization process begins with the AD APIs retrieving the user and group information from the SaaS platform. The APIs then communicate with the agent to push this information to the AD server. The agent acts as a bridge between the SaaS platform and the AD server, enabling secure communication and data transfer.
+
+This synchronization process ensures that the user and group information in the AD server is up-to-date and reflects the latest changes made in the SaaS platform. It is useful for managing user access and permissions across multiple platforms and ensuring consistent security standards.
+
+Overall, the Active Directory API Communications is an essential component of identity and access management in modern IT environments, providing seamless integration and secure communication between different systems.
+
+
+## Import Users
+The Import Users API is a software component that can be integrated into the Active Directory API Communications module to enable the import of user data from external systems or sources. This API allows for the automation of user data management, simplifying the process of adding or updating user information in the Active Directory.
+
+```shell
+curl POST "https://api.authnull.kloudlearn.com/api/v1/importUsers"
+```
+
+```HTTP
+POST api/v1/importUsers HTTP/1.1
+```
+
+```json
+[
+{
+    "ldapHost":"ldap.forumsys.com",
+    "ldapPort":"389",
+    "baseDN":"dc=example,dc=com",
+    "filter":"(ou=italians)",
+    "bindDN":"BindDN",
+    "domainID":"91"
+}
+]
+```
+
+This will Import Users.
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST api/v1/importUsers HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+ldapHost | The ldapHost specifies the LDAP server hostname or IP address to connect to for importing user information.
+ldapPort | The ldapPort specifies the port number used for LDAP communication during the import process in Active Directory API Communications..
+baseDN | The baseDN specifies the base distinguished name for the search in which the imported users will be added..
+filter | The filter allows for specifying criteria to select specific user accounts for import.. 
+bindDN | The bindDN specifies the distinguished name of the user account used to authenticate and authorize the API request.
+domainID | The domainID specifies the identifier of the domain to which the users should be imported. 
+
+### HTTP response
+
+`successfully Imported Users`
+
+
+<aside class="success">
+successfully Imported Users
+</aside>
+
+## Get Import Status
+The Get Import Status API is a software component that can be integrated into the Active Directory API Communications module to enable the retrieval of import status information for user data imports. This API allows for the monitoring and tracking of user data imports, providing real-time status updates on the progress of import operations.
+
+```shell
+curl  POST "https://api.authnull.kloudlearn.com/api/v1/getImportStatus" 
+```
+
+```HTTP
+POST api/v1/getImportStatus HTTP/1.1
+```
+
+```json
+[
+{
+    "DirectoryName":"ldap.forumsys.com"
+}
+]
+```
+
+This will Get Import Status.
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST api/v1/getImportStatus HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+directoryName | Name of the Directory.
+
+### HTTP response
+
+`Imported status successfully`
+
+
+<aside class="success">
+Imported status successfully
+</aside>
+
+## Mapping API
+The Mapping API is a software component that can be integrated into the Active Directory API Communications module to enable the mapping of user attributes between external systems and the Active Directory. This API allows for the customization of user attribute mapping, simplifying the process of managing user data across different systems.
+
+## Reconfigure Active Directory
+The Reconfigure Active Directory API is a software component that can be used to update the configuration settings for the Active Directory API Communications module. This API allows for the customization and adjustment of the communication settings between the Active Directory and external systems.
+
+```shell
+curl POST "https://api.authnull.kloudlearn.com/api/v1/reConfigure" 
+```
+
+```HTTP
+POST api/v1/reConfigure HTTP/1.1
+```
+
+```json
+[
+FieldMappings: {
+
+email "john@kloudone.com",
+
+slack: "JohnDoe",
+
+username: "John",
+
+department: "IT",
+
+group: "groupA",
+
+subgroup: "subgroupA",
+
+roles: "admin",
+
+location: "India",
+
+region: "United States",
+
+primaryApp: "kloudone",
+
+fax: "1234567890"
+
+}
+]
+```
+
+This will reConfigure Active Directory.
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`POST api/v1/reConfigure HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+groupID | GrouId is the id of group.
+fieldMappings | FieldMappings is the mapping of the field.
+
+### HTTP response
+
+`successfully reConfigured Active Directory`
+
+
+<aside class="success">
+successfully reConfigured Active Directory
+</aside>
