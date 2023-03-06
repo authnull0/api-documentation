@@ -1,66 +1,6 @@
 # Endpoint User Management
 The Endpoint User Management manages endpoint users creation, creates credentials based on credential type and assigns them to wallets. The users are also imported from the Authnull Agent running per instance, and are assigned to wallets. All the synchronization happens with the Authnull Agent for endpoint users 
 
-
-## Add User
-The Add User API allows users to add a new user to the system or application for endpoint user management. This API provides a simple and secure way to manage user accounts and ensure that only authorized users have access to sensitive information or resources.
-
-```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/add-linux-user-info' \
---header 'Content-Type: application/json' \
---data '{
-    "userName":"sefali",
-    "authMethod":"su",
-    "userType":"3",
-    "customMapping":"4"
-}'
-```
-
-```http
-POST /api/v1/add-linux-user-info HTTP/1.1
-```
-
-
-
-```json
-[
-{
-    "userName":"sefali",
-    "authMethod":"s",
-    "userType":"6",
-    "customMapping":"6"
-   
-}
-]
-```
-
-This will add the users to an Endpoint.
-
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-
-`POST /api/v1/add-linux-user-info HTTP/1.1`
-
-### Query Parameters
-
-Parameter | Description
---------- | ------- | -----------
-userName | an identification used by a person with access to a computer, network, or online service.
-authMethod | Authentication is the process of determining whether someone or something is, in fact, who or what it says it is..
-userType | Roles is the user is admin or user it signify.
-customMapping | It expresses ideas, thoughts and relationships among and between different spatial elements in multiple dimensions..
-
-### HTTP response
-
-`successfully Added`
-
-
-<aside class="success">
-successfully Added
-</aside>
  
 ## List User
 The List User API allows users to retrieve a list of all the users in the system or application for endpoint user management.The API may return a list of user details and any relevant permissions or access rights.
