@@ -552,6 +552,212 @@ issuerDID |The issuerDid is a required field used to identify the decentralized 
 ### HTTP Response
 `Credential Schema Listed`
 
+##  Poll Credentials 
+The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
+
+```shell
+curl --location --request POST 'https://api/v1/walletService/pollCredentials' \
+--header 'Content-Type: application/json' \
+--data '{
+  "email": "john@kloudone.com",
+  "walletKey": "xxx-xxx-xxx-xxx"
+}
+'
+```
+
+```http
+POST /api/v1/walletService/pollCredentials HTTP/1.1
+```
+
+```json
+{
+  "email": "john@kloudone.com",
+  "walletKey": "xxx-xxx-xxx-xxx"
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/walletService/pollCredentials HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+email | The email  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
+walletKey | The walletKey parameter in API of Decentralized Identities (DIDs) is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
+
+
+```json
+{
+  "code": 200,
+  "status": "success",
+  "message": "Retrived Credential Sucessfully",
+  "email": "john@kloudone.com",
+  "walletKey": "xxx-xxx-xxx-xxx",
+  "credentials": [
+    {
+      "credentialId": 99,
+      "credentialName": "Credential",
+      "issuerName": "Broadcom",
+      "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "userDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "jwt": "FWHQGjstawCugyKQPI0Q3QdSkEGJ3UIMydMnnjDxflAa+iNm+UyvqOf8ALMCby2OZ5HeC9Msh8uciNpzCXOeB5HxaXl1ZU3+I00oRqli+nwMRNUOj4ks8qaXXj5hpvMl2TwuX5MfBNYCeULHRz1HtV77Cn60ofzwVtZoI1so5X5c/xhalvnfqWansnswR1fC3ZNcXHRpY0Mm97PLUoCcVl6wuy3e8fmJGN2JvgvP2bRVubfqtDxLuDKnyJ6TwOZCIle8Lbmmfr2wXN8CfxxRlsuGdFHQ75Mhjbhe9H0ABmFClDgnJj4FaU2kTfpJTK5sBUgEekIxw2R4vCu8leeT0PI+UR68jARt6A2Tz3b1yfe1BDm8bU/8tRUd1RBTMELo4jheO2Eo37JJvEDCTT8YGALfkWGpdUYmrhe6RxgCGklE54oisdUOxNuP/U2yU7B72lbiqa6KDiYPUK4s+HfYui0yghdHwNuaFDfePh18na68ztMlfkspLP/jCcWn+vYlN5IQwesXXO0cg5qRSsxMVwvvBrnAQf98vU9yiZK5Ls324KduHCaDS44jy8yLCeMrPTOnypA/khQ0NY7jqvdhJ/XjSCnVJdzNuVkvcirZI64hofnZ4LfVJuNcH2qgjoEJ9vIHdyxodZf1iaXs1yTffUC6h64AViFijBDJPcY2BCGyv+IQgGeqkCRN6nEEWn5304/+7UD8/onG541NYMPmlmDSezKk7JH+8ju61O7NXMAh9vur4tGcjs2/iHDcMTdn80lkIy9mVEXJ8rtH9IbXXNGI11o0+lwHvSUE9D7WaLA0DMgMSXQFasT1GraesYpBm6eu1+TlRYtNTtXxXjD8+F1tbiwQzZ2KXFQtcvwTcLREZM3ZhqgnvNXFJ5XOorSYgl8v8wMGTj3c6P0PlaNfLQOz3O5pvfBn9+abK3xp66n84gpxVxZMcX0CE1fBilJ3vmsoXpN5tUcGjBacP/HIxN8/N1IY6QZw4RIgXq1pCSABHJZjQvMNpp0ghUnX7Nc3w83T01qyJZbkg0YKUivdiG8rniNCzzpHchNR16UkesiKm7IIXexlKI5LXK8FuFN6IqGF5gUvMceYCH6ZGWcQW2nYJH6Upw0DV3CUTIP3eQpSN8jzwJOZtDRXh1WseM/f7guV/2F0g96c2Y1XRp+VGKqbeVQsQPVaZCHLrWH38+nBNh92WwOIHXqVFWNY+g43BKenTjI0d/Neo2jmJeRxefPuSHWpzYQOEjSha3cB5g3DOKrGSQNePFrDd/l3KMPfaR6YWI043tP7k/jLdgJOA8nhRIQA9aUClpahOQJ96Auc0mSVcNpKlB+m4xPgxGWEs6ZXuZpNcEnX5M9BoTQ1Gq4iaJ33f8PzG6iCqyPzV9rh6ALzsIaZ4o1C/scLaGD1zSaSNQZH2HAB0Kxuf67vHgnpajNrzBB7TZLSz/ah23zLohTeHfE1I757WluxGbJGNkSEqe0v75sX5RtlZn8SvEZeL+EEf/A3p8HmITnA39cemeBnD6zoQtrmY87/XFDlPf7RJZD6vz8dCah90rCI21vt07KnTKSNuTESkiCedv91bYW+ZBABSFJGA6tc1NhMkmusAqrePqaDWX/7fLcicl5Yzn48G7g0nDsUMdxkmGOAhCgIY07Z+RMa2woFiTRBnSe5arGGxH2wwkWfmHg3MUu+iZDtWOtABHX0xpLA2TXRLarOnXR6hhp69fKTlg78rF6j3FW//8Rh6fEGMKoRRV/4kI+nP9nkTZbux8kKL5goJ5GlcZ0WQ83ESUqivi50n8PnxtP/l3FPj94bIuJI3RMQM3GefNrkZw==",
+      "createdAt": "2023-03-03T06:23:31Z"
+    }
+  ]
+}
+```
+
+### HTTP Response
+`Credential Schema Listed`
+
+## Acknowledge Credential 
+The acknowledge credential API is an essential component of decentralized identity (DID) systems. It is a programming interface that enables a user to acknowledge or verify a digital credential issued by another party.This API is critical in ensuring the integrity and trustworthiness of digital credentials, as it enables users to verify the authenticity and validity of a credential before accepting it. Moreover, it provides users with control over their personal information by allowing them to disclose only the information necessary to prove their qualifications or identity.
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId": 1,
+  "userId": 104,
+  "credentialId": 10,
+  "accept": true
+}'
+```
+
+```http
+POST /api/v1/walletService/acknowledgeCredential HTTP/1.1
+```
+```json
+{
+  "walletId": 1,
+  "userId": 104,
+  "credentialId": 10,
+  "accept": true
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST https://api.authnull.kloudlearn.com/api/v1/walletService/acknowledgeCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+walletId | The walletId parameter in the API of Decentralized Identities refers to the unique identifier of a digital wallet that holds a users decentralized identities, verifiable credentials, and other related data.
+userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
+credentialId | The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
+accept | The accept is used to indicate the acceptance of a credential presented by the holder.
+
+
+```json
+{
+  "code": 200,
+  "status": "Success",
+  "message": "Credential Accepted"
+}
+```
+
+### HTTP Response
+`Credential Accepted`
+
+
+## Poll Presentation Request 
+The acknowledge credential API is an essential component of decentralized identity (DID) systems. It is a programming interface that enables a user to acknowledge or verify a digital credential issued by another party.This API is critical in ensuring the integrity and trustworthiness of digital credentials, as it enables users to verify the authenticity and validity of a credential before accepting it. Moreover, it provides users with control over their personal information by allowing them to disclose only the information necessary to prove their qualifications or identity.
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletService/pollPresentationRequest' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId": 1,
+  "walletKey": "abcxyz",
+  "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}'
+```
+
+```http
+POST api/v1/walletService/pollPresentationRequest HTTP/1.1
+```
+```json
+{
+  "walletId": 1,
+  "walletKey": "abcxyz",
+  "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST https://api.authnull.kloudlearn.com/api/v1/walletService/pollPresentationRequest HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+walletId | The walletId parameter in the API of Decentralized Identities refers to the unique identifier of a digital wallet that holds a users decentralized identities, verifiable credentials, and other related data.
+walletKey | The walletKey is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
+holderDid | The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
+
+
+```json
+{
+  "id": "e8ffeca4-62e0-47e0-8751-4fa353b8f139",
+  "input_descriptors": [
+    {
+      "id": "epmUser",
+      "name": "EPM User Verifiable Credential",
+      "purpose": "The EPM User VC allows to access to Linux Endpoints.",
+      "format": {
+        "jwt_vc": {
+          "alg": [
+            "EdDSA"
+          ]
+        }
+      },
+      "constraints": {
+        "fields": [
+          {
+            "id": "epmUsername",
+            "path": [
+              "$.credentialSubject.epmUsername"
+            ]
+          },
+          {
+            "id": "epmPassword",
+            "path": [
+              "$.credentialSubject.epmPassword"
+            ]
+          },
+          {
+            "id": "holderDID",
+            "path": [
+              "$.credentialSubject.holderDID"
+            ]
+          },
+          {
+            "id": "holderId",
+            "path": [
+              "$.credentialSubject.holderId"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### HTTP Response
+`Credential Accepted`
+
 
 
 ## Revoke Credential 
@@ -1131,15 +1337,19 @@ Authorization Key Required
 Parameter | Description
 --------- | ----------- 
 email | The email  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
-walletKey | The walletKey parameter in API of Decentralized Identities (DIDs) is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
+walletKey | The walletKey is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
 
 
 
 ```json
 {
+  "userId": 113,
+  "walletId": 63,
+  "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "secretKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "code": 200,
-  "status":"Success",
-  "message":"Wallet successfully registered"}
+  "status": "Success",
+  "message": "Wallet successfully registered"
 }
 ```
 
