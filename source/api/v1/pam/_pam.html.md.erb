@@ -9,3 +9,61 @@ Privileged access management (PAM), a subdivision of Identity and Access Managem
 The solution should include the following functionalities:
 
 Defining user roles Granting required privileges or access rights for the roles defined Distributing user information and access grants to all devices and systems that enforce access rights in organizations Monitoring privileged user activities and analyzing the same to detect anomalies
+
+# Installation Of Authnull Microservices
+
+To install Authnull Microservices repository in your system, you can follow these general steps:
+
+1.Install the framework: You can install the framework by following the instructions provided in their respective documentation.
+Link for the same : `https://goa.design/implement/implementing/`
+
+2.Create a project: Once the framework is installed, create a new project using the command-line interface (CLI) or integrated development environment (IDE) provided by the framework. You can also use any existing project as a starting point.
+
+3.Define the microservices: Identify the different components of your application that can be broken down into smaller, more manageable microservices. Define the interface for each microservice.
+
+4.Implement the microservices: Write the code for each microservice, including the APIs for communication between the different microservices.
+
+5.Test the microservices: To facilitate testing of each microservice,there are a unit tests for each component of the microservice. These unit tests can be automatically triggered and executed during the continuous integration (CI) process, helping to ensure that each microservice is functioning as expected. The unit tests can be stored in a dedicated folder such as /test within the Git repository.
+
+6.Deploy the microservices: Deploy each microservice to a separate container or virtual machine.
+
+7.Monitor the microservices: Monitor the performance of each microservice and the overall system. Use metrics and logs to identify issues and improve the system.
+
+These are the general steps to install a microservices repository for backend APIs. 
+
+
+# Authnull Web Application Installation Instructions
+
+### Instructions for installing the application:
+Run `npm install` in your terminal/command prompt.
+
+### Instructions to run the Application on development mode:
+1. To launch the application in development mode, run `npm run dev` in your terminal/command prompt.
+
+2. Once the application is running, access it in your browser by visiting `http://127.0.0.1:5173/login`.
+
+### Instructions to run the Application on production mode:
+
+1. Create a production build of the application using `npm run build` command
+
+2. Clone the svelte-server repository and run `npm install` to install it.
+
+3. Copy the dist folder from svelte-app root directory to the root directory of svelte-server.
+
+4. Run `npm start` from svelte-server directory using a terminal.
+
+5. Once the svelte-server starts, access it in your browser by visiting `http://127.0.0.1:3000`
+
+### Tech used in the application.
+The application is built using a combination of technologies.
+
+1. Svelte is used as the primary JavaScript framework to develop the user interface
+
+2. Carbon Black serves as the design library for consistent and streamlined UI design.
+
+3. Vite is the chosen build tool for compiling and packaging the code for deployment.
+
+
+
+
+

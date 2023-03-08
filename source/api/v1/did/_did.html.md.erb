@@ -217,10 +217,17 @@ curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issue
 --header 'Content-Type: application/json' \
 --data '{
 	"domainId" : 1,
-    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxx",
-    "schemaId" : 2,
-    "metadata" : "password"
+	"issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"schemaId" : 1,
+	"credentialName": "EPM User",
+	"metadata":{
+		"epmUsername": "john",
+            "epmPassword": "xxx",
+            "holderDID": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "holderId": 1
+    },
+	"expiry": "2024-01-01T00:00:00Z"
 }'
 ```
 
@@ -231,10 +238,17 @@ POST /api/v1/credential/createCredential HTTP/1.1
 ```json
 {
 	"domainId" : 1,
-    "issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-	"holderDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "schemaId" : 2,
-    "metadata" : "password"
+	"issuerDid" : "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+	"schemaId" : 1,
+	"credentialName": "EPM User",
+	"metadata":{
+		"epmUsername": "john",
+            "epmPassword": "xxx",
+            "holderDID": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "holderId": 1
+    },
+	"expiry": "2024-01-01T00:00:00Z"
 }
 ```
 ### Access Token
@@ -331,11 +345,11 @@ POST /api/v1/verifierService/issuePR HTTP/1.1
 ```json
 {
     "username": "john",
-    "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "issuerDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "walletUrl": "http://authnull.com/walletservice/wallets/1",
-    "endpoint": "ubuntuVm",
-    "grouop": "R&D and Engineering"
+    "endpoint": "sisAdmin",
+    "grouop": "R&D"
 }
 
 ```
