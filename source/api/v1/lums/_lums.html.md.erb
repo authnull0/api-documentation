@@ -413,12 +413,21 @@ The Delete Endpoint User API is a part of the User Management endpoint and is us
 curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/deleteEpmUser' \
 --header 'Content-Type: application/json' \
 --data '{
-        "epmUserId":899,
-        "domainId":1,
-        "userName":"messagebus",
-        "instanceIds":[2]
-        
-        }'
+    "domainId": 1,
+    "key": "34rfdhuytqwrtttbcv",
+    "epmUsers": [
+        {
+            "epmUserId": 514,
+            "userName": "hema",
+            "instanceId": 17
+        },
+        {
+            "epmUserId": 515,
+            "userName": "hema",
+            "instanceId": 17
+        }
+    ]
+}'
 ```
 
 ```http
@@ -429,11 +438,20 @@ DELETE api/v1/endpointUsers/deleteEpmUser HTTP/1.1
 
 ```json
 {
-"epmUserId":899,
-"domainId":1,
-"userName":"messagebus",
-"instanceIds":[2]
-
+    "domainId": 1,
+    "key": "34rfdhuytqwrtttbcv",
+    "epmUsers": [
+        {
+            "epmUserId": 514,
+            "userName": "hema",
+            "instanceId": 17
+        },
+        {
+            "epmUserId": 515,
+            "userName": "hema",
+            "instanceId": 17
+        }
+    ]
 }
 ```
 
@@ -462,8 +480,7 @@ instanceId | The instanceId is used to specify the ID of the instances that are 
 ```json
 {
     "status": "Success",
-    "message": "User deleted successfully",
-    "userId": "25"
+    "message": "User deleted successfully"
 }
 ```
 
