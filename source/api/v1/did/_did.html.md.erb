@@ -20,16 +20,19 @@ https://api.did.kloudlearn.com/api/v1/did/createIssuerDid
 curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'  \
 --header 'Content-Type: application/json' \
 --data '{
-  "method": "key",
   "domainId": 1,
-   "name":  "Authnull"
+  "method": "key",
+  "name": "Broadcom R&D",
+  "description": "R&D department of Broadcom"
 }'
 ```
 
 ```json
 {
   "domainId": 1,
-  "method": "web" 
+  "method": "key",
+  "name": "Broadcom R&D",
+  "description": "R&D department of Broadcom"
 }
 
 ```
@@ -45,13 +48,16 @@ Parameter | Description
 --------- | -----------
 method    |This refers to the specific DID method that will be used to create the DID. A DID method is a set of rules and specifications that govern how a DID is created, stored, and used. There are many different DID methods available, each with its own unique features and requirements. 
 domainId |This refers to the company or organization who is using the service.
+description | The description allows developers to provide additional information and context about the data being shared or requested within a decentralized identity ecosystem.
+
 
 
 ```json
 {
-
-“did spec“
-
+  "id": "did:key:z6MkkHNepDyi2FYcNAwAHaujXaPFZG8dAzUFPJvneySxmXAK",
+  "code": 200,
+  "message": "Successfully created DID",
+  "status": "Success"
 }
 
 ```
@@ -120,18 +126,180 @@ description | The description allows developers to provide additional informatio
 ### HTTP Response
 `Successfully created DID`
 
-## Create Credential Definition
+## DID List
+The DID List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available Decentralized Identifiers (DIDs) registered on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, providing them with a way to discover and connect with other participants in the decentralized identity ecosystem.
 
 
-### Create Schema List
-The Create Schema List API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
+```http
+POST /api/v1/did/DIDList HTTP/1.1
+```
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "issuerId": 2,
+  "userId": 104  
+}'
+```
+
+```json
+{
+  "domainId": 1,
+  "issuerId": 2,
+  "userId": 104  
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/did/DIDList HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+domainId |This refers to the company or organization who is using the service.
+issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
+
+```json
+[
+    {
+        "DIDType": "Issuer",
+        "domainId": 1,
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "issuerName": "Broadcom",
+        "credentialIssued": 1,
+        "desc": "This a issuer DID",
+        "lastYpdatedAt": "02-12-2023 12:12:12"
+    },
+    {
+        "DIDType": "User",
+        "domainId": 1,
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "issuerName": "Broadcom",
+        "credentialIssued": 1,
+        "desc": "This a User DID",
+        "lastYpdatedAt": "02-12-2023 12:12:12"
+    },
+    {
+        "DIDType": "User",
+        "domainId": 1,
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "issuerName": "Broadcom",
+        "credentialIssued": 1,
+        "desc": "This a User DID",
+        "lastYpdatedAt": "02-12-2023 12:12:12"
+    },
+    {
+        "DIDType": "User",
+        "domainId": 1,
+        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "issuerName": "Broadcom",
+        "credentialIssued": 1,
+        "desc": "This a User DID",
+        "lastYpdatedAt": "02-12-2023 12:12:12"
+    }
+  ]
+    
+```
+
+### HTTP Response
+`Successfully Listed DID`
+
+## Delete DID 
+The DELETE DID API is used to delete a decentralized identifier (DID) and its associated data from the underlying decentralized ledger, which can be useful in scenarios such as revoking a users access or deleting outdated information.
+
+```shell
+curl --location --request DELETE 'https://api.did.kloudlearn.com/api/v1/did/deleteDid' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1,
+  "dids": [
+    {
+      "type": "Issuer",
+      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    } ,
+    {
+      "type": "User",
+      "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ]
+}'
+```
+
+```http
+DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1
+```
+```json
+{
+  "domainId": 1,
+  "dids": [
+    {
+      "type": "Issuer",
+      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    } ,
+    {
+      "type": "User",
+      "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ]
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+domainId | This refers to the company or organization which the user is part of. 
+dids | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
+type | The type  specifies the type of data being shared or requested within a decentralized identity ecosystem, such as a public key or verifiable credential. 
+
+```json
+{
+  "code": 200,
+  "message": "2 DIDs deleted successfully",
+  "status": "Success"
+}
+```
+
+### HTTP Response
+`DIDs deleted successfully`
+
+
+## Create Schema 
+The Create Schema API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
 
 ```shell
 curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema' \
 --header 'Content-Type: application/json' \
 --data '{
-   "domainId": 1,
-   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "name": "EPM User",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "EPM User Schema",
+    "type": "object",
+    "properties": {
+      "userId": {
+        "type": "number"
+      },
+      "name": {
+        "type": "string"
+      }
+    },
+    "additionalProperties": false
+  },
+  "sign": false
 }
 '
 ```
@@ -142,7 +310,7 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 ```json
 {
-  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
+  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -191,7 +359,7 @@ sign | The sign is used to sign data with a private key associated with a decent
         "version": "1.0",
         "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
         "name": "EPM User",
-        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
         "authored": "2023-02-28T15:34:42Z",
         "Schema": {
             "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
@@ -214,6 +382,57 @@ sign | The sign is used to sign data with a private key associated with a decent
 
 ### HTTP Response
 `Schema List created`
+
+## Credential Schema List 
+The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential' \
+--header 'Content-Type: application/json' \
+--data '{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+'
+```
+
+```http
+POST /api/v1/credential/credentialSchemaList HTTP/1.1
+```
+
+```json
+{
+   "domainId": 1,
+   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/credential/credentialSchemaList HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+domainId  | This refers to the company or organization which the user is part of. 
+issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
+
+```json
+[
+    {
+        "id": 1,
+        "name": "SSH"
+    }
+]
+```
+
+### HTTP Response
+`Credential Schema Listed`
 
 
 ## Create Verifiable Credential
@@ -293,8 +512,8 @@ The Assign Credential to Wallet API in Decentralized Identities (DIDs) enables u
 curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser' \
 --header 'Content-Type: application/json' \
 --data '{
-  "walletId":[1],
-  "userId": [104],
+  "walletId":[1,3],
+  "userId": [104.105],
   "credentialId": [10]
 }'
 ```
@@ -305,8 +524,8 @@ POST /api/v1/walletService/assignWalletUser HTTP/1.1
 
 ```json
 {
-  "walletId":[1],
-  "userId": [104],
+  "walletId":[1,3],
+  "userId": [104.105],
   "credentialId": [10]
 }
 
@@ -565,56 +784,7 @@ sign | The sign is used to sign data with a private key associated with a decent
 `Schema List created`
 
 
-## Credential Schema List 
-The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
 
-```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential' \
---header 'Content-Type: application/json' \
---data '{
-   "domainId": 1,
-   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-}
-'
-```
-
-```http
-POST /api/v1/credential/credentialSchemaList HTTP/1.1
-```
-
-```json
-{
-   "domainId": 1,
-   "issuerDid": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-}
-
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`POST /api/v1/credential/credentialSchemaList HTTP/1.1`
-
-### Query Parameters
-
-Parameter | Description
---------- | -----------
-domainId  | This refers to the company or organization which the user is part of. 
-issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
-
-```json
-[
-    {
-        "id": 1,
-        "name": "SSH"
-    }
-]
-```
-
-### HTTP Response
-`Credential Schema Listed`
 
 ## Issue Presentation Request
 The Issue Presentation Request API in Decentralized Identities (DIDs) enables verifiers to request specific verifiable credentials from holders in a secure and decentralized manner. The API allows verifiers to specify the attributes they require and issue a presentation request to the holder, who can then choose which credentials to present without revealing unnecessary or sensitive information.
@@ -785,70 +955,6 @@ accept | The accept is used to indicate the acceptance of a credential presented
 ### HTTP Response
 `Credential Accepted`
 
-## Delete DID API
-The DELETE DID API is used to delete a decentralized identifier (DID) and its associated data from the underlying decentralized ledger, which can be useful in scenarios such as revoking a users access or deleting outdated information.
-
-```shell
-curl --location --request DELETE 'https://api.did.kloudlearn.com/api/v1/did/deleteDid' \
---header 'Content-Type: application/json' \
---data '{
-  "domainId": 1,
-  "dids": [
-    {
-      "type": "Issuer",
-      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    } ,
-    {
-      "type": "User",
-      "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    }
-  ]
-}'
-```
-
-```http
-DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1
-```
-```json
-{
-  "domainId": 1,
-  "dids": [
-    {
-      "type": "Issuer",
-      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    } ,
-    {
-      "type": "User",
-      "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-    }
-  ]
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1`
-
-### Query Parameters
-Parameter | Description
---------- | -----------
-domainId | This refers to the company or organization which the user is part of. 
-dids | The did specifies the unique decentralized identifier associated with a decentralized identity, allowing for authentication and authorization of data exchange and access within a decentralized identity ecosystem.
-type | The type  specifies the type of data being shared or requested within a decentralized identity ecosystem, such as a public key or verifiable credential. 
-
-```json
-{
-  "code": 200,
-  "message": "2 DIDs deleted successfully",
-  "status": "Success"
-}
-```
-
-### HTTP Response
-`DIDs deleted successfully`
 
 
 
@@ -1112,89 +1218,7 @@ issuerDID      |The issuerDid is a required field used to identify the decentral
 `Successfully Listed Credential Schema List`
 
 
-## DID List
-The DID List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available Decentralized Identifiers (DIDs) registered on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, providing them with a way to discover and connect with other participants in the decentralized identity ecosystem.
 
-
-```http
-POST /api/v1/did/DIDList HTTP/1.1
-```
-
-```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList' \
---header 'Content-Type: application/json' \
---data '{
-  "domainId": 1,
-  "issuerId": 2,
-  "userId": 104  
-}'
-```
-
-```json
-{
-  "domainId": 1,
-  "issuerId": 2,
-  "userId": 104  
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-### HTTP Request
-`POST /api/v1/did/DIDList HTTP/1.1`
-
-### Query Parameters
-Parameter | Description
---------- | ----------- 
-domainId |This refers to the company or organization who is using the service.
-issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
-userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
-
-```json
-[
-    {
-        "DIDType": "Issuer",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a issuer DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
-    },
-    {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
-    },
-    {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
-    },
-    {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
-    }
-  ]
-    
-```
-
-### HTTP Response
-`Successfully Listed DID`
 
 
 
