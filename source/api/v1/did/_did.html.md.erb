@@ -210,6 +210,73 @@ userId | The userId specifies the unique identifier associated with a user, enab
 ### HTTP Response
 `Successfully Listed DID`
 
+## Search DID API
+The SEARCH DID API is an API (Application Programming Interface) used in decentralized identities to search for and retrieve information about a specific DID (Decentralized Identifier) on a given network or ledger.
+
+The SEARCH DID API allows developers to query a specific network or ledger to find information related to a specific DID. This can include information such as public keys, service endpoints, and other metadata associated with the DID.
+
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/SearchDID' \
+--header 'Content-Type: application/json' \
+--data '{
+  "name":"hema",
+  "didType":"ISSUER",
+  "pageNumber":1,
+  "pageSize":10
+}'
+```
+
+```http
+POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1
+```
+```json
+{
+  "name":"hema",
+  "didType":"ISSUER",
+  "pageNumber":1,
+  "pageSize":10
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+name |The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
+didType | The didType parameter in search DID API specifies the type of Decentralized Identifier (DID) that should be searched for.
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+
+
+```json
+{
+  "count": 1,
+  "didList": [
+    {
+      "didType": "Issuer",
+      "domainId": 1,
+      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "issuerName": "hema",
+      "credentialIssued": 1,
+      "desc": "test",
+      "lastUpdatedAt": "02-12-2023 12:12:12"
+    }
+  ]
+}
+```
+
+### HTTP Response
+`API found successfully`
+
+
+
 ## Delete DID 
 The DELETE DID API is used to delete a decentralized identifier (DID) and its associated data from the underlying decentralized ledger, which can be useful in scenarios such as revoking a users access or deleting outdated information.
 
@@ -959,71 +1026,6 @@ accept | The accept is used to indicate the acceptance of a credential presented
 
 
 
-## Search DID API
-The SEARCH DID API is an API (Application Programming Interface) used in decentralized identities to search for and retrieve information about a specific DID (Decentralized Identifier) on a given network or ledger.
-
-The SEARCH DID API allows developers to query a specific network or ledger to find information related to a specific DID. This can include information such as public keys, service endpoints, and other metadata associated with the DID.
-
-
-```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/SearchDID' \
---header 'Content-Type: application/json' \
---data '{
-  "name":"hema",
-  "didType":"ISSUER",
-  "pageNumber":1,
-  "pageSize":10
-}'
-```
-
-```http
-POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1
-```
-```json
-{
-  "name":"hema",
-  "didType":"ISSUER",
-  "pageNumber":1,
-  "pageSize":10
-}
-```
-
-### Access Token
-Authorization Key Required 
-
-
-### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1`
-
-### Query Parameters
-Parameter | Description
---------- | -----------
-name |The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
-didType | The didType parameter in search DID API specifies the type of Decentralized Identifier (DID) that should be searched for.
-pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
-pageSize | The pageSize specifies the number of search results to be returned per page.
-
-
-```json
-{
-  "count": 1,
-  "didList": [
-    {
-      "didType": "Issuer",
-      "domainId": 1,
-      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      "issuerName": "hema",
-      "credentialIssued": 1,
-      "desc": "test",
-      "lastUpdatedAt": "02-12-2023 12:12:12"
-    }
-  ]
-}
-```
-
-### HTTP Response
-`API found successfully`
-
 
 
 ## Revoke Credential 
@@ -1167,6 +1169,221 @@ domainId | This refers to the company or organization which the user is part of.
 ### HTTP Response
 `succesfully Credential Listed`
 
+## Get Assigned Credential 
+The Assigned Credential API is a feature of decentralized identity (DID) systems that enables the secure and efficient exchange of verifiable credentials between different parties.
+the Assigned Credential API is a key component of decentralized identity systems, enabling users to securely and efficiently share their verifiable credentials with third parties in a trusted and decentralized manner.
+
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}'
+```
+
+```http
+POST https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential HTTP/1.1
+```
+
+```json
+{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+walletId | This refers to the company or organization which the user is part of.
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+filter | The filter is the search parameter.
+
+
+```json
+{
+  "code": 200,
+  "message": "Credential List Success",
+  "status": "Success",
+  "walletId": 104,
+  "count": 1,
+  "credentials": [
+    {
+      "id": 89,
+      "issuerId": 128,
+      "issuerName": "test2",
+      "schemaId": 2,
+      "schemaName": "Password",
+      "issuedAt": "2023-03-02T07:09:06Z",
+      "credentialId": "100512df-84ca-4434-970d-af57435ad3b0",
+      "expireDate": "2024-01-01T00:00:00Z",
+      "name": "Credential",
+      "status": "Assigned"
+    }
+  ]
+}
+```
+
+### HTTP Response
+` Credential  Assigned succesfully`
+
+
+
+## Accepted Credential 
+The Accepted Credential API is a programming interface that is used in the context of decentralized identities (DIDs) to enable the exchange of verifiable credentials between different parties.
+
+The Accepted Credential API allows a DID controller to accept or reject incoming credential requests, manage the storage and presentation of their own verifiable credentials, and control the disclosure of specific credentials to third parties. This API provides a standardized way for developers to build applications that support interoperability between different DID systems, making it easier for users to manage and share their digital identities securely.
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}'
+```
+
+```http
+POST https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential HTTP/1.1
+```
+
+```json
+{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+walletId | This refers to the company or organization which the user is part of.
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+filter | The filter is the search parameter.
+
+
+```json
+{
+  "code": 200,
+  "message": "Credential List Success",
+  "status": "Success",
+  "walletId": 104,
+  "count": 1,
+  "credentials": [
+    {
+      "id": 110,
+      "issuerId": 126,
+      "issuerName": "Broadcom",
+      "schemaId": 2,
+      "schemaName": "Password",
+      "issuedAt": "2023-03-06T11:07:54Z",
+      "credentialId": "87a455bd-09a6-46bd-86b1-0aae40cb63d9",
+      "expireDate": "2024-01-01T00:00:00Z",
+      "name": "Credential",
+      "status": "Assigned"
+    }
+  ]
+}
+```
+
+### HTTP Response
+` Credential  Accepted succesfully`
+
+
+## Ignored Credential 
+The Ignored Credential API is a feature of decentralized identity systems that allows users to selectively ignore or hide certain credentials associated with their digital identity.
+
+By using the Ignored Credential API, users can specify which credentials they want to exclude from their digital identity when presenting it to others. This can help to protect their privacy and reduce the amount of personal information they need to share in certain situations.
+
+Decentralized identity systems are designed to give users more control over their personal data and provide a more secure and transparent way of managing digital identities. The Ignored Credential API is one example of how these systems can be customized to meet the specific needs and preferences of individual users.
+
+```shell
+curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential' \
+--header 'Content-Type: application/json' \
+--data '{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}'
+```
+
+```http
+POST https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential HTTP/1.1
+```
+
+```json
+{
+  "walletId":104,
+  "pageNumber":1,
+  "pageSize":10,
+  "filter":""
+}
+```
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+walletId | This refers to the company or organization which the user is part of.
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+filter | The filter is the search parameter.
+
+
+```json
+{
+  "code": 200,
+  "message": "Credential List Success",
+  "status": "Success",
+  "walletId": 104,
+  "count": 1,
+  "credentials": [
+    {
+      "id": 109,
+      "issuerId": 126,
+      "issuerName": "Broadcom",
+      "schemaId": 2,
+      "schemaName": "Password",
+      "issuedAt": "2023-03-06T10:34:36Z",
+      "credentialId": "821fe335-51d8-4f15-ae33-a0da55c15707",
+      "expireDate": "2024-01-01T00:00:00Z",
+      "name": "Test",
+      "status": "Assigned"
+    }
+  ]
+}
+```
+
+### HTTP Response
+` Credential  Ignored succesfully`
+
 
 ## Credential Schema List
 The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
@@ -1233,12 +1450,25 @@ POST /api/v1/wallet/users HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/wallet/users'
+curl -X POST \
+  'https://api.did.kloudlearn.com/api/v1/walletService/walletUserList' \
+  --header 'Accept: */*' \
+  --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "domainId": 1,
+  "pageNumber": 1,
+  "pageSize": 2,
+  "filter": ""
+}'
 ```
 
 ```json
 {
-  "domainId": 1
+  "domainId": 1,
+  "pageNumber": 1,
+  "pageSize": 2,
+  "filter": ""
 }
 ```
 
@@ -1253,20 +1483,36 @@ Authorization Key Required
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+filter | The filter is the search parameter.
 
 
 ```json
 {
-  "Code": 200,
-  "Message": "Successfully retrieved waller users",
-  "Status": "Success",
+  "code": 200,
+  "message": "Successfully retrieved waller users",
+  "count": 34,
+  "status": "Success",
   "users": [
-      {
-          "userId": 100,
-          "walletUrl": "link",
-          "noOfCredentials": 10
-      }
+    {
+      "walletId": 43,
+      "userId": 111,
+      "walletUrl": "wallet.brcm.connect.com",
+      "status": "Registered",
+      "username": "Hemalatha",
+      "emailAddress": "hr@gmail.com",
+      "noOfcredential": 3
+    },
+    {
+      "walletId": 44,
+      "userId": 112,
+      "walletUrl": "wallet.brcm.connect.com",
+      "status": "Registered",
+      "username": "Hemalatha",
+      "emailAddress": "hem@gmail.com",
+      "noOfcredential": 2
+    }
   ]
 }
 ```
