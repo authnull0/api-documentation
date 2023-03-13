@@ -723,26 +723,56 @@ holderDid | The holderDid is a required field used to identify the holder of the
 The Submit Presentation Response API in Decentralized Identities (DIDs) enables holders to respond to presentation requests from verifiers by submitting a verifiable presentation that meets the requested criteria. The API allows holders to selectively disclose only the information that is necessary, while maintaining control and ownership over their personal data.
 
 ```shell
-curl POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentationResponse
+curl POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation
 ```
 
 ```http
-POST /api/v1/walletService/submitPresentationResponse HTTP/1.1
+POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation HTTP/1.1
 ```
 
 ```json
 {
-    "walletId": 1,
-    "presentationRequestId": 1,
-    "presentationSubmissionBytes": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Nzc3NjcxNjgsImlhdCI6MTY3Nzc2Njg2OCwidnAiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6IlZlcmlmaWFibGVQcmVzZW50YXRpb24iLCJ2ZXJpZmlhYmxlQ3JlZGVudGlhbCI6W3siQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsIlVuaXZlcnNpdHlEZWdyZWVDcmVkZW50aWFsIl0sImlzc3VlciI6ImRpZDpleGFtcGxlOjEyMyJ9XSwiaG9sZGVyIjoiZGlkOmV4YW1wbGU6NDU2In19.ayUHgpgzQs3dHvgETyHFgC4rFx_oEg"
+  "walletId": 79,
+  "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "presentationRequestId": 64,
+  "presentation": {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1"
+    ],
+    "credentialSchema": {
+      "id": "d31ce42d-dffc-4178-93bd-838757d3df5d",
+      "type": "JsonSchemaValidator2018"
+    },
+    "credentialSubject": {
+      "epmPassword": "xxxxxx",
+      "epmUsername": "muthu",
+      "holderDID": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "holderId": "1",
+      "id": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "expirationDate": "2028-12-12T00:00:00Z",
+    "id": "f8e394c8-e6b8-4a68-a452-9e36a2879c8a",
+    "issuanceDate": "2023-03-01T08:38:17Z",
+    "issuer": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "type": [
+      "VerifiableCredential"
+    ],
+    "proof": {
+      "type": "Ed25519Signature2018",
+      "created": "2020-02-03T17:23:49Z",
+      "jws": "eyJhbGciOiJFZERTQSIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..AUQ3AJ23WM5vMOWNtYKuqZBekRAOUibOMH9XuvOd39my1sO-X9R4QyAXLD2ospssLvIuwmQVhJa-F0xMOnkvBg",
+      "proofPurpose": "assertionMethod",
+      "verificationMethod": "https://example.edu/issuers/keys/1"
+    }
+  }
 }
-
 ```
+
 ### Access Token
 Authorization Key Required 
 
 ### HTTP Request
-`POST /api/v1/walletService/submitPresentationResponse HTTP/1.1`
+`POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation HTTP/1.1`
 
 ### Query Parameters
 
@@ -750,18 +780,24 @@ Parameter | Description
 --------- | -----------
 walletId | The walletId  is an optional field used to specify the unique identifier of the digital wallet containing the users decentralized identity credentials.
 presentationRequestId | The presentationRequestId is a required field used to identify the request for a verifiable credential presentation, allowing the holder of the credential to provide the necessary proof of identity for authentication or authorization purposes.
-presentationSubmissionBytes | The presentationSubmissionBytes is an optional field used to specify the verifiable credential presentation data in a serialized format, which can be used to verify the authenticity and validity of the presented credentials.
+presentation | The presentation is used to specify the verifiable credential presentation data in a serialized format, which can be used to verify the authenticity and validity of the presented credentials.
+holderDID |  The holderDid is a required field used to identify the holder of the decentralized identity credentials being used for authentication or authorization purposes.
+type | The type  specifies the type of data being shared or requested within a decentralized identity ecosystem, such as a public key or verifiable credential. 
+id |  The id specifies the unique identifier associated with a decentralized identity and is typically used to authenticate and authorize access to specific resources or data.
+
+
+
 
 ```json
 {
-    "code": 200,
-    "status": "Success",
-    "message": "Successfully submitted presentation response"
+  "code": 200,
+  "status": "Success",
+  "message": "Successfully submitted presentation"
 }
 ```
 
 ### HTTP Response
-`Successfully submitted presentation response`
+`Successfully submitted presentation`
 
 
 

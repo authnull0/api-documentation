@@ -11,9 +11,12 @@ curl --location 'http://localhost:9090/api/v1/endpointUsers/listAllEpmUsers' \
 --data '{
     "domainId":1,
     "pageId": 1,
-    "pageSize": 200,
-    "filter": "",
-    "instanceIds": [2, 1]
+    "pageSize": 10,
+    "filter": {
+        "filterBy": "username",
+        "value": "bijay"
+    },
+    "instanceIds": [1,2]
 }'
 ```
 
@@ -27,11 +30,13 @@ POST /api/v1/endpointUsers/listAllEpmUsers HTTP/1.1
 ```json
 {
     "domainId":1,
-    "pageId":1,
-    "pageSize":10,
-    "filter":"",
-    "instanceIds":[17]
-
+    "pageId": 1,
+    "pageSize": 10,
+    "filter": {
+        "filterBy": "username",
+        "value": "bijay"
+    },
+    "instanceIds": [1,2]
 }
 ```
 
@@ -57,31 +62,37 @@ filter | filter is the search keyword for searching endpoint groups.
 
 ```json
 {
-    "totalCount": 382,
+    "totalCount": 2,
     "epmUsers": [
         {
             "credType": "Password",
-            "userId": 520,
-            "userName": "Hema",
+            "userId": 1785,
+            "userName": "bijaySuperCredential",
             "source": "",
             "userType": "Local User",
             "instanceIds": [
                 1
             ],
             "assign": true,
-            "credentialId": ""
+            "credentialId": "124",
+            "hostNames": [
+                "kloudone01.vm"
+            ]
         },
         {
             "credType": "Password",
-            "userId": 525,
-            "userName": "Hema",
+            "userId": 1772,
+            "userName": "Bijay",
             "source": "",
             "userType": "Local User",
             "instanceIds": [
-                1
+                2
             ],
             "assign": true,
-            "credentialId": ""
+            "credentialId": "124",
+            "hostNames": [
+                "kloudone02.vm"
+            ]
         }
     ]
 }
@@ -413,12 +424,21 @@ The Delete Endpoint User API is a part of the User Management endpoint and is us
 curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/deleteEpmUser' \
 --header 'Content-Type: application/json' \
 --data '{
-        "epmUserId":899,
-        "domainId":1,
-        "userName":"messagebus",
-        "instanceIds":[2]
-        
-        }'
+    "domainId": 1,
+    "key": "34rfdhuytqwrtttbcv",
+    "epmUsers": [
+        {
+            "epmUserId": 514,
+            "userName": "hema",
+            "instanceId": 17
+        },
+        {
+            "epmUserId": 515,
+            "userName": "hema",
+            "instanceId": 17
+        }
+    ]
+}'
 ```
 
 ```http
@@ -429,11 +449,20 @@ DELETE api/v1/endpointUsers/deleteEpmUser HTTP/1.1
 
 ```json
 {
-"epmUserId":899,
-"domainId":1,
-"userName":"messagebus",
-"instanceIds":[2]
-
+    "domainId": 1,
+    "key": "34rfdhuytqwrtttbcv",
+    "epmUsers": [
+        {
+            "epmUserId": 514,
+            "userName": "hema",
+            "instanceId": 17
+        },
+        {
+            "epmUserId": 515,
+            "userName": "hema",
+            "instanceId": 17
+        }
+    ]
 }
 ```
 
@@ -462,8 +491,7 @@ instanceId | The instanceId is used to specify the ID of the instances that are 
 ```json
 {
     "status": "Success",
-    "message": "User deleted successfully",
-    "userId": "25"
+    "message": "User deleted successfully"
 }
 ```
 
