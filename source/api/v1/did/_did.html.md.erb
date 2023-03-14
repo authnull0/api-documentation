@@ -350,7 +350,7 @@ The Create Schema API in Decentralized Identities (DIDs) enables issuers to crea
 curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema' \
 --header 'Content-Type: application/json' \
 --data '{
-  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -377,7 +377,7 @@ POST /api/v1/schema/createSchema HTTP/1.1
 
 ```json
 {
-  "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop", 
+  "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
   "name": "EPM User",
   "schema": {
     "$schema": "http://json-schema.org/draft-07/schema#",
@@ -426,7 +426,7 @@ sign | The sign is used to sign data with a private key associated with a decent
         "version": "1.0",
         "id": "d97534d3-260c-4341-b578-e033dcf3bb99",
         "name": "EPM User",
-        "author": "did:key:z6Mkit1hjN4WZYCY2GLrjpeAfJKLBB7QmQ9dHQpsutcznKop",
+        "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "authored": "2023-02-28T15:34:42Z",
         "Schema": {
             "$id": "d97534d3-260c-4341-b578-e033dcf3bb99",
@@ -632,7 +632,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletServ
 --header 'Content-Type: application/json' \
 --data '{
   "walletId": 1,
-  "walletKey": "abcxyz",
+  "walletKey": "xxxxxx",
   "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }'
 ```
@@ -643,7 +643,7 @@ POST api/v1/walletService/pollPresentationRequest HTTP/1.1
 ```json
 {
   "walletId": 1,
-  "walletKey": "abcxyz",
+  "walletKey": "xxxxx",
   "holderDid": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
@@ -930,10 +930,18 @@ groupop |The groupop is an optional field used to specify the group operation to
 
 ```json
 {
-    "presentationRequestId": 7,
-    "message": "PR Raised Successfully",
-    "status": "Success",
-    "code": 200
+	prs: [{
+	"prId": ,
+	"walletId": ,
+	"holderDid": ,
+    },{
+	:"prId": ,
+	"walletId": ,
+	"holderDid": ,
+    }]
+	"message":"PRs submitted successfully",
+	"status": "Success",
+	"code": 200,
 }
 ```
 
