@@ -610,6 +610,8 @@ Parameter | Description
 walletId | The walletId  is an optional field used to specify the unique identifier of the digital wallet containing the users decentralized identity credentials.
 userId | The userId specifies the unique identifier associated with a decentralized identity and is typically used to authenticate and authorize access to specific resources or data.
 credentialId |  The credentialId specifies the unique identifier associated with a verifiable credential, allowing for easy retrieval and management of verifiable credentials within a decentralized identity ecosystem.
+
+
 ```json
 {
     "code": 200,
@@ -1011,6 +1013,68 @@ walletKey | The walletKey parameter in API of Decentralized Identities (DIDs) is
 
 ### HTTP Response
 `Credential Schema Listed`
+
+
+## Assign AD User Credential 
+The Assign AD User Credential API is a specific application programming interface (API) that is used within decentralized identity systems to assign user credentials to an Active Directory (AD) user account.
+
+The Assign AD User Credential API is typically used in scenarios where a decentralized identity system needs to interact with an AD domain to assign specific user credentials, such as a username or password, to a particular user account. This API allows the decentralized identity system to securely communicate with the AD domain and make the necessary changes to the user account.
+
+
+```shell
+POST 'https://api.did.kloudlearn.com/api/v1/credential/createADUserCredential' \
+  --header 'Accept: */*' \
+  --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "domainId": 1,
+  "userId": 105,
+  "issuerId": 153
+}'
+```
+
+```http
+POST https://api.did.kloudlearn.com/api/v1/credential/createADUserCredential HTTP/1.1
+```
+
+```json
+{
+  "domainId": 1,
+  "userId": 105,
+  "issuerId": 153
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST https://api.did.kloudlearn.com/api/v1/credential/createADUserCredential HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+domainId | This refers to the company or organization which the user is part of. 
+userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
+issuerId | The issuerId parameter on the Assign AD User Credential API in decentralized identities specifies the unique identifier of the issuer who issued the user's credential.
+
+
+### HTTP Response
+
+```json
+{
+  "code": 200,
+  "status": "Success",
+  "message": "Credential Created"
+}
+```
+
+`Credential Schema Listed`
+
+
 
 ## Acknowledge Credential 
 The acknowledge credential API is an essential component of decentralized identity (DID) systems. It is a programming interface that enables a user to acknowledge or verify a digital credential issued by another party.This API is critical in ensuring the integrity and trustworthiness of digital credentials, as it enables users to verify the authenticity and validity of a credential before accepting it. Moreover, it provides users with control over their personal information by allowing them to disclose only the information necessary to prove their qualifications or identity.
