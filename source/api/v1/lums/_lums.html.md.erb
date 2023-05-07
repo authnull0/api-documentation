@@ -109,7 +109,7 @@ successfully shown list of all endpoint user
 The Add Endpoint User Info API allows users to add endpoint-specific information to a user account in the system or application for endpoint user management. This API provides a simple and efficient way to manage user accounts and ensure that endpoint-specific information is associated with each user.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/addEpmUserInfo' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/endpointUsers/addEpmUserInfo' \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":4,
@@ -187,7 +187,7 @@ User Added successfully
 The Get Endpoint User Detail API is a part of the User Management endpoint and is used to retrieve detailed information about a specific user. This API endpoint requires the user unique identifier as input and returns information and any associated metadata. It is useful for retrieving specific user information to display or manipulate within an application.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/epmUserDetail' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/endpointUsers/epmUserDetail' \
 --header 'Content-Type: application/json' \
 --data '{
     "domainId":1,
@@ -254,7 +254,7 @@ The Update Endpoint User Info API is a part of the User Management endpoint and 
 
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/updateEpmUserInfo' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/endpointUsers/updateEpmUserInfo' \
 --header 'Content-Type: application/json' \
 --data '{
 "userId":26,
@@ -337,7 +337,7 @@ EPM User Info updated
 The Update User Wallet API is a service that allows developers to programmatically update the wallet balance of a user on the Lums platform. This API can be used to add or subtract funds from a user wallet balance, and can be integrated into various applications such as e-commerce platforms, gaming sites, or any other platform that requires user wallets. The API uses secure authentication and authorization protocols to ensure that only authorized users have access to wallet update functionalities. With this API, developers can provide a seamless user experience by enabling users to add funds to their wallet or make purchases directly from their wallet balance.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/updateUserWallet' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/endpointUsers/updateUserWallet' \
 --header 'Content-Type: application/json' \
 --data '{
     "epmUserId":[402],
@@ -421,7 +421,7 @@ Wallet updated
 The Delete Endpoint User API is a part of the User Management endpoint and is used to delete a user account. This API endpoint requires the user unique identifier as input, and upon successful execution, the user account is removed from the system. This API is useful for administrative purposes, such as removing inactive or unauthorized user accounts.
 
 ```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/deleteEpmUser' \
+curl --location --request DELETE 'https://did-authdev.broadcom.net/pamservice/api/v1/endpointUsers/deleteEpmUser' \
 --header 'Content-Type: application/json' \
 --data '{
     "domainId": 1,
@@ -509,7 +509,7 @@ A proper password complexity policy would be: eight characters for the length of
 The Add Password Policy API is a part of the Password Policy endpoint in User Management and is used to define the password requirements for user accounts. This API endpoint requires input such as password length, complexity rules, and expiration policies. Upon successful execution, the API returns a success message indicating that the password policy has been added. This API is useful for enforcing security standards for user passwords and reducing the risk of security breaches.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/addPasswordPolicy' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/addPasswordPolicy' \
 --header 'Content-Type: application/json' \
 --data '{
     "policyName":"PolicynonMachineTest",
@@ -583,7 +583,7 @@ The Delete Password Policy API is a part of the Password Policy endpoint in User
 
 
 ```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deletePasswordPolicy' \
+curl --location --request DELETE 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/deletePasswordPolicy' \
 --header 'Content-Type: application/json' \
 --data '{
     "policyId":1
@@ -647,7 +647,7 @@ successfully deleted Password Policy
 The List All Password Policy API is a part of the Password Policy endpoint in User Management and is used to retrieve a list of all existing password policies. This API endpoint returns a list of policies, each with its unique identifier and associated settings such as password length and complexity rules. This API is useful for administrative purposes, such as reviewing the current password policies or managing multiple policies for different user groups or applications.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/listPasswordPolicy' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/listPasswordPolicy' \
 --header 'Content-Type: application/json' \
 --data '{
     "machineIds":[1,2,3],
@@ -719,7 +719,7 @@ successfully Listed All Password Policy
 The Assign Policy to Endpoints API is a part of the Password Policy endpoint in User Management and is used to assign an existing password policy to a specific endpoint or group of endpoints. This API endpoint requires the unique identifier of the policy and the identifier of the endpoint(s) to be assigned to as input. Upon successful execution, the API returns a success message indicating that the policy has been assigned to the specified endpoint(s). This API is useful for managing password policies for different applications or user groups and ensuring consistent security standards across multiple endpoints.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/assignPolicyToMachine' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/assignPolicyToMachine' \
 --header 'Content-Type: application/json' \
 --data '{
     "policyId":2,
@@ -783,7 +783,7 @@ successfully Assigned Policy To endpoint
 The Update Password Policy API is a part of the Password Policy endpoint in User Management and is used to update an existing password policy. This API endpoint requires the unique identifier of the policy and the updated policy settings as input, such as password length, complexity rules, or expiration policies.This API is useful for modifying password policies to reflect changing security needs or standards. It is important to note that updating a password policy may affect the security of user accounts and should be done with caution.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updatePasswordPolicy' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/updatePasswordPolicy' \
 --header 'Content-Type: application/json' \
 --data '{
     "policyId": 1,
@@ -863,7 +863,7 @@ successfully updated Password Policy
 The Validate Password API is a part of the Password Policy endpoint in User Management and is used to validate if a password meets the specified password policy requirements. This API endpoint requires the user password as input and returns a success message indicating if the password meets the policy requirements or an error message indicating which policy requirements were not met. This API is useful for ensuring that user passwords meet the specified security standards and reducing the risk of security breaches. It is typically used in conjunction with other password policy management APIs.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/validatePassword' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/validatePassword' \
 --header 'Content-Type: application/json' \
 --data '{
 

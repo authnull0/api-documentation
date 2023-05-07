@@ -506,7 +506,7 @@ issuerDID |The issuerDid is a required field used to identify the decentralized 
 Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential'  \
+curl --location --request POST 'https://did-authdev.broadcom.net/pamservice/api/v1/issueVerifiableCredential'  \
 --header 'Content-Type: application/json' \
 --data '{
 	"domainId" : 1,
@@ -653,7 +653,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/walletService/pollPresentationRequest HTTP/1.1`
+`POST https://did-authdev.broadcom.net/pamservice/api/v1/walletService/pollPresentationRequest HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1044,7 +1044,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/walletService/acknowledgeCredential HTTP/1.1`
+`POST https://did-authdev.broadcom.net/pamservice/api/v1/walletService/acknowledgeCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1103,7 +1103,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/presentationRequest HTTP/1.1`
+`POST https://did-authdev.broadcom.net/pamservice/api/v1/presentationRequest HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description

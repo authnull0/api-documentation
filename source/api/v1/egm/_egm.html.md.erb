@@ -15,7 +15,7 @@ It is important to ensure that endpoint groups and associated authentication flo
 This lists all the Endpoint groups that are present. Endpoint groups refer to a collection of  Linux endpoints
 
 ```shell
-curl --location --request POST https://api.authnull.kloudlearn.com/api/v1/instanceGroup/listEndpointGroup \
+curl --location --request POST https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/listEndpointGroup \
 --header 'Content-Type: application/json' \
 --data '{
     "domainId" :"1",
@@ -80,7 +80,7 @@ Endpoint listed.
 The Add Endpoint groups API allows users to add new Endpoint groups to a system or application.
 
 ```shell
-curl --location --request POST https://api.authnull.kloudlearn.comapi/v1/instanceGroup/addInstanceGroup  \
+curl --location --request POST https://did-authdev.broadcom.net/pamserviceapi/v1/instanceGroup/addInstanceGroup  \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":1,
@@ -146,7 +146,7 @@ The Delete Endpoint Group API  allows users to delete an existing Endpoint group
 
 
 ```shell
-curl --location --request DELETE https://api.authnull.kloudlearn.com/api/v1/instanceGroup/deleteEndpointGroup  \
+curl --location --request DELETE https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/deleteEndpointGroup  \
 --header 'Content-Type: application/json' \
 --data '{
     "domainId" : 2,
@@ -195,7 +195,7 @@ Endpoint  deleted.
 The Edit Endpoint Group API allows users to modify an existing Endpoint group in a system or application.This API provides a simple and secure way to update Endpoint groups with new information or to modify existing attributes, such as the groups name, description, or metadata.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/editInstanceGroup' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/editInstanceGroup' \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":1,
@@ -250,7 +250,7 @@ Endpoint Status Updated.
 The Assign users to Endpoint Group API allows users to assign or add users to an existing Endpoint group in a system or application.This API provides a convenient and secure way to manage user access to Endpoint groups and ensure that only authorized users can access or modify endpoints within the group.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/assignUsersToEndpointGroup' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/assignUsersToEndpointGroup' \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":1234,
@@ -318,7 +318,7 @@ The Add Authflow API allows users to add a new authentication flow to an existin
 This API provides a simple and secure way to manage authentication flows for Endpoint groups and ensure that only authorized users can access or modify endpoints within the group. 
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/addAuthFlowToInstanceGroup' \
+curl --location 'https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/addAuthFlowToInstanceGroup' \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":1234,
@@ -374,7 +374,7 @@ Auth flow added
 The Update Instance Group Status API allows users to update the status of an instance group in a system or application. This API provides a simple and secure way to manage the status of instance groups and ensure that they are running smoothly and efficiently.
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instanceGroup/updateInstanceGroupStatus' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/instanceGroup/updateInstanceGroupStatus' \
 --header 'Content-Type: application/json' \
 --data '{
 "domainId":1234,
@@ -484,7 +484,7 @@ Instance group detail fetched
 The Update Credential Policy API allows users to update the credential policy for an endpoint group in a system or application.This API provides a simple and secure way to manage credential policies for endpoint groups and ensure that they are configured to meet the security requirements of an organization. 
 
 ```shell
-curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/updateCredentialPolicyToEndpointGroup' \
+curl --location --request PUT 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/updateCredentialPolicyToEndpointGroup' \
 --header 'Content-Type: application/json' \
 --data '{
 
@@ -550,7 +550,7 @@ Credential Policy Updated
 The Delete Credential Policy API allows users to delete the credential policy for an endpoint group in a system or application.It typically requires authentication to ensure that only authorized users can delete credential policies.
 
 ```shell
-curl --location --request DELETE 'https://api.authnull.kloudlearn.com/api/v1/instances/deleteCredentialPolicyToEndpointGroup' \
+curl --location --request DELETE 'https://did-authdev.broadcom.net/pamservice/api/v1/instances/deleteCredentialPolicyToEndpointGroup' \
 --header 'Content-Type: application/json' \
 --data '{
 "groupId":1,

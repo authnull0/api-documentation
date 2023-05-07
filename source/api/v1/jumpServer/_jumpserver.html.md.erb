@@ -1,0 +1,291 @@
+# Jump Server 
+A jump server API provides a secure way to remotely access and manage servers, devices, and other resources within a network. It acts as a proxy or intermediary server between the user and the target server, allowing users to securely authenticate and access the target resources without directly exposing them to the public internet. The API allows for programmatic access to the jump server, allowing administrators to automate tasks and simplify access management for users and systems. Overall, a jump server API helps to improve security and streamline access to critical resources within a network.
+
+
+## Add Jump Server
+
+Adding a Jump Server API involves creating an API that provides access to the Jump Server functionality. A Jump Server is a server that is used to access and manage other servers, and the Jump Server API provides a programmatic way to access and manage these servers through an interface. This API can be used to automate tasks, monitor server activity, and perform other operations related to the Jump Server functionality.
+
+```shell
+curl --location 'https://did-authdev.broadcom.net/api/v1/jumpserver/addJumpServer' \
+--header 'Content-Type: application/json' \
+--data '{
+    "serverId" : "KLOUDONE202",
+	"publicIpAddress": "172.28.5.1",
+	"domains": [1],
+    "endpoints": [1, 11, 12],
+	"region": "india",
+	"domainId": 1,
+    "serverName": "Authnull Server"
+}'
+
+```
+
+```http
+POST /api/v1/jumpserver/addJumpServer HTTP/1.1
+```
+
+```json
+{
+    "serverId" : "KLOUDONE202",
+	"publicIpAddress": "172.28.5.1",
+	"domains": [1],
+    "endpoints": [1, 11, 12],
+	"region": "india",
+	"domainId": 1,
+    "serverName": "Authnull Server"
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/jumpserver/addJumpServer HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+serverId| The serverId parameter identifies the target server to which the jump server will be added.
+publicIpAddress| The publicIpAddress parameter is used in the Add Jump Server API to specify the public IP address of the jump server.
+domains| It allows specifying a list of allowed domains for the jump server.
+endpoints| Endpoints parameter is used to specify the network endpoints that can be accessed through the jump server.
+region| It specifies the geographic region where the jump server is located.
+domainId| It specifies the ID of the domain to which the jump server belongs.
+serverName| It specifies the name of the server being added as a jump server.
+
+
+### HTTP Response
+
+`Jump Server Added Successfully.`
+
+```json
+{
+    "Id": 20,
+    "Code": 200,
+    "Message": "Jump Server Added Successfully."
+}
+```
+
+<aside class="success">
+Jump Server Added Successfully.
+</aside>
+
+
+## List All Jump Server
+
+A Jump Server API is a set of programming instructions that allows communication between a Jump Server and other systems or applications. To list all Jump Server APIs, you would need to access the documentation or source code of the Jump Server software being used and look for the relevant API documentation. This documentation should provide a list of available APIs, along with details such as their endpoints, parameters, and authentication requirements. You can use these APIs to perform various actions, such as creating new Jump Server instances, managing user access, and monitoring server activity.
+
+```shell
+curl --location 'https://did-authdev.broadcom.net/api/v1/jumpserver/listJumpServer' \
+--header 'Content-Type: application/json' \
+--data '{
+    "pageId":1,
+    "pageSize":10,
+    "filter": "KLOUDONE202"
+}'
+
+```
+
+```http
+POST /api/v1/jumpserver/listJumpServer HTTP/1.1
+```
+
+```json
+{
+    "pageId":1,
+    "pageSize":10,
+    "filter": "KLOUDONE202"
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/jumpserver/listJumpServer HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+pageId |Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
+filter | filter is the search keyword for searching endpoint groups.
+
+
+
+### HTTP Response
+
+`Jump Server listed Successfully.`
+
+```json
+{
+    "total": 10,
+    "jumpServers": [
+        {
+            "id": 11,
+            "serverId": "KLOUDONE202",
+            "serverName": "Authnull Server",
+            "publicIpAddress": "172.28.5.1",
+            "domains": [
+                {
+                    "domainId": 1,
+                    "organizationName": "Kloudone"
+                }
+            ],
+            "region": "india",
+            "domainId": 1,
+            "status": "Active"
+        },
+        {
+            "id": 12,
+            "serverId": "KLOUDONE202",
+            "serverName": "Authnull Server",
+            "publicIpAddress": "172.28.5.1",
+            "domains": [
+                {
+                    "domainId": 1,
+                    "organizationName": "Kloudone"
+                }
+            ],
+            "region": "india",
+            "domainId": 1,
+            "status": "ACTIVE"
+        },
+        {
+            "id": 20,
+            "serverId": "KLOUDONE202",
+            "serverName": "Authnull Server",
+            "publicIpAddress": "172.28.5.1",
+            "domains": [
+                {
+                    "domainId": 1,
+                    "organizationName": "Kloudone"
+                }
+            ],
+            "region": "india",
+            "domainId": 1,
+            "status": "ACTIVE"
+        }
+    ]
+}
+```
+
+<aside class="success">
+Jump Server listed Successfully.
+</aside>
+
+## Update Jump Server
+
+A Jump Server API is a type of software interface that enables a user to remotely access a Jump Server. Updating the Jump Server API involves making changes to the API code or configuration to improve its functionality or security. The Jump Server is a specialized server that enables users to remotely access other servers and devices within a network. Upgrading the Jump Server API can help ensure that users can access these devices in a secure and efficient manner.
+
+```shell
+curl --location --request PUT 'https://did-authdev.broadcom.net/api/v1/jumpserver/updateJumpServer' \
+--header 'Content-Type: application/json' \
+--data '{
+    "Id": 5,
+    "domainId":1,
+    "serverName":"AWS server"
+}'
+
+```
+
+```http
+PUT /api/v1/jumpserver/updateJumpServer HTTP/1.1
+```
+
+```json
+{
+    "Id": 5,
+    "domainId":1,
+    "serverName":"AWS server"
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`PUT /api/v1/jumpserver/updateJumpServer HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+id| The id parameter identifies the target server to which the jump server will be added.
+domainId| It specifies the ID of the domain to which the jump server belongs.
+serverName| It specifies the name of the server being added as a jump server.
+
+
+### HTTP Response
+
+`Jump Server Added Successfully.`
+
+```json
+{
+    "Id": 20,
+    "Code": 200,
+    "Message": "Jump Server Added Successfully."
+}
+```
+
+<aside class="success">
+Jump Server Added Successfully.
+</aside>
+
+## Delete Jump Server
+
+A Delete Jump Server API is a programming interface that allows authorized users to delete a jump server, which is a dedicated server used for managing and accessing other servers in a network. This API can be used to remove a jump server instance from the system, along with any associated configurations and credentials. By removing jump servers that are no longer needed, organizations can improve security and reduce the risk of unauthorized access to critical servers.
+
+```shell
+curl --location --request DELETE 'https://did-authdev.broadcom.net/api/v1/jumpserver/deleteJumpServer' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 7
+}'
+
+```
+
+```http
+DELETE /api/v1/jumpserver/deleteJumpServer HTTP/1.1
+```
+
+```json
+{
+    "id": 7
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`DELETE /api/v1/jumpserver/deleteJumpServer HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+id| The id parameter identifies the target server to which the jump server will be deleted.
+
+
+### HTTP Response
+
+`Jump Server Deleted`
+
+```json
+{
+    "code": 200,
+    "message": "Jump Server Deleted"
+}
+```
+
+<aside class="success">
+Jump Server Deleted
+</aside>
+
