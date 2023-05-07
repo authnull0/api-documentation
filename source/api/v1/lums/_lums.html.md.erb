@@ -501,6 +501,62 @@ instanceId | The instanceId is used to specify the ID of the instances that are 
 Endpoint User deleted
 </aside>
 
+
+## View Credential
+
+This particular API is used to list any credentials that have the ability to escalate privileges on the system, and which have been granted access to view those credentials. It is typically used in combination with other Endpoint User Management APIs to manage and audit privileged access on Unix and Linux systems.
+
+```shell
+curl --location --request PUT 'https://api.authnull.kloudlearn.com/api/v1/endpointUsers/viewCredential' \
+--data '{
+    "domainId": 1,
+    "pageId":0,
+    "pageSize":5
+}'
+```
+
+```http
+PUT /api/v1/endpointUsers/viewCredential HTTP/1.1
+```
+
+
+
+```json
+{
+    "domainId": 1,
+    "pageId":0,
+    "pageSize":5
+}
+```
+
+
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+
+`PUT /api/v1/endpointUsers/viewCredential HTTP/1.1`
+
+### Query Parameters
+
+Parameter | Description
+--------- | ------- | -----------
+domainId |  Domain Id is the company/organization id within our Authnull platform.
+pageId | Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
+
+
+
+### HTTP response
+
+
+`listed Escalate Privilege Credential`
+
+<aside class="success">
+listed Escalate Privilege Credential
+</aside>
+
 ## Password Policy
 A proper password complexity policy would be: eight characters for the length of a password and at least three types of the following characters used: uppercase letters, lowercase letters, digits, and special characters. Add the following parameters and their values: minlen, dcredit, ucredit, lcredit, and ocredit.
 
