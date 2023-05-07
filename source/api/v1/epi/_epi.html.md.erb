@@ -341,4 +341,331 @@ Group added to Machine
 </aside>
 
 
+## View Generated PAM
+
+The View Generated PAM API is a feature of endpoint management that provides a view of the generated PAM configuration file.The View Generated PAM API allows administrators to view the contents of the PAM configuration file, which can be useful for troubleshooting authentication issues or verifying that the correct PAM modules are being used. The API can be accessed through endpoint management tools and provides a read-only view of the PAM configuration file.
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/viewGeneratedPamCode' \
+--header 'Content-Type: application/json' \
+--data '{
+    "domainId": 1,
+    "instanceId": 1
+
+}'
+
+```
+
+```http
+POST /api/v1/instances/viewGeneratedPamCode HTTP/1.1
+```
+
+```json
+{
+    "domainId": 1,
+    "instanceId": 1
+
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/instances/viewGeneratedPamCode HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+domainId| The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceId |  The instanceId is used to specify the ID of the instances that are part of the endpoint.
+
+
+### HTTP Response
+
+`PAM Code generated`
+
+```json
+{
+    "InstanceId": "1",
+    "Code": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "Message": "Success"
+}
+```
+
+<aside class="success">
+PAM Code generated
+</aside>
+
+
+## Add Credential rotation policy
+
+The Add Credential Rotation Policy API is a part of endpoint management and allows for the creation of a policy that rotates the credentials used by an endpoint. This API can be used to specify the frequency of credential rotation, the type of credentials to rotate, and any additional settings related to the rotation process. Once created, the policy can be applied to one or more endpoints to ensure that their credentials are rotated on a regular basis, improving security and reducing the risk of unauthorized access.
+
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/addCredentialRotationPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+    "policyName": "testPolicy",
+    "rotationTime": 30,
+    "credentialMedium": "Email",
+    "sessionExpiryTime": 15,
+     "userType": "priv",
+     "instanceId":18,
+     "instanceGroupId":1,
+     "domainId":0
+  }'
+
+```
+
+```http
+POST /api/v1/instances/addCredentialRotationPolicy HTTP/1.1
+```
+
+```json
+{
+  "policyName": "testPolicy",
+  "rotationTime": 30,
+  "credentialMedium": "Email",
+  "sessionExpiryTime": 15,
+   "userType": "priv",
+   "instanceId":18,
+   "instanceGroupId":1,
+   "domainId":0
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/instances/addCredentialRotationPolicy HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+policyName |  It is used to specify the name of the credential rotation policy being created.
+rotationTime| It specifies the time interval for rotating the credentials associated with an endpoint.
+credentialMedium | It specifies the type of credential being rotated, such as a password or API key.
+sessionExpiryTime | It specifies the time interval after which a user session will expire.
+userType |It specifies the type of user to which the policy applies.
+instanceGroupId | It specifies the ID of the instance group to which the rotation policy should be applied.
+domainId| The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceId |  The instanceId is used to specify the ID of the instances that are part of the endpoint.
+
+
+### HTTP Response
+
+`Credential rotation policy Created`
+
+```json
+{
+    "PolicyId": "1",
+    "Code": "200",
+    "Message": "Credential Rotation Policy Created"
+}
+```
+
+<aside class="success">
+Credential rotation policy Created
+</aside>
+
+
+
+## List All Credential rotation policy
+
+The List All Credential Rotation Policy API is an endpoint management feature that allows users to view all credential rotation policies associated with their account. This API can be used to retrieve details such as the name, description, and frequency of rotation for each policy, as well as the credentials that are affected by the policy. By providing this information, the API enables users to monitor and manage their credentials effectively, ensuring that they remain secure and up-to-date at all times.
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/listAllCredentialRotationPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+  "pageId":1,
+  "pageSize":2
+}'
+
+```
+
+```http
+POST /api/v1/instances/listAllCredentialRotationPolicy HTTP/1.1
+```
+
+```json
+{
+    "pageId":1,
+    "pageSize":2
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST api/v1/instances/listAllCredentialRotationPolicy HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+pageId |Page ID refers to the page number.
+pageSize | Page size refers to the number of endpoints groups to be fetched.
+
+
+### HTTP Response
+
+`Credential rotation policy Created`
+
+```json
+[
+    {
+        "policyName": "AAAPolicy",
+        "rotationTime": 30,
+        "credentialMedium": "Email",
+        "sessionExpiryTime": 15,
+        "userType": "priv"
+    },
+    {
+        "policyName": "BBBPolicy",
+        "rotationTime": 30,
+        "credentialMedium": "Email",
+        "sessionExpiryTime": 45,
+        "userType": "priv"
+    }
+]
+```
+
+<aside class="success">
+Credential rotation policy Created
+</aside>
+
+
+## Update Credential rotation policy
+
+The Update Credential Rotation Policy API is a feature of endpoint management that allows users to modify the rotation policy for their endpoint credentials. With this API, users can adjust the frequency and method of credential rotation, ensuring that their endpoint security remains up-to-date and effective. This API can be used in conjunction with other endpoint management tools to create a comprehensive security strategy for managing endpoint access and protecting sensitive data.
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/updateCredentialRotationPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+  "policyId":1,
+  "policyName" : "TestPplocy" , 
+  "rotationTime" : 3,  
+  "instanceId" :4, 
+  "instanceGroupId" : 5, 
+  "domainId" :10
+}'
+
+```
+
+```http
+PUT /api/v1/instances/updateCredentialRotationPolicy HTTP/1.1
+```
+
+```json
+{
+    "policyId":1,
+    "policyName" : "TestPplocy" , 
+    "rotationTime" : 3,  
+    "instanceId" :4, 
+    "instanceGroupId" : 5, 
+    "domainId" :10
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`PUT /api/v1/instances/updateCredentialRotationPolicy HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+policyName |  It is used to specify the name of the credential rotation policy being created.
+rotationTime| It specifies the time interval for rotating the credentials associated with an endpoint.
+policyId | It is used to specify the ID of the policy to be updated.
+instanceGroupId | It specifies the ID of the instance group to which the rotation policy should be applied.
+domainId| The domainId is used to specify the ID of the domain to which the endpoint belongs.
+instanceId |  The instanceId is used to specify the ID of the instances that are part of the endpoint.
+
+
+### HTTP Response
+
+`Credential Rotation Policy updated`
+
+```json
+{
+    "Code": "200",
+    "Message": "Credential Rotation Policy updated"
+}
+```
+
+<aside class="success">
+Credential Rotation Policy updated
+</aside>
+
+
+
+##	Delete Credential rotation policy
+
+The Delete Credential Rotation Policy API is an endpoint management API that allows you to delete a previously created credential rotation policy. This API is typically used in conjunction with other endpoint management APIs to automate the process of managing credentials and their associated policies. By deleting a credential rotation policy, you can remove an outdated or unnecessary policy from your endpoint management system, which can help improve security and streamline your overall endpoint management workflow.
+
+```shell
+curl --location 'https://api.authnull.kloudlearn.com/api/v1/instances/deleteCredentialRotationPolicy' \
+--header 'Content-Type: application/json' \
+--data '{
+  "policyId":1,
+}'
+
+```
+
+```http
+DELETE /api/v1/instances/deleteCredentialRotationPolicy HTTP/1.1
+```
+
+```json
+{
+    "policyId":1,
+}
+
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`DELETE /api/v1/instances/deleteCredentialRotationPolicy HTTP/1.1`
+
+### Query Parameter
+Parameter  | Description
+--------- | -----------
+policyId | It is used to specify the ID of the policy to be updated.
+
+
+### HTTP Response
+
+`Deleted Credential Policy Successfully`
+
+```json
+{
+    "Code": "200",
+    "Message": "Deleted Credential Policy Successfully"
+}
+
+```
+
+<aside class="success">
+Deleted Credential Policy Successfully
+</aside>
+
+
 
