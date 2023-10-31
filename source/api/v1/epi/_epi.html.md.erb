@@ -19,7 +19,11 @@ curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/list' \
   "domainId": 1,
 "pageId": 1,
 "pageSize": 10,
-"filter":""
+"search": "",
+"filter": {
+    "filterBy": "",
+    "value": ""
+}
 }'
 ```
 
@@ -32,7 +36,9 @@ POST /api/v1/instances/list HTTP/1.1
   "domainId": 1,
 "pageId": 1,
 "pageSize": 10,
-"filter":""
+"filter": {
+    "filterBy": "",
+    "value": ""
 }
 ```
 
@@ -50,30 +56,31 @@ domainId |  The domainId is used to specify the ID of the domain to which the en
 pageId |Page ID refers to the page number.
 pageSize | Page size refers to the number of endpoints groups to be fetched.
 filter | filter is the search keyword for searching endpoint groups.
-
+filterBy |filterBy is the filter instances based on the attribute.
+value |value define specific filtering criteria or conditions.
 ### HTTP Response
 
 `All the instances listed below.`
 
 ```json
 {
-    "domainId": 1,
-    "groupId": 0,
-    "totalCount": 7,
-    "instances": [
-        {
-            "totalUsers": 38,
-            "instanceName": "SK2014",
-            "osName": "RedHat",
-            "publicIp": "192.168.3.1",
-            "privateIp": "",
-            "hostName": "",
-            "status": "Inactive",
-            "instanceId": 1,
-            "totalGroups": 8
-        }
-      ]
+  "domainId": 1,
+  "totalCount": 1,
+  "instances": [
+    {
+      "totalUsers": 0,
+      "instanceName": "MACKL01",
+      "osName": "linux",
+      "publicIp": "127.0.1.1",
+      "privateIp": "",
+      "hostName": "ubuntu-s-1vcpu-1gb-nyc1-01",
+      "status": "Inactive",
+      "instanceId": 88,
+      "totalGroups": 0,
+      "lastActive": "1696426256"
     }
+  ]
+}
 ```
 
 <aside class="success">
@@ -331,8 +338,8 @@ actions | The action is used to specify the type of action to be performed on a 
 
 ```json
 {
-    "code": 200,
-    "message": "Successfully Added"
+  "code": 200,
+  "message": "Successfully Added/Removed"
 }
 ```
 
