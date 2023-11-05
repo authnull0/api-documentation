@@ -23,7 +23,7 @@ The daemon is the program that runs continuously in the background to synchroniz
 ## Save ActiveDirectory Configuration
 
 ```shell
-curl POST "https://api.authnull.kloudlearn.com/api/v1/saveActiveDirectoryConfig"
+curl POST "https://api.authnull.authnull.com/api/v1/saveActiveDirectoryConfig"
 ```
 
 ```HTTP
@@ -35,7 +35,7 @@ POST api/v1/saveActiveDirectoryConfig HTTP/1.1
  {
     "directoryName":"xyz-xyz-xyz", 
     "accountName":"abc-abc-abc", 
-    "appUrl":"www.kloudlearn.com", 
+    "appUrl":"www.authnull.com", 
     "domainId":"1"
 }
 ]
@@ -77,7 +77,7 @@ ActiveDirectory Configure successfully saved
 The Import Users API is a software component that can be integrated into the Active Directory API Communications module to enable the import of user data from external systems or sources. This API allows for the automation of user data management, simplifying the process of adding or updating user information in the Active Directory.
 
 ```shell
-curl --location 'https://api.authnull.kloudlearn.com/api/v1/integrations/activeDirectory/importLdif' \
+curl --location 'https://api.authnull.authnull.com/api/v1/integrations/activeDirectory/importLdif' \
 --form 'file=@"/C:/Users/HP/Downloads/sample.ldif"' \
 --form 'fileName="paul.txt"' \
 --form 'domainId="1"'

@@ -13,11 +13,11 @@ Overall, DIDs represent a promising new approach to digital identity management 
 Verifiable credentials are a form of digital identity that allows individuals and organizations to securely and selectively share information about themselves. By creating an Issuer DID, an entity can establish a trusted identity on a decentralized network, and issue verifiable credentials that can be cryptographically verified by third parties.
 
 ```http
-https://api.did.kloudlearn.com/api/v1/did/createIssuerDid
+https://api.did.authnull.com/api/v1/did/createIssuerDid
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createIssuerDid'  \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/createIssuerDid'  \
 --header 'Content-Type: application/json' \
 --data '{
   "domainId": 1,
@@ -41,7 +41,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/create
 Authorization Key Required 
 
 ### HTTP Request
-`https://api.did.kloudlearn.com/api/v1/did/createIssuerDid`
+`https://api.did.authnull.com/api/v1/did/createIssuerDid`
 
 ### Query Parameters
 Parameter | Description
@@ -70,7 +70,7 @@ A Holder DID is a Decentralized Identifier (DID) that is used by an user to stor
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/createHolderDid'  \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/createHolderDid'  \
 --header 'Content-Type: application/json' \
 --data '{
   "method": "brcm",
@@ -135,7 +135,7 @@ POST /api/v1/did/DIDList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/DIDList' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/DIDList' \
 --header 'Content-Type: application/json' \
 --data '{
   "domainId": 1,
@@ -217,7 +217,7 @@ The SEARCH DID API allows developers to query a specific network or ledger to fi
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/SearchDID' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/SearchDID' \
 --header 'Content-Type: application/json' \
 --data '{
   "name":"hema",
@@ -228,7 +228,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/did/Search
 ```
 
 ```http
-POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1
+POST https://api.did.authnull.com/api/v1/did/SearchDID HTTP/1.1
 ```
 ```json
 {
@@ -244,7 +244,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/did/SearchDID HTTP/1.1`
+`POST https://api.did.authnull.com/api/v1/did/SearchDID HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -281,7 +281,7 @@ pageSize | The pageSize specifies the number of search results to be returned pe
 The DELETE DID API is used to delete a decentralized identifier (DID) and its associated data from the underlying decentralized ledger, which can be useful in scenarios such as revoking a users access or deleting outdated information.
 
 ```shell
-curl --location --request DELETE 'https://api.did.kloudlearn.com/api/v1/did/deleteDid' \
+curl --location --request DELETE 'https://api.did.authnull.com/api/v1/did/deleteDid' \
 --header 'Content-Type: application/json' \
 --data '{
   "domainId": 1,
@@ -299,7 +299,7 @@ curl --location --request DELETE 'https://api.did.kloudlearn.com/api/v1/did/dele
 ```
 
 ```http
-DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1
+DELETE https://api.did.authnull.com/api/v1/did/deleteDid HTTP/1.1
 ```
 ```json
 {
@@ -322,7 +322,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`DELETE https://api.did.kloudlearn.com/api/v1/did/deleteDid HTTP/1.1`
+`DELETE https://api.did.authnull.com/api/v1/did/deleteDid HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -347,7 +347,7 @@ type | The type  specifies the type of data being shared or requested within a d
 The Create Schema API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/schema/createSchema' \
 --header 'Content-Type: application/json' \
 --data '{
   "author": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 
@@ -454,7 +454,7 @@ sign | The sign is used to sign data with a private key associated with a decent
 The Credential Schema List API in Decentralized Identities (DIDs) enables users to access and retrieve a list of available verifiable credential schemas published on a decentralized network. The API allows users to search and filter the list based on their specific needs and requirements, enabling them to create and manage verifiable credentials in a secure, transparent, and interoperable manner.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential' \
 --header 'Content-Type: application/json' \
 --data '{
    "domainId": 1,
@@ -506,7 +506,7 @@ issuerDID |The issuerDid is a required field used to identify the decentralized 
 Verifiable Credentials (VCs) are digital credentials that contain information about a person or entity, which can be verified by others. A Decentralized Identifier (DID) is a unique identifier that allows individuals or organizations to control their own digital identity. Combining these two technologies, a Verifiable Credential DID is a digital credential that is associated with a DID, allowing for secure and decentralized verification of the credentials authenticity and ownership
 
 ```shell
-curl --location --request POST 'https://api.authnull.kloudlearn.com/api/v1/issueVerifiableCredential'  \
+curl --location --request POST 'https://api.authnull.authnull.com/api/v1/issueVerifiableCredential'  \
 --header 'Content-Type: application/json' \
 --data '{
 	"domainId" : 1,
@@ -576,7 +576,7 @@ metadata | These are the set of properties or claims.
 The Assign Credential to Wallet API in Decentralized Identities (DIDs) enables users to securely store and manage their verifiable credentials in a decentralized wallet. This API allows users to request, receive and store verifiable credentials issued by trusted issuers, providing them with greater control and ownership over their personal data.
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser' \
+curl --location 'https://api.did.authnull.com/api/v1/walletService/assignWalletUser' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId":[1,3],
@@ -628,7 +628,7 @@ The acknowledge credential API is an essential component of decentralized identi
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletService/pollPresentationRequest' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/walletService/pollPresentationRequest' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId": 1,
@@ -653,7 +653,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/walletService/pollPresentationRequest HTTP/1.1`
+`POST https://api.authnull.authnull.com/api/v1/walletService/pollPresentationRequest HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -723,11 +723,11 @@ holderDid | The holderDid is a required field used to identify the holder of the
 The Submit Presentation Response API in Decentralized Identities (DIDs) enables holders to respond to presentation requests from verifiers by submitting a verifiable presentation that meets the requested criteria. The API allows holders to selectively disclose only the information that is necessary, while maintaining control and ownership over their personal data.
 
 ```shell
-curl POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation
+curl POST https://api.did.authnull.com/api/v1/walletService/submitPresentation
 ```
 
 ```http
-POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation HTTP/1.1
+POST https://api.did.authnull.com/api/v1/walletService/submitPresentation HTTP/1.1
 ```
 
 ```json
@@ -772,7 +772,7 @@ POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation HTTP
 Authorization Key Required 
 
 ### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/walletService/submitPresentation HTTP/1.1`
+`POST https://api.did.authnull.com/api/v1/walletService/submitPresentation HTTP/1.1`
 
 ### Query Parameters
 
@@ -805,7 +805,7 @@ id |  The id specifies the unique identifier associated with a decentralized ide
 The Create Schema List API in Decentralized Identities (DIDs) enables issuers to create and manage a list of verifiable credential schemas that can be used to define the structure and rules for different types of credentials. The API allows issuers to define the attributes and format of each schema, and publish the list to a decentralized network, making it available for use by other participants in the ecosystem 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/schema/createSchema
+curl --location --request POST 'https://api.did.authnull.com/api/v1/schema/createSchema
 ```
 
 ```http
@@ -893,7 +893,7 @@ sign | The sign is used to sign data with a private key associated with a decent
 The Issue Presentation Request API in Decentralized Identities (DIDs) enables verifiers to request specific verifiable credentials from holders in a secure and decentralized manner. The API allows verifiers to specify the attributes they require and issue a presentation request to the holder, who can then choose which credentials to present without revealing unnecessary or sensitive information.
 
 ```shell
-curl POST https://api.did.kloudlearn.com/api/v1/verifierService/issuePR
+curl POST https://api.did.authnull.com/api/v1/verifierService/issuePR
 ```
 
 ```http
@@ -1017,7 +1017,7 @@ The acknowledge credential API is an essential component of decentralized identi
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/walletService/acknowledgeCredential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/walletService/acknowledgeCredential' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId": 1,
@@ -1044,7 +1044,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/walletService/acknowledgeCredential HTTP/1.1`
+`POST https://api.authnull.authnull.com/api/v1/walletService/acknowledgeCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1076,7 +1076,7 @@ accept | The accept is used to indicate the acceptance of a credential presented
 The Revoke Credential API in Decentralized Identities (DIDs) enables issuers to revoke previously issued verifiable credentials in a secure and decentralized manner. The API allows issuers to specify the reason for revocation and publish the revocation status to the decentralized network, ensuring that the revoked credential can no longer be used or presented by the holder.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/revokecredential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/revokecredential' \
 --header 'Content-Type: application/json' \
 --data '{
   "vcid": 2,
@@ -1103,7 +1103,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST https://api.authnull.kloudlearn.com/api/v1/presentationRequest HTTP/1.1`
+`POST https://api.authnull.authnull.com/api/v1/presentationRequest HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1132,7 +1132,7 @@ The Credential List API in Decentralized Identities (DIDs) enables users to acce
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialList' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/credentialList' \
 --header 'Content-Type: application/json' \
 --data '{
    "domainId": 1
@@ -1219,7 +1219,7 @@ the Assigned Credential API is a key component of decentralized identity systems
 
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/GetAssignedCredential' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId":104,
@@ -1230,7 +1230,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ```
 
 ```http
-POST https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential HTTP/1.1
+POST https://api.did.authnull.com/api/v1/credential/GetAssignedCredential HTTP/1.1
 ```
 
 ```json
@@ -1245,7 +1245,7 @@ POST https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential HTTP
 Authorization Key Required 
 
 ### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/credential/GetAssignedCredential HTTP/1.1`
+`POST https://api.did.authnull.com/api/v1/credential/GetAssignedCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1291,7 +1291,7 @@ The Accepted Credential API is a programming interface that is used in the conte
 The Accepted Credential API allows a DID controller to accept or reject incoming credential requests, manage the storage and presentation of their own verifiable credentials, and control the disclosure of specific credentials to third parties. This API provides a standardized way for developers to build applications that support interoperability between different DID systems, making it easier for users to manage and share their digital identities securely.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/GetAcceptedCredential' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId":104,
@@ -1302,7 +1302,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ```
 
 ```http
-POST https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential HTTP/1.1
+POST https://api.did.authnull.com/api/v1/credential/GetAcceptedCredential HTTP/1.1
 ```
 
 ```json
@@ -1317,7 +1317,7 @@ POST https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential HTTP
 Authorization Key Required 
 
 ### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/credential/GetAcceptedCredential HTTP/1.1`
+`POST https://api.did.authnull.com/api/v1/credential/GetAcceptedCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1364,7 +1364,7 @@ By using the Ignored Credential API, users can specify which credentials they wa
 Decentralized identity systems are designed to give users more control over their personal data and provide a more secure and transparent way of managing digital identities. The Ignored Credential API is one example of how these systems can be customized to meet the specific needs and preferences of individual users.
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential' \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/GetIgnoredCredential' \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId":104,
@@ -1375,7 +1375,7 @@ curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential
 ```
 
 ```http
-POST https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential HTTP/1.1
+POST https://api.did.authnull.com/api/v1/credential/GetIgnoredCredential HTTP/1.1
 ```
 
 ```json
@@ -1390,7 +1390,7 @@ POST https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential HTTP/
 Authorization Key Required 
 
 ### HTTP Request
-`POST https://api.did.kloudlearn.com/api/v1/credential/GetIgnoredCredential HTTP/1.1`
+`POST https://api.did.authnull.com/api/v1/credential/GetIgnoredCredential HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1438,7 +1438,7 @@ POST /api/v1/credential/credentialSchemaList HTTP/1.1
 ```
 
 ```shell
-curl --location --request POST 'https://api.did.kloudlearn.com/api/v1/credential/credentialSchemaList'  \
+curl --location --request POST 'https://api.did.authnull.com/api/v1/credential/credentialSchemaList'  \
 --header 'Content-Type: application/json' \
 --data '{
    "domainId": 1,
@@ -1490,12 +1490,12 @@ The Wallet User List API is a feature in decentralized identity systems that all
 
 
 ```http
-POST /api/v1/wallet/users HTTP/1.1
+POST /api/v1/walletService/walletUserList HTTP/1.1
 ```
 
 ```shell
 curl -X POST \
-  'https://api.did.kloudlearn.com/api/v1/walletService/walletUserList' \
+  'https://api.did.authnull.com/api/v1/walletService/walletUserList' \
   --header 'Accept: */*' \
   --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
   --header 'Content-Type: application/json' \
@@ -1521,7 +1521,7 @@ Authorization Key Required
 
 
 ### HTTP Request
-`POST /api/v1/wallet/users HTTP/1.1`
+`POST /api/v1/walletService/walletUserList HTTP/1.1`
 
 ### Query Parameters
 Parameter | Description
@@ -1576,7 +1576,7 @@ POST /api/v1/credential/GetCredential HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/credential/GetCredential'  \
+curl --location 'https://api.did.authnull.com/api/v1/credential/GetCredential'  \
 --header 'Content-Type: application/json' \
 --data '{
    "credentialId": "430d2578-4382-4e74-a8b6-af7c1a960100"
@@ -1641,7 +1641,7 @@ POST /api/v1/walletService/assignWalletUser HTTP/1.1
 ```
 
 ```shell
-curl --location 'https://api.did.kloudlearn.com/api/v1/walletService/assignWalletUser'  \
+curl --location 'https://api.did.authnull.com/api/v1/walletService/assignWalletUser'  \
 --header 'Content-Type: application/json' \
 --data '{
   "walletId": 1,
@@ -1685,4 +1685,169 @@ credentialId | The credentialId specifies the unique identifier associated with 
 ### HTTP Response
 `Successfully Assigned Wallet`
 
+## RegisterDevice Wallet
+The RegisterDeviceWallet API handle the registration of a device wallet for a user based on their email and a wallet key. If the user is already registered, it compares the provided WalletKey with the existing one. If the keys do not match, it returns an error message.If the user does not have an existing wallet, a new wallet registration is created in database.
 
+```http
+POST /api/v1/walletService/registerDevice HTTP/1.1
+```
+
+```shell
+curl --location 'https://dev.api.did.authnull.com/api/v1/walletService/registerDevice'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "EmailId":"bijay@kloudone.com"
+}'
+```
+
+```json
+{
+  "EmailId":"bijay@kloudone.com"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+
+### HTTP Request
+`POST /api/v1/walletService/registerDevice HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+EmailId | The email Id  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
+WalletKey |The walletKey is a private key used to sign and authenticate DID transactions and operations within a decentralized network.
+
+```json
+{
+  "userId": 26,
+"walletId": 181,
+"holderDid": "did:key:z6Mkpr5Q4b6LUnnnHvUXDN7B9Sm76vACkUpXpCLXmD47aCtQ",
+"secretKey": "2E3LiEeiuXQy69TtKrcnx5bGDVi24CmtYHR8sPFoa4TmvJgModHruiDquhfh5js7qBTg1y77kY5u2Cz8zDhVpEUG",
+"code": 200,
+"status": "Success",
+"message": "Wallet successfully registered"
+}
+```
+
+### HTTP Response
+`Wallet registered `
+
+## List Credentials
+The List Credentials API retrieves and filters user wallet credentials, excluding any that have expired and returns a response containing the remaining valid credentials
+
+```http
+POST api/v1/walletService/ListCredentials HTTP/1.1
+```
+
+```shell
+curl --location 'https://dev.api.did.authnull.com/api/v1/walletService/ListCredentials'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "WalletId": 180
+}'
+```
+
+```json
+{
+  "WalletId": 180
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/walletService/ListCredentials HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+walletId | The walletId  is an optional field used to specify the unique identifier of the digital wallet containing the users decentralized identity credentials.
+
+
+```json
+{
+  "code": 200,
+  "status": "Success",
+  "message": "Credentials fetched successfully",
+  "credentials": [
+    {
+      "id": 22263,
+      "credentialId": "d5efa8f3-89ed-4446-96ed-00ceb281636a",
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "status": "Assigned"
+    },
+    {
+      "id": 22264,
+      "credentialId": "25294634-3082-4dce-9a6a-b4be7e8fb42f",
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "status": "Assigned"
+    },
+    {
+      "id": 22265,
+      "credentialId": "a54ae987-4acf-4000-b65b-59b07936782e",
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "status": "Assigned"
+    },
+    {
+      "id": 22266,
+      "credentialId": "95e5625b-1ad5-4dae-8eed-f0f9079eefe4",
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "status": "Assigned"
+    },
+    {
+      "id": 22267,
+      "credentialId": "6f46ba67-354f-427a-8bbf-287cbb8519c3",
+      "expirationDate": "2024-12-31T00:00:00Z",
+      "status": "Assigned"
+    }
+  ]
+}
+```
+
+### HTTP Response
+`Successfully wallet listed`
+
+## Wallet Invalidation
+The Wallet Invalidation API ensures that when an employee or directory user leaves the organization, their access and credentials are completely revoked. User will be logged off outside the wallet and user will not be able to login.
+
+```http
+POST api/v1/walletService/InvalidateWallet HTTP/1.1
+```
+
+```shell
+curl --location 'https://dev.api.did.authnull.com/api/v1/walletService/InvalidateWallet'  \
+--header 'Content-Type: application/json' \
+--data '{
+  "EmailId":"bijay@kloudone.com"
+}'
+```
+
+```json
+{
+  "EmailId":"bijay@kloudone.com"
+}
+```
+
+### Access Token
+Authorization Key Required 
+
+### HTTP Request
+`POST /api/v1/walletService/InvalidateWallet HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | ----------- 
+EmailId | The email Id  refers to the email address associated with a decentralized identity, which can be used to verify and authenticate a users identity across various services and platforms.
+
+```json
+{
+  "code": 200,
+  "message": "Wallet Invalidate successfully"
+}
+```
+
+### HTTP Response
+`Wallet Invalidated`

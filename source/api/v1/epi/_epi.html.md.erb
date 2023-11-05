@@ -13,7 +13,7 @@ Endpoint management is the process of actively monitoring, detecting, and preven
 The List Instances API allows users to retrieve a list of computing instances that belong to an endpoint group in a system or application.This API provides a simple and convenient way to access information about computing instances within an endpoint group and their status, configuration, or usage metrics.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/list' \ 
+curl POST 'https://api.authnull.authnull.com/api/v1/instances/list' \ 
 --header 'Content-Type: application/json' \
 --data '{
   "domainId": 1,
@@ -92,7 +92,7 @@ The Add Instance API allows users to add a new computing instance to an endpoint
 
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/addInstance \
+curl POST 'https://api.authnull.authnull.com/api/v1/instances/addInstance \
 --header 'Content-Type: application/json' \
 --data '{
 "domain_id":25,
@@ -155,7 +155,7 @@ Instance added to the list.
 The Update Auth Type API allows users to update the authentication type used for a computing instance within an endpoint group in a system or application. This API provides a simple and flexible way to manage the authentication methods used within an endpoint group and ensure that they meet the security requirements of an organization.
 
 ```shell
-curl PUT https://api.authnull.kloudlearn.com/api/v1/instances/updateAuthType \
+curl PUT 'https://api.authnull.authnull.com/api/v1/instances/updateAuthType \
 --header 'Content-Type: application/json' \
 --data '{
     "instanceId":1,
@@ -212,7 +212,7 @@ Auth type updated
 The Assign User to Endpoints API allows users to assign one or more users to specific computing instances within an endpoint group in a system or application. This API provides a simple and secure way to manage user access to computing instances and ensure that only authorized users can access sensitive information or resources.
 
 ```shell
-curl POST 'https://api.authnull.kloudlearn.com/api/v1/instances/assignUsersToMachines  \
+curl POST 'https://api.authnull.authnull.com/api/v1/instances/assignUsersToMachines \
 --header 'Content-Type: application/json' \
 --data '{
     "instanceIds":[1,2],
@@ -265,10 +265,9 @@ action |The action is used to specify the type of action to be performed on an e
 
 ```json
 {
-    "code": 200,
-    "message": "Successfully Added"
+  "code": 200,
+  "message": "Successfully Added/Removed"
 }
-
 ```
 
 <aside class="success">
@@ -282,13 +281,14 @@ Group added to endpoint
 The Assign Groups to Endpoints API allows users to assign one or more groups to specific computing instances within an endpoint group in a system or application.
 
 ```shell
-curl PUT 'https://api.authnull.kloudlearn.com/api/v1/instances/assignGroupToMachines  \
+curl PUT 'https://api.authnull.authnull.com/api/v1/instances/assignGroupToMachines  \
 --header 'Content-Type: application/json' \
 --data '{
-    "instanceId":[1,2],
-    "domainId":1,
-    "groupId":[1,2,3],
-     "action":"add"
+    "instanceIds":[1,2],
+    "domainId":1,
+    "groupId":[1,2,3],
+     "action":"remove"
+}'
 }
 '
 ```
@@ -309,9 +309,9 @@ PUT /api/v1/instances/assignGroupToMachines HTTP/1.1
  
 
 {
-    "instanceId":[1,2],
-    "domainId":1,
-    "groupId":[1,2,3],
+    "instanceIds":[1,2],
+    "domainId":1,
+    "groupId":[1,2,3],
      "action":"remove"
 }
 ```
@@ -338,8 +338,8 @@ actions | The action is used to specify the type of action to be performed on a 
 
 ```json
 {
-  "code": 200,
-  "message": "Successfully Added/Removed"
+  "code": 400,
+  "message": "Not Added/Removed Groups to machines"
 }
 ```
 
