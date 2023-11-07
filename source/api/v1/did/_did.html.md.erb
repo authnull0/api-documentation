@@ -54,7 +54,7 @@ description | The description allows developers to provide additional informatio
 
 ```json
 {
-  "id": "did:key:z6MkkHNepDyi2FYcNAwAHaujXaPFZG8dAzUFPJvneySxmXAK",
+  "id": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
   "code": 200,
   "message": "Successfully created DID",
   "status": "Success"
@@ -139,16 +139,20 @@ curl --location --request POST 'https://api.did.authnull.com/api/v1/did/DIDList'
 --header 'Content-Type: application/json' \
 --data '{
   "domainId": 1,
-  "issuerId": 2,
-  "userId": 104  
+  "pageNumber": 1,
+  "pageSize": 10,
+  "search": "",
+  "filter": "User"
 }'
 ```
 
 ```json
 {
-  "domainId": 1,
-  "issuerId": 2,
-  "userId": 104  
+    "domainId": 1,
+    "pageNumber": 1,
+    "pageSize": 10,
+    "search": "",
+    "filter": "User"
 }
 ```
 
@@ -162,48 +166,86 @@ Authorization Key Required
 Parameter | Description
 --------- | ----------- 
 domainId |This refers to the company or organization who is using the service.
-issuerDID |The issuerDid is a required field used to identify the decentralized identity issuer and verify the authenticity of the credentials associated with the identity.
-userId | The userId specifies the unique identifier associated with a user, enabling secure authentication and authorization of data exchange and access within a decentralized identity ecosystem. 
+pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
+pageSize | The pageSize specifies the number of search results to be returned per page.
+filter | The filter is the search parameter.
 
 ```json
-[
+{
+  "count": 46,
+  "didList": [
     {
-        "DIDType": "Issuer",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a issuer DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
+      "domainId": 1,
+      "id": 302,
+      "issuerName": "Bijay Sharma",
+      "desc": "User DID for Bijay Sharma",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
     },
     {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
+      "domainId": 1,
+      "id": 303,
+      "issuerName": "user123 test",
+      "desc": "User DID for user123 test",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
     },
     {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
+      "domainId": 1,
+      "id": 304,
+      "issuerName": "Asif Ali",
+      "desc": "User DID for Asif Ali",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
     },
     {
-        "DIDType": "User",
-        "domainId": 1,
-        "did": "did:brcm:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "issuerName": "Broadcom",
-        "credentialIssued": 1,
-        "desc": "This a User DID",
-        "lastYpdatedAt": "02-12-2023 12:12:12"
+      "domainId": 1,
+      "id": 305,
+      "issuerName": "muthu muthu",
+      "desc": "User DID for muthu muthu",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
+    },
+    {
+      "domainId": 1,
+      "id": 306,
+      "issuerName": "Paul Mollo",
+      "desc": "User DID for Paul Mollo",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
+    },
+    {
+      "domainId": 1,
+      "id": 307,
+      "issuerName": "kiran kumari",
+      "desc": "User DID for kiran kumari",
+      "lastUpdatedAt": "2023-08-30T14:01:13Z"
+    },
+    {
+      "domainId": 1,
+      "id": 308,
+      "issuerName": "sangeetha mathi",
+      "desc": "User DID for sangeetha mathi",
+      "lastUpdatedAt": "2023-08-30T14:01:14Z"
+    },
+    {
+      "domainId": 1,
+      "id": 309,
+      "issuerName": "pompita sil",
+      "desc": "User DID for pompita sil",
+      "lastUpdatedAt": "2023-08-30T14:01:14Z"
+    },
+    {
+      "domainId": 1,
+      "id": 310,
+      "issuerName": "Pompita Sil",
+      "desc": "User DID for Pompita Sil",
+      "lastUpdatedAt": "2023-08-30T14:01:14Z"
+    },
+    {
+      "domainId": 1,
+      "id": 311,
+      "issuerName": "hjhhx bhkjn",
+      "desc": "User DID for hjhhx bhkjn",
+      "lastUpdatedAt": "2023-08-30T14:01:14Z"
     }
   ]
+}
     
 ```
 
@@ -220,10 +262,10 @@ The SEARCH DID API allows developers to query a specific network or ledger to fi
 curl --location --request POST 'https://api.did.authnull.com/api/v1/did/SearchDID' \
 --header 'Content-Type: application/json' \
 --data '{
-  "name":"hema",
-  "didType":"ISSUER",
+  "didname":"BijaySharma",
+  "didType":"USER",
   "pageNumber":1,
-  "pageSize":10
+  "pageSize":3
 }'
 ```
 
@@ -232,10 +274,10 @@ POST https://api.did.authnull.com/api/v1/did/SearchDID HTTP/1.1
 ```
 ```json
 {
-  "name":"hema",
-  "didType":"ISSUER",
+  "didname":"BijaySharma",
+  "didType":"USER",
   "pageNumber":1,
-  "pageSize":10
+  "pageSize":3
 }
 ```
 
@@ -249,7 +291,7 @@ Authorization Key Required
 ### Query Parameters
 Parameter | Description
 --------- | -----------
-name |The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
+didname |The name is used to specify a user-friendly name or label for the decentralized identity credentials, making them easier to manage and identify.
 didType | The didType parameter in search DID API specifies the type of Decentralized Identifier (DID) that should be searched for.
 pageNumber | The pageNumber is used to specify the page number of results to retrieve when querying for DIDs. 
 pageSize | The pageSize specifies the number of search results to be returned per page.
@@ -257,15 +299,33 @@ pageSize | The pageSize specifies the number of search results to be returned pe
 
 ```json
 {
-  "count": 1,
+  "count": 46,
   "didList": [
     {
-      "didType": "Issuer",
+      "didType": "User",
       "domainId": 1,
-      "did": "did:key:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      "issuerName": "hema",
+      "did": "did:key:z6MkpM9cqnXMruwdab1KWq8EEkfLK7fBMcVSoCm6JtBqQUvs",
+      "issuerName": "Bijay Sharma",
       "credentialIssued": 1,
-      "desc": "test",
+      "desc": "User DID for Bijay Sharma",
+      "lastUpdatedAt": "02-12-2023 12:12:12"
+    },
+    {
+      "didType": "User",
+      "domainId": 1,
+      "did": "did:key:z6Mkke4wmXyjMgB3JRn8dWTp272z4JfjZ77cNgViwU6vo1AV",
+      "issuerName": "user123 test",
+      "credentialIssued": 1,
+      "desc": "User DID for user123 test",
+      "lastUpdatedAt": "02-12-2023 12:12:12"
+    },
+    {
+      "didType": "User",
+      "domainId": 1,
+      "did": "did:key:z6MkoEcaWQCjyrgdbgQf7Ub2akf3iePoGn9CZvyZJpp3AMZs",
+      "issuerName": "Asif Ali",
+      "credentialIssued": 1,
+      "desc": "User DID for Asif Ali",
       "lastUpdatedAt": "02-12-2023 12:12:12"
     }
   ]
@@ -275,6 +335,151 @@ pageSize | The pageSize specifies the number of search results to be returned pe
 ### HTTP Response
 `API found successfully`
 
+## Issuer List 
+The Issuer List API allows users to retrieve a list of all the issuers in the system or application from Issuer DID.
+
+The API may return a list of user name and  issuerId
+
+```shell
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/issuerList' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 1
+}'
+```
+
+```http
+POST https://api.did.authnull.com/api/v1/did/issuerList HTTP/1.1
+```
+```json
+{
+  "domainId": 1
+}
+```
+
+### Access Token
+Authorization Key not Required 
+
+
+### HTTP Request
+`POST https://api.did.authnull.com/api/v1/did/issuerList HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+domainID | The domainID specifies the identifier of the domain to which the users should be imported. 
+
+
+```json
+[
+  {
+    "Name": "Broadcom R&D",
+    "IssuerId": 50
+  },
+  {
+    "Name": "Broadcom R&D",
+    "IssuerId": 51
+  },
+  {
+    "Name": "Authnull",
+    "IssuerId": 47
+  }
+]
+```
+
+### HTTP Response
+`API found successfully`
+
+## User List 
+The User List API allows users to retrieve a list of all the users in the system or application from EPM Users.
+
+The API may return a list of user name and  userId
+
+```shell
+curl --location --request POST 'https://api.did.authnull.com/api/v1/did/userList' \
+--header 'Content-Type: application/json' \
+--data '{
+  "domainId": 0
+}'
+```
+
+```http
+POST https://api.did.authnull.com/api/v1/did/userList HTTP/1.1
+```
+```json
+{
+  "domainId": 0
+}
+```
+
+### Access Token
+Authorization Key not Required 
+
+
+### HTTP Request
+`POST https://api.did.authnull.com/api/v1/did/userList HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+domainID | The domainID specifies the identifier of the domain to which the users should be imported. 
+
+
+```json
+[
+  {
+    "Name": "",
+    "userId": 982
+  }
+]
+```
+
+### HTTP Response
+`API found successfully`
+
+## Seed User DID
+The Seed user Did API allows retrieves user data from the database, and iterates through each user, creating a DID for them using the CreateHolderDid
+
+The API returns a response indicating whether all user DIDs were successfully seeded.
+
+```shell
+curl --location --request PUT 'https://api.did.authnull.com/api/v1/seedUserDID' \
+--header 'Content-Type: application/json' \
+--data '{
+  "IssuerId": 112
+}'
+```
+
+```http
+PUT https://api.did.authnull.com/api/v1/seedUserDID HTTP/1.1
+```
+```json
+{
+  "IssuerId": 112
+}
+```
+
+### Access Token
+Authorization Key not Required 
+
+
+### HTTP Request
+`Put https://api.did.authnull.com/api/v1/seedUserDID HTTP/1.1`
+
+### Query Parameters
+Parameter | Description
+--------- | -----------
+issuerId | The issuerId is used to specify the ID of the entity that issued the wallet.
+
+
+```json
+{
+  "message": "User DIDs seeded successfully"
+}
+```
+
+### HTTP Response
+`API found successfully`
 
 
 ## Delete DID 
@@ -333,6 +538,7 @@ type | The type  specifies the type of data being shared or requested within a d
 
 ```json
 {
+  "id": "xxxxxxxxxxxxxxxxxxxxx",
   "code": 200,
   "message": "2 DIDs deleted successfully",
   "status": "Success"
