@@ -1,0 +1,16 @@
+---
+title: Privileged Access Management
+---
+
+# Privileged Access Management (PAM)
+
+Privileged access management (PAM) is the combination of tools and technology used to secure, control and monitor access to an organization's critical information and resources. Subcategories of PAM include shared access password management, privileged session management and application access management.
+
+Privileged access management (PAM), a subdivision of Identity and Access Management (IAM), is a solution that provides organizations with better control and monitoring capabilities that decide who can have privileged access to critical assets, say, a computer or information system.
+
+The solution should include the following functionalities:
+
+- Defining user roles
+- Granting required privileges or access rights for the roles defined
+- Distributing user information and access grants to all devices and systems that enforce access rights in organizations
+- Monitoring privileged user activities and analyzing the same to detect anomalies

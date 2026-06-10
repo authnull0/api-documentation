@@ -1,3 +1,14 @@
+# Next.js
+.next/
+out/
+node_modules/
+
+# Misc
+*.DS_STORE
+.env
+.env*.local
+
+# Ruby/Slate legacy
 *.gem
 *.rbc
 .bundle
@@ -11,17 +22,12 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-*.DS_STORE
 build/
 .cache
 .vagrant
 .sass-cache
-
-# YARD artifacts
 .yardoc
 _yardoc
 doc/
 .idea/
-
-# Vagrant artifacts
 ubuntu-*-console.log
