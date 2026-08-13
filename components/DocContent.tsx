@@ -4,7 +4,7 @@ interface DocContentProps {
 
 export function DocContent({ contentHtml }: DocContentProps) {
   return (
-    <div className="max-w-4xl mx-auto px-8 py-10">
+    <div className="max-w-4xl px-8 py-10">
       <article
         className="prose prose-slate max-w-none
           prose-headings:font-semibold

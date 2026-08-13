@@ -6,7 +6,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Navbar />
-      <div style={{ paddingTop: 60, display: 'flex', minHeight: 'calc(100vh - 60px)' }}>
+      <div className="site-pad" style={{ paddingTop: 60, display: 'flex', minHeight: 'calc(100vh - 60px)' }}>
         <Sidebar />
         <main style={{ flex: 1, minWidth: 0, overflowX: 'hidden' }}>
           {children}

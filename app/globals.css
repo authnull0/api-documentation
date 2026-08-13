@@ -6,13 +6,14 @@
 
 /* ── Typography System ─────────────────────────────────────────────────── */
 :root {
-  --font-sans:    "Booton", "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
-  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "Times New Roman", serif;
+  --font-sans:    var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-display: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-mono:    var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, monospace;
 }
 
 body {
   font-family: var(--font-sans);
+  font-weight: 500;
   font-size: 15px;
   line-height: 1.55;
   letter-spacing: -0.005em;
@@ -34,11 +35,13 @@ h1, h2, h3 {
   letter-spacing: -0.028em;
 }
 
-h2 { font-size: clamp(30px, 4.2vw, 56px); line-height: 1.02; }
-
 h3 { line-height: 1.06; font-weight: 700; }
 
-p { font-size: 20px; line-height: 1.62; }
+/* .section-title — big clamp heading, marketing sections only (not docs prose) */
+.section-title { font-size: clamp(30px, 4.2vw, 56px); line-height: 1.02; }
+
+/* .lead — large lede paragraph, marketing sections only (not docs prose) */
+.lead { font-size: 20px; line-height: 1.62; }
 
 /* .display — serif display heading style */
 .display {
@@ -58,6 +61,52 @@ p { font-size: 20px; line-height: 1.62; }
 
 /* .mono — monospace text */
 .mono { font-family: var(--font-mono); }
+
+/* ── Shared page gutter ──────────────────────────────────────────────────
+   Used by Navbar, Footer, and the docs layout so their content shares the
+   same left/right edges at every breakpoint. */
+.site-pad {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+@media (max-width: 480px) {
+  .site-pad {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* ── Meta chips (home hero) ────────────────────────────────────────────── */
+.metachip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 4px 11px;
+  background: #fff;
+}
+
+/* ── Doc card method/type tags ────────────────────────────────────────────── */
+.mtag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+.mtag.get { background: #eef2ff; color: #4338ca; }
+.mtag.post { background: #e6f6ec; color: #15803d; }
+.mtag.put { background: #fdf2dc; color: #b45309; }
+.mtag.delete { background: #fdeaea; color: #b91c1c; }
+.mtag.guide { background: #f3f4f6; color: #374151; }
+.mtag.ref { background: #f3f4f6; color: #374151; }
 
 /* ── Callout / aside styles ────────────────────────────────────────────── */
 .prose aside {

@@ -5,23 +5,24 @@ import Image from 'next/image'
 
 const SANS = "var(--font-sans, 'Segoe UI', -apple-system, sans-serif)"
 
-const DEVELOPERS = [
-  { label: 'Documentation', href: 'https://help.authnull.com/', external: true },
-  { label: 'API Reference', href: '/docs/introduction',         external: false },
+const RESOURCES = [
+  { label: 'Blog',  href: 'https://authnull-website-v3.pages.dev/blog', external: true },
+  { label: 'Video', href: 'https://authnull.com/resources/videos',      external: true },
 ]
 
-const PRODUCT = [
-  { label: 'Platform', href: 'https://authnull-website-v3.pages.dev/',         external: true },
-  { label: 'Pricing',  href: 'https://authnull-website-v3.pages.dev/pricing',  external: true },
+const DOCUMENTATION = [
+  { label: 'Getting Started',    href: '/docs/introduction',  external: false },
+  { label: 'Installation Guide', href: '/docs/installation',  external: false },
+  { label: 'API Reference',      href: '/docs/errors',        external: false },
 ]
 
 const COMPANY = [
+  { label: 'Website', href: 'https://authnull-website-v3.pages.dev/',        external: true },
   { label: 'About',   href: 'https://authnull-website-v3.pages.dev/about',   external: true },
-  { label: 'Blog',    href: 'https://authnull-website-v3.pages.dev/blog',    external: true },
   { label: 'Contact', href: 'https://authnull-website-v3.pages.dev/contact', external: true },
 ]
 
-function FooterColumn({ title, links }: { title: string; links: typeof DEVELOPERS }) {
+function FooterColumn({ title, links }: { title: string; links: typeof RESOURCES }) {
   return (
     <div>
       <p style={{ fontFamily: SANS, fontWeight: 700, fontSize: 12, letterSpacing: '0.08em', color: '#111827', marginBottom: 16, textTransform: 'uppercase' }}>
@@ -51,7 +52,7 @@ export default function Footer() {
   return (
     <footer style={{
       borderTop: '1px solid #E5E7EB',
-      background: '#ffffff',
+      background: '#f6f7f9',
       padding: '48px 2.5rem 32px',
       fontFamily: SANS,
     }}>
@@ -61,58 +62,42 @@ export default function Footer() {
           className="footer-grid">
           {/* Brand column */}
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-              <Image src="/authnull_logo.png" alt="AuthNull" width={28} height={28} style={{ borderRadius: 6 }} />
-              <span style={{ fontSize: 17, fontWeight: 700, color: '#111827' }}>AuthNull</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 2, marginBottom: 14 }}>
+              <Link href="/" style={{ display: "flex", alignItems: "center", gap: 9, textDecoration: "none" }}>
+            <Image src="/authnull-logo.png" alt="AuthNull" width={120} height={36} priority style={{ objectFit: "contain" }} />
+          </Link>
             </div>
-            <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 20, maxWidth: 240 }}>
-              Identity-based MFA and access control for the infrastructure you already own.
+            <p style={{ fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 20, maxWidth: 260 }}>
+              MFA for everything your IdP can&apos;t reach — Active Directory, RADIUS, Windows, and Linux.
             </p>
-            {/* Social icons */}
-            <div style={{ display: 'flex', gap: 8 }}>
-              <a
-                href="https://www.linkedin.com/company/authnull/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  width: 34, height: 34, border: '1px solid #D1D5DB', borderRadius: 6,
-                  color: '#374151', fontSize: 13, fontWeight: 600, textDecoration: 'none',
-                  transition: 'border-color 0.15s, color 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#6B7280'; e.currentTarget.style.color = '#6B7280' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.color = '#374151' }}
-              >
-                in
-              </a>
-              <a
-                href="https://www.facebook.com/people/AuthNull/61577963862771/?rdid=N11yi2u72IoAvo4P&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F192ebyJvNp%2F"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  width: 34, height: 34, border: '1px solid #D1D5DB', borderRadius: 6,
-                  color: '#374151', fontSize: 13, fontWeight: 600, textDecoration: 'none',
-                  transition: 'border-color 0.15s, color 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#6B7280'; e.currentTarget.style.color = '#6B7280' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = '#D1D5DB'; e.currentTarget.style.color = '#374151' }}
-              >
-                f
-              </a>
+            {/* Status indicator */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#00d4aa', flexShrink: 0 }} />
+              <span style={{ fontSize: 13, color: '#6B7280' }}>All systems operational</span>
             </div>
           </div>
 
-          <FooterColumn title="Product"    links={PRODUCT} />
-          <FooterColumn title="Developers" links={DEVELOPERS} />
-          <FooterColumn title="Company"    links={COMPANY} />
+          <FooterColumn title="Documentation" links={DOCUMENTATION} />
+          <FooterColumn title="Resources"     links={RESOURCES} />
+          <FooterColumn title="Company"       links={COMPANY} />
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: 20, fontSize: 12, color: '#9CA3AF' }}>
-          © {new Date().getFullYear()} AuthNull. All rights reserved.
+        <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: 20, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <span style={{ fontSize: 12, color: '#000' }}>
+            © {new Date().getFullYear()} AuthNull, Inc.
+          </span>
+          <div style={{ display: 'flex', gap: 20 }}>
+            <Link href="https://authnull-website-v3.pages.dev/privacy" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#000', textDecoration: 'none' }}>
+              Privacy
+            </Link>
+            <Link href="https://authnull-website-v3.pages.dev/terms" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#000', textDecoration: 'none' }}>
+              Terms
+            </Link>
+            <Link href="https://kloudone.safebase.us/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, color: '#000', textDecoration: 'none' }}>
+              Security
+            </Link>
+          </div>
         </div>
       </div>
 

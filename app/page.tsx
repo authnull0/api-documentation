@@ -1,57 +1,74 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
+import { Rocket, Lock, Monitor, Users, Bot, Fingerprint, FolderTree, FileText } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 const categories = [
   {
-    icon: '🚀',
+    icon: Rocket,
     title: 'Getting Started',
     description: 'New to AuthNull? Start here with our introduction and installation guide.',
     href: '/docs/introduction',
+    tags: ['guide'],
+    count: '2 guides',
   },
   {
-    icon: '🔐',
+    icon: Lock,
     title: 'Privileged Access Management',
     description: 'Control and monitor access to critical infrastructure with PAM APIs.',
     href: '/docs/pam',
+    tags: ['guide'],
+    count: 'Overview',
   },
   {
-    icon: '🖥️',
+    icon: Monitor,
     title: 'Endpoint Management',
     description: 'Manage endpoints, assign users and groups, and configure auth types.',
     href: '/docs/endpoint-management',
+    tags: ['post', 'put'],
+    count: '5 endpoints',
   },
   {
-    icon: '👥',
+    icon: Users,
     title: 'User Management',
     description: 'Create and manage endpoint users, credentials, wallets, and password policies.',
     href: '/docs/endpoint-user-management',
+    tags: ['post', 'put'],
+    count: '13 endpoints',
   },
   {
-    icon: '🤖',
+    icon: Bot,
     title: 'Agents',
     description: 'Deploy Authnull Agent, AD Agent, and CSV Agent to sync users and groups.',
     href: '/docs/authnull-agent',
+    tags: ['post'],
+    count: '12 endpoints',
   },
   {
-    icon: '🆔',
+    icon: Fingerprint,
     title: 'Decentralized Identities',
     description: 'Issue and manage DIDs, verifiable credentials, and wallet-based auth.',
     href: '/docs/decentralized-identities',
+    tags: ['post'],
+    count: '10 endpoints',
   },
   {
-    icon: '📂',
+    icon: FolderTree,
     title: 'Active Directory',
     description: 'Import users, sync LDAP groups, and reconfigure directory settings.',
     href: '/docs/active-directory',
+    tags: ['post'],
+    count: '3 endpoints',
   },
   {
-    icon: '📋',
+    icon: FileText,
     title: 'API Reference',
     description: 'Complete error codes, HTTP status meanings, and API conventions.',
     href: '/docs/errors',
+    tags: ['ref'],
+    count: '11 status codes',
   },
 ]
 
@@ -218,23 +235,31 @@ export default function Home() {
       {/* ── Hero ── */}
       <section
         className="hero-bg-grid relative overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #0e2a4a 0%, #0a1a30 30%, #080f1a 60%, #060b1c 100%)', minHeight: '100vh', fontFamily: SANS, color: '#e8f0fe' }}
+        style={{ background: '#ffffff', fontFamily: SANS, color: '#111827' }}
       >
-        {/* Glow orbs */}
-        <div style={{ position: 'absolute', borderRadius: '50%', filter: 'blur(90px)', pointerEvents: 'none', width: 520, height: 420, background: 'rgba(0,212,170,0.11)', top: '5%', left: '-10%' }} />
-        <div style={{ position: 'absolute', borderRadius: '50%', filter: 'blur(90px)', pointerEvents: 'none', width: 620, height: 420, background: 'rgba(59,130,255,0.10)', top: '0%', right: '-15%' }} />
-        <div style={{ position: 'absolute', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none', width: 340, height: 340, background: 'rgba(120,80,255,0.07)', bottom: '18%', left: '28%' }} />
-
         {/* Hero content */}
-        <div className="relative z-10 text-center mx-auto w-full px-4 sm:px-6" style={{ maxWidth: 760, paddingTop: 'calc(60px + 4rem)', paddingBottom: '2rem' }}>
+        <div
+          className="relative z-10 text-center mx-auto w-full site-pad"
+          style={{ maxWidth: 760, paddingTop: 'calc(60px + 3rem)', paddingBottom: '3.5rem' }}
+        >
+
+          {/* Eyebrow + meta chips */}
+          <div className="flex items-center justify-center gap-2 flex-wrap" style={{ marginBottom: 22 }}>
+            <span className="eyebrow" style={{ color: '#4f46e5' }}>API Reference</span>
+            <span className="metachip">v1 · stable</span>
+            <span className="metachip">
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
+              All APIs operational
+            </span>
+          </div>
 
           {/* Heading */}
-          <h1 className="home-title text-white" style={{ marginBottom: '1.5rem' }}>
-            AuthNull <span style={{ color: '#ffffff' }}>API</span><br />Reference
+          <h1 className="home-title text-gray-900" style={{ marginBottom: '1.5rem' }}>
+            AuthNull <span style={{ color: '#4f46e5' }}>API</span><br />Reference
           </h1>
 
           {/* Subtitle */}
-          <p className="mx-auto" style={{ fontWeight: 300, color: '#6b8099', maxWidth: 560, marginBottom: '2.5rem' }}>
+          <p className="mx-auto lead" style={{ fontWeight: 300, color: '#4b5563', maxWidth: 560, marginBottom: '2.5rem' }}>
             Integrate privileged access management, MFA, and decentralized identity into your infrastructure with our developer-first APIs.
           </p>
 
@@ -242,7 +267,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link href="/docs/introduction" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: '#ffffff', color: '#080f1a', fontSize: 14, fontWeight: 600,
+              background: '#4f46e5', color: '#ffffff', fontSize: 14, fontWeight: 600,
               padding: '11px 22px', borderRadius: 8, textDecoration: 'none',
               transition: 'opacity 0.2s, transform 0.15s',
             }}>
@@ -251,9 +276,9 @@ export default function Home() {
             </Link>
             <Link href="/docs/installation" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              background: 'transparent', color: '#ffffff', fontSize: 14, fontWeight: 400,
+              background: 'transparent', color: '#111827', fontSize: 14, fontWeight: 400,
               padding: '11px 22px', borderRadius: 8, textDecoration: 'none',
-              border: '1px solid rgba(255,255,255,0.25)',
+              border: '1px solid rgba(0,0,0,0.15)',
               transition: 'background 0.2s, border-color 0.2s',
             }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
@@ -262,39 +287,24 @@ export default function Home() {
           </div>
         </div>
 
-        {/* PAM Auth Flow diagram */}
+        {/* PAM Auth Flow diagram — temporarily disabled, restore by uncommenting
         <div className="relative z-10 w-full mx-auto px-4 sm:px-6" style={{ maxWidth: 1000, paddingBottom: '4rem' }}>
           <div className="eyebrow" style={{ textAlign: 'center', color: '#6b8099', marginBottom: '1.5rem' }}>
             PAM Authentication Flow
           </div>
-
-          {/* Scrollable on mobile, centered on desktop */}
           <div className="overflow-x-auto pb-2">
             <FlowCircuit />
           </div>
-
-          {/* Stats row — 2-col on mobile, 4-col on sm+ */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 mt-10 rounded-xl overflow-hidden" style={{ gap: 1, background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            {([
-              { key: 'modules',  num: <><span style={{ color: '#fff' }}>10</span><span style={{ color: '#00d4aa' }}>+</span></>,               label: 'API Modules' },
-              { key: 'latency',  num: <><span style={{ color: '#00d4aa' }}>&lt;</span><span style={{ color: '#fff' }}>50ms</span></>,            label: 'Auth Latency' },
-              { key: 'did',      num: <><span style={{ color: '#fff' }}>DID</span><span style={{ color: '#00d4aa' }}>/</span><span style={{ color: '#fff' }}>VC</span></>, label: 'Decentralized Identity' },
-              { key: 'uptime',   num: <><span style={{ color: '#fff' }}>99.9</span><span style={{ color: '#00d4aa' }}>%</span></>,               label: 'Uptime SLA' },
-            ] as const).map((stat) => (
-              <div key={stat.key} className="text-center" style={{ padding: '18px 12px', background: '#0c1624' }}>
-                <div style={{ fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', fontWeight: 700, letterSpacing: '-0.02em' }}>{stat.num}</div>
-                <div style={{ fontSize: 11, color: '#6b8099', marginTop: 3, fontFamily: MONO }}>{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
+        */}
+
       </section>
 
       {/* ── Explore section ── */}
-      <section className="bg-white py-20 px-6">
+      <section className="bg-white py-20 site-pad">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-indigo-700">Explore the Documentation</h2>
+            <h2 className="text-indigo-700 section-title">Explore the Documentation</h2>
             <p className="mt-3 text-gray-500 text-base">
               Everything you need to integrate AuthNull into your application
             </p>
@@ -305,85 +315,25 @@ export default function Home() {
               <Link
                 key={cat.href}
                 href={cat.href}
-                className="group relative bg-white border border-gray-200 rounded-xl p-6 hover:border-indigo-300 hover:shadow-md transition-all"
+                className="group relative flex flex-col bg-white border border-gray-200 rounded-xl p-6 hover:border-indigo-300 hover:shadow-md transition-all"
               >
-                <div className="text-2xl mb-3">{cat.icon}</div>
+                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-100">
+                  <cat.icon size={20} strokeWidth={2} />
+                </div>
                 <h3 className="font-semibold text-gray-900 text-base group-hover:text-indigo-700 transition-colors">
                   {cat.title}
                 </h3>
                 <p className="mt-1.5 text-sm text-gray-500 leading-relaxed">{cat.description}</p>
-                <span className="absolute bottom-5 right-5 text-gray-300 group-hover:text-indigo-400 transition-colors text-lg">→</span>
+                <div className="flex items-center gap-1.5" style={{ marginTop: 16, paddingTop: 13, borderTop: '1px solid #f3f4f6' }}>
+                  {cat.tags.map((tag) => (
+                    <span key={tag} className={`mtag ${tag}`}>{tag.toUpperCase()}</span>
+                  ))}
+                  <span className="mono" style={{ marginLeft: 'auto', fontSize: 11, color: '#9ca3af' }}>{cat.count}</span>
+                </div>
               </Link>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* ── CTA section ── */}
-      <section style={{
-        position: 'relative',
-        padding: '100px 24px 90px',
-        textAlign: 'center',
-        overflow: 'hidden',
-        background: [
-          'radial-gradient(ellipse 55% 70% at 10% 50%, rgba(167,139,250,0.22) 0%, transparent 65%)',
-          'radial-gradient(ellipse 55% 70% at 90% 50%, rgba(249,168,212,0.18) 0%, transparent 65%)',
-          'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(196,181,253,0.12) 0%, transparent 60%)',
-          '#ffffff',
-        ].join(', '),
-      }}>
-        {/* Heading */}
-        <h2 style={{
-          fontFamily: 'var(--font-display)',
-          fontWeight: 500,
-          fontSize: 'clamp(36px, 5.5vw, 68px)',
-          lineHeight: 1.05,
-          letterSpacing: '-0.028em',
-          color: '#1a1035',
-          margin: '0 auto 20px',
-          maxWidth: 700,
-        }}>
-          Ready to Get Started?
-        </h2>
-
-        {/* Subtitle */}
-        <p style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: 16,
-          lineHeight: 1.65,
-          color: '#6b7280',
-          maxWidth: 440,
-          margin: '0 auto 40px',
-          fontWeight: 400,
-        }}>
-          Implement enterprise-grade authentication and access control in minutes.
-        </p>
-
-        {/* Buttons */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginBottom: 28 }}>
-          <Link href="/docs/installation" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '12px 26px', borderRadius: 8,
-            border: '1.5px solid #1a1035',
-            background: '#ffffff', color: '#1a1035',
-            fontSize: 14, fontWeight: 500, textDecoration: 'none',
-            fontFamily: 'var(--font-sans)',
-            transition: 'background 0.2s',
-          }}>
-            View Installation Guide →
-          </Link>
-          <Link href="/docs/endpoint-management" style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '12px 26px', borderRadius: 8,
-            background: '#1a1035', color: '#ffffff',
-            fontSize: 14, fontWeight: 500, textDecoration: 'none',
-            fontFamily: 'var(--font-sans)',
-            transition: 'opacity 0.2s',
-          }}>
-            Explore API Endpoints
-          </Link>
-        </div>
-
       </section>
 
       <Footer />
