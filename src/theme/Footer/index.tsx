@@ -12,8 +12,8 @@ const RESOURCES: FooterLink[] = [
 ];
 
 const DOCUMENTATION: FooterLink[] = [
-  {label: 'Getting Started', href: '/docs/introduction', external: false},
-  {label: 'Installation Guide', href: '/docs/installation', external: false},
+  {label: 'Getting Started', href: '/docs/intro', external: false},
+  {label: 'Installation Guide', href: '/docs/intro', external: false},
   {label: 'API Reference', href: '/docs/errors', external: false},
 ];
 

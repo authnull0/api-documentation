@@ -4,50 +4,80 @@
  * work well for content-centric websites.
  */
 
-/* ── Fonts (self-hosted, ported from app/fonts.ts) ───────────────────────
-   Root-relative paths into static/fonts/ — Docusaurus's bundler resolves
-   these against the static assets dir and rewrites for baseUrl at runtime. */
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/fonts/dm-sans/DMSans-normal.woff2') format('woff2');
-  font-weight: 400 500 600 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'DM Sans';
-  src: url('/fonts/dm-sans/DMSans-italic.woff2') format('woff2');
-  font-weight: 400 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('/fonts/jetbrains-mono/JetBrainsMono-normal.woff2') format('woff2');
-  font-weight: 400 500;
-  font-style: normal;
-  font-display: swap;
-}
+/* ── Fonts (Instrument Sans + IBM Plex Mono, loaded via Google Fonts —
+   see the `stylesheets` entry in docusaurus.config.ts) ──────────────────── */
 
 /* You can override the default Infima variables here. */
 :root {
-  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   --ifm-font-family-base: var(--font-sans);
   --ifm-font-family-monospace: var(--font-mono);
   --ifm-navbar-height: 60px;
 
-  --ifm-color-primary: #4f46e5;
-  --ifm-color-primary-dark: #4338ca;
-  --ifm-color-primary-darker: #3f33bd;
-  --ifm-color-primary-darkest: #342a9c;
-  --ifm-color-primary-light: #6a62e8;
-  --ifm-color-primary-lighter: #7871ea;
-  --ifm-color-primary-lightest: #9d98f0;
+  --ifm-color-primary: #4338ca;
+  --ifm-color-primary-dark: #3730a3;
+  --ifm-color-primary-darker: #312e81;
+  --ifm-color-primary-darkest: #1e1b4b;
+  --ifm-color-primary-light: #4f46e5;
+  --ifm-color-primary-lighter: #6366f1;
+  --ifm-color-primary-lightest: #a5b4fc;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* ── API method / status pills (endpoint reference pages) ────────────────
+   Colors ported directly from the AuthNull API Docs design's M()/CODEPILL()
+   helpers, for use as inline <span> badges next to endpoint headings and
+   response status lines. */
+.api-method,
+.api-status {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 2px 8px;
+}
+.api-method { font-size: 11px; letter-spacing: 0.03em; }
+.api-status { font-size: 11.5px; }
+
+.api-method--get { background: #e9f7ef; color: #127a45; }
+.api-method--post { background: #eef0ff; color: #3f37c9; }
+.api-method--put { background: #fff4e5; color: #b25e09; }
+.api-method--delete { background: #fdeceb; color: #b42318; }
+
+.api-status--2xx { background: #e9f7ef; color: #127a45; }
+.api-status--4xx { background: #fdeceb; color: #b42318; }
+.api-status--other { background: #fff4e5; color: #b25e09; }
+
+/* ── Admonition palette (matches the design's note/important/warning/danger
+   callout colors — note and important both use Infima's default alert
+   classes, secondary and info respectively) ──────────────────────────────── */
+.alert--secondary {
+  --ifm-alert-border-color: #4338ca;
+  --ifm-alert-background-color: #f8f8fe;
+  --ifm-alert-background-color-highlight: rgba(67, 56, 202, 0.06);
+  --ifm-alert-color: #2f3744;
+}
+.alert--info {
+  --ifm-alert-border-color: #7c3aed;
+  --ifm-alert-background-color: #faf7ff;
+  --ifm-alert-background-color-highlight: rgba(124, 58, 237, 0.06);
+  --ifm-alert-color: #2f3744;
+}
+.alert--warning {
+  --ifm-alert-border-color: #b25e09;
+  --ifm-alert-background-color: #fffaf2;
+  --ifm-alert-background-color-highlight: rgba(178, 94, 9, 0.06);
+  --ifm-alert-color: #2f3744;
+}
+.alert--danger {
+  --ifm-alert-border-color: #b42318;
+  --ifm-alert-background-color: #fef7f6;
+  --ifm-alert-background-color-highlight: rgba(180, 35, 24, 0.06);
+  --ifm-alert-color: #2f3744;
 }
 
 /* ── Typography System ─────────────────────────────────────────────────── */
@@ -267,6 +297,12 @@ h3 { line-height: 1.06; font-weight: 700; }
   -webkit-backdrop-filter: saturate(180%) blur(9px);
   border-bottom: 1px solid #e5e7eb;
   box-shadow: none;
+}
+
+/* Infima defaults the logo to 2rem (32px) tall; the source PNG is a wide
+   281×57 wordmark, which reads oversized in a 60px-tall bar. */
+.navbar__logo {
+  height: 30px;
 }
 
 .navbar-cta {

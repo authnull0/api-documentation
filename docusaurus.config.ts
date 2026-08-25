@@ -35,6 +35,19 @@ const config: Config = {
     locales: ['en'],
   },
 
+  stylesheets: [
+    {
+      href: 'https://fonts.googleapis.com',
+      rel: 'preconnect',
+    },
+    {
+      href: 'https://fonts.gstatic.com',
+      rel: 'preconnect',
+      crossorigin: 'anonymous',
+    },
+    'https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap',
+  ],
+
   presets: [
     [
       'classic',
@@ -78,7 +91,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.vsDark,
       darkTheme: prismThemes.vsDark,
-      additionalLanguages: ['http'],
+      additionalLanguages: ['http', 'python'],
     },
   } satisfies Preset.ThemeConfig,
 };

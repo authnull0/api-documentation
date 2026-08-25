@@ -8,7 +8,7 @@ const categories = [
     icon: Rocket,
     title: 'Getting Started',
     description: 'New to AuthNull? Start here with our introduction and installation guide.',
-    href: '/docs/introduction',
+    href: '/docs/intro',
     tags: ['guide'],
     count: '2 guides',
   },
@@ -16,7 +16,7 @@ const categories = [
     icon: Lock,
     title: 'Privileged Access Management',
     description: 'Control and monitor access to critical infrastructure with PAM APIs.',
-    href: '/docs/pam',
+    href: '/docs/intro',
     tags: ['guide'],
     count: 'Overview',
   },
@@ -24,7 +24,7 @@ const categories = [
     icon: Monitor,
     title: 'Endpoint Management',
     description: 'Manage endpoints, assign users and groups, and configure auth types.',
-    href: '/docs/endpoint-management',
+    href: '/docs/intro',
     tags: ['post', 'put'],
     count: '5 endpoints',
   },
@@ -32,7 +32,7 @@ const categories = [
     icon: Users,
     title: 'User Management',
     description: 'Create and manage endpoint users, credentials, wallets, and password policies.',
-    href: '/docs/endpoint-user-management',
+    href: '/docs/ad-users',
     tags: ['post', 'put'],
     count: '13 endpoints',
   },
@@ -40,7 +40,7 @@ const categories = [
     icon: Bot,
     title: 'Agents',
     description: 'Deploy Authnull Agent, AD Agent, and CSV Agent to sync users and groups.',
-    href: '/docs/authnull-agent',
+    href: '/docs/intro',
     tags: ['post'],
     count: '12 endpoints',
   },
@@ -48,7 +48,7 @@ const categories = [
     icon: Fingerprint,
     title: 'Decentralized Identities',
     description: 'Issue and manage DIDs, verifiable credentials, and wallet-based auth.',
-    href: '/docs/decentralized-identities',
+    href: '/docs/intro',
     tags: ['post'],
     count: '10 endpoints',
   },
@@ -56,7 +56,7 @@ const categories = [
     icon: FolderTree,
     title: 'Active Directory',
     description: 'Import users, sync LDAP groups, and reconfigure directory settings.',
-    href: '/docs/active-directory',
+    href: '/docs/ad-domains',
     tags: ['post'],
     count: '3 endpoints',
   },
@@ -71,7 +71,7 @@ const categories = [
 ];
 
 const SANS = "var(--font-sans, 'Segoe UI', -apple-system, sans-serif)";
-const MONO = "var(--font-mono, 'JetBrains Mono', monospace)";
+const MONO = "var(--font-mono, 'IBM Plex Mono', monospace)";
 
 interface FlowNodeProps {
   delay: string;
@@ -263,7 +263,7 @@ export default function Home() {
 
           {/* CTA buttons */}
           <div className="hero-cta-row">
-            <Link to="/docs/introduction" style={{
+            <Link to="/docs/intro" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: '#4f46e5', color: '#ffffff', fontSize: 14, fontWeight: 600,
               padding: '11px 22px', borderRadius: 8, textDecoration: 'none',
@@ -272,7 +272,7 @@ export default function Home() {
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
-            <Link to="/docs/installation" style={{
+            <Link to="/docs/intro" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'transparent', color: '#111827', fontSize: 14, fontWeight: 400,
               padding: '11px 22px', borderRadius: 8, textDecoration: 'none',
