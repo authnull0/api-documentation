@@ -1,4 +1,9 @@
-# Next.js
+# Docusaurus
+.docusaurus/
+build/
+.cache-loader
+
+# Next.js (legacy, pre-Docusaurus migration)
 .next/
 out/
 node_modules/
@@ -22,7 +27,6 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
-build/
 .cache
 .vagrant
 .sass-cache
