@@ -3,15 +3,23 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
+      type: 'link',
+      label: 'Documentation Home',
+      href: '/docs/intro',
+      className: 'sidebar-home-link sidebar-icon sidebar-icon--home',
+    },
+    {
       type: 'category',
       label: 'Getting started',
-      collapsed: false,
+      collapsed: true,
+      className: 'sidebar-icon sidebar-icon--start',
       items: ['intro', 'auth', 'scope', 'headers', 'errors', 'pagination'],
     },
     {
       type: 'category',
       label: 'AD Mode',
-      collapsed: false,
+      collapsed: true,
+      className: 'sidebar-icon sidebar-icon--ad',
       items: [
         'ad-domains',
         'ad-users',
@@ -25,19 +33,22 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Database Mode',
-      collapsed: false,
+      collapsed: true,
+      className: 'sidebar-icon sidebar-icon--db',
       items: ['db-databases', 'db-users', 'db-tables', 'db-agents', 'db-connections'],
     },
     {
       type: 'category',
       label: 'Radius Mode',
-      collapsed: false,
+      collapsed: true,
+      className: 'sidebar-icon sidebar-icon--radius',
       items: ['rad-onboarding', 'rad-devices', 'rad-vendors'],
     },
     {
       type: 'category',
       label: 'API conventions',
-      collapsed: false,
+      collapsed: true,
+      className: 'sidebar-icon sidebar-icon--conv',
       items: ['conv-request', 'conv-response', 'conv-status', 'conv-trouble'],
     },
   ],
