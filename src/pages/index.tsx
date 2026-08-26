@@ -1,73 +1,73 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
-import {Rocket, Lock, Monitor, Users, Bot, Fingerprint, FolderTree, FileText} from 'lucide-react';
+import {BookOpen, Shield, Database, Globe, FileText, KeyRound} from 'lucide-react';
 
-const categories = [
+const modes = [
   {
-    icon: Rocket,
-    title: 'Getting Started',
-    description: 'New to AuthNull? Start here with our introduction and installation guide.',
+    icon: BookOpen,
+    title: 'Getting started',
+    methods: ['guide'],
+    count: 6,
+    noun: 'guides',
+    description: 'Authenticate requests, scope them to your org and tenant, and learn the conventions every endpoint follows.',
+    paths: ['Authentication', 'Tenant scope', 'Pagination'],
     href: '/docs/intro',
-    tags: ['guide'],
-    count: '2 guides',
   },
   {
-    icon: Lock,
-    title: 'Privileged Access Management',
-    description: 'Control and monitor access to critical infrastructure with PAM APIs.',
-    href: '/docs/intro',
-    tags: ['guide'],
-    count: 'Overview',
-  },
-  {
-    icon: Monitor,
-    title: 'Endpoint Management',
-    description: 'Manage endpoints, assign users and groups, and configure auth types.',
-    href: '/docs/intro',
-    tags: ['post', 'put'],
-    count: '5 endpoints',
-  },
-  {
-    icon: Users,
-    title: 'User Management',
-    description: 'Create and manage endpoint users, credentials, wallets, and password policies.',
-    href: '/docs/ad-users',
-    tags: ['post', 'put'],
-    count: '13 endpoints',
-  },
-  {
-    icon: Bot,
-    title: 'Agents',
-    description: 'Deploy Authnull Agent, AD Agent, and CSV Agent to sync users and groups.',
-    href: '/docs/intro',
-    tags: ['post'],
-    count: '12 endpoints',
-  },
-  {
-    icon: Fingerprint,
-    title: 'Decentralized Identities',
-    description: 'Issue and manage DIDs, verifiable credentials, and wallet-based auth.',
-    href: '/docs/intro',
-    tags: ['post'],
-    count: '10 endpoints',
-  },
-  {
-    icon: FolderTree,
-    title: 'Active Directory',
-    description: 'Import users, sync LDAP groups, and reconfigure directory settings.',
+    icon: Shield,
+    title: 'AD Mode',
+    methods: ['post', 'put'],
+    count: 41,
+    noun: 'endpoints',
+    description: 'Onboard domains, manage users and groups, enforce authentication policies, and read sign-in and lockout logs.',
+    paths: ['/ad/GetAllDomains', '/api/v1/policyService/ListPolicy', '/users/onboardUser'],
     href: '/docs/ad-domains',
-    tags: ['post'],
-    count: '3 endpoints',
+  },
+  {
+    icon: Database,
+    title: 'Database Mode',
+    methods: ['post'],
+    count: 13,
+    noun: 'endpoints',
+    description: 'Discover databases and their schemas, manage database users, and broker connections through Authnull agents.',
+    paths: ['/api/v1/databaseService/listDatabase', '/connections/createConnections'],
+    href: '/docs/db-databases',
+  },
+  {
+    icon: Globe,
+    title: 'Radius Mode',
+    methods: ['post'],
+    count: 2,
+    noun: 'endpoints',
+    description: 'Onboard Radius devices behind Microsoft NPS, Cisco ISE or Aruba ClearPass, and manage the device inventory.',
+    paths: ['/network_device/ListDevices', '/network_device/DeleteDevice'],
+    href: '/docs/rad-onboarding',
   },
   {
     icon: FileText,
-    title: 'API Reference',
-    description: 'Complete error codes, HTTP status meanings, and API conventions.',
-    href: '/docs/errors',
-    tags: ['ref'],
-    count: '11 status codes',
+    title: 'API conventions',
+    methods: ['ref'],
+    count: 4,
+    noun: 'references',
+    description: 'Request and response formats, HTTP status codes, and troubleshooting for common integration failures.',
+    paths: ['Request format', 'Status codes', 'Troubleshooting'],
+    href: '/docs/conv-request',
   },
+];
+
+const totalEndpoints = modes.filter((m) => m.noun === 'endpoints').reduce((sum, m) => sum + m.count, 0);
+
+const facts = [
+  {k: 'Base URL', v: 'api.authnull.com'},
+  {k: 'Auth header', v: 'X-Authorization'},
+  {k: 'Format', v: 'application/json'},
+];
+
+const steps = [
+  {n: '1', title: 'Set your token', desc: 'Keep the token in the environment, never in client code.', code: 'export AUTHNULL_TOKEN="..."'},
+  {n: '2', title: 'Send the header', desc: 'Authnull reads X-Authorization, not the standard Authorization header.', code: 'X-Authorization: $AUTHNULL_TOKEN'},
+  {n: '3', title: 'Scope the body', desc: 'Every call carries the organization and tenant it acts within.', code: '{ "orgId": 105, "tenantId": 1 }'},
 ];
 
 const SANS = "var(--font-sans, 'Segoe UI', -apple-system, sans-serif)";
@@ -252,17 +252,17 @@ export default function Home() {
           </div>
 
           {/* Heading */}
-          <h1 className="home-title" style={{color: '#111827', marginBottom: '1.5rem'}}>
-            AuthNull <span style={{color: '#4f46e5'}}>API</span><br />Reference
+          <h1 className="home-title" style={{color: '#111827', marginBottom: '1.25rem'}}>
+            Passwordless access, <span style={{color: 'var(--ifm-color-primary)'}}>three modes</span>, one API.
           </h1>
 
           {/* Subtitle */}
           <p className="lead" style={{margin: '0 auto', fontWeight: 300, color: '#4b5563', maxWidth: 560, marginBottom: '2.5rem'}}>
-            Integrate privileged access management, MFA, and decentralized identity into your infrastructure with our developer-first APIs.
+            Authnull secures Active Directory, databases and Radius network devices through a single JSON interface. Every screen in the console maps to an endpoint documented here.
           </p>
 
           {/* CTA buttons */}
-          <div className="hero-cta-row">
+          <div className="hero-cta-row" style={{marginBottom: '2.5rem'}}>
             <Link to="/docs/intro" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: '#4f46e5', color: '#ffffff', fontSize: 14, fontWeight: 600,
@@ -272,16 +272,26 @@ export default function Home() {
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
             </Link>
-            <Link to="/docs/intro" style={{
+            <Link to="/docs/auth" style={{
               display: 'inline-flex', alignItems: 'center', gap: 8,
               background: 'transparent', color: '#111827', fontSize: 14, fontWeight: 400,
               padding: '11px 22px', borderRadius: 8, textDecoration: 'none',
               border: '1px solid rgba(0,0,0,0.15)',
               transition: 'background 0.2s, border-color 0.2s',
             }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
-              Installation Guide
+              <KeyRound size={14} strokeWidth={2} />
+              Authentication
             </Link>
+          </div>
+
+          {/* Base URL / auth header / format facts */}
+          <div className="facts-grid">
+            {facts.map((f) => (
+              <div key={f.k} className="fact-item">
+                <div className="fact-key">{f.k}</div>
+                <div className="fact-val">{f.v}</div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -298,35 +308,67 @@ export default function Home() {
 
       </section>
 
-      {/* ── Explore section ── */}
-      <section className="site-pad" style={{background: '#ffffff', paddingTop: '5rem', paddingBottom: '5rem'}}>
+      {/* ── Quickstart ── */}
+      <section className="site-pad" style={{background: '#fcfcfd', borderTop: '1px solid #e7e9ed', borderBottom: '1px solid #e7e9ed', paddingTop: '2.75rem', paddingBottom: '2.75rem'}}>
         <div style={{maxWidth: '64rem', margin: '0 auto'}}>
-          <div style={{textAlign: 'center', marginBottom: '3rem'}}>
-            <h2 className="section-title" style={{color: '#4338ca'}}>Explore the Documentation</h2>
-            <p style={{marginTop: '0.75rem', color: '#6b7280', fontSize: '1rem'}}>
-              Everything you need to integrate AuthNull into your application
-            </p>
-          </div>
+          <h2 className="eyebrow" style={{color: '#8b929e', marginBottom: '1.375rem'}}>Three calls to your first response</h2>
+          <ol className="steps-grid">
+            {steps.map((s) => (
+              <li key={s.n} className="step-card">
+                <div style={{display: 'flex', alignItems: 'center', gap: 9, marginBottom: 9}}>
+                  <span className="step-num">{s.n}</span>
+                  <span className="step-title">{s.title}</span>
+                </div>
+                <p className="step-desc">{s.desc}</p>
+                <code className="step-code">{s.code}</code>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          <div className="category-grid">
-            {categories.map((cat) => (
-              <Link key={cat.href} to={cat.href} className="category-card">
-                <div className="category-icon">
-                  <cat.icon size={20} strokeWidth={2} />
+      {/* ── Endpoint index ── */}
+      <section className="site-pad" style={{background: '#ffffff', paddingTop: '4.5rem', paddingBottom: '3rem'}}>
+        <div style={{maxWidth: '64rem', margin: '0 auto'}}>
+          <div style={{display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap', marginBottom: 8}}>
+            <h2 style={{fontSize: 'clamp(26px, 2.8vw, 34px)', fontWeight: 600, letterSpacing: '-0.024em', color: '#111827'}}>Endpoint index</h2>
+            <span className="mono" style={{fontSize: 12.5, color: '#8b929e'}}>{totalEndpoints} endpoints across 3 modes</span>
+          </div>
+          <p style={{fontSize: 16, color: '#4b5462', maxWidth: '58ch', marginBottom: '1.75rem'}}>
+            Pick the mode your integration targets. Each row links into the full reference.
+          </p>
+
+          <div className="endpoint-list">
+            {modes.map((m) => (
+              <Link key={m.href} to={m.href} className="endpoint-row">
+                <span className="endpoint-icon">
+                  <m.icon size={17} strokeWidth={1.7} />
+                </span>
+                <div style={{minWidth: 0}}>
+                  <div className="endpoint-title-row">
+                    <span className="endpoint-title">{m.title}</span>
+                    {m.methods.map((tag) => (
+                      <span key={tag} className={`idx-tag ${tag}`}>{tag.toUpperCase()}</span>
+                    ))}
+                  </div>
+                  <p className="endpoint-desc">{m.description}</p>
+                  <div className="endpoint-paths">
+                    {m.paths.map((p) => (
+                      <code key={p} className="endpoint-path">{p}</code>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="category-title">{cat.title}</h3>
-                <p className="category-description">{cat.description}</p>
-                <div className="category-footer">
-                  {cat.tags.map((tag) => (
-                    <span key={tag} className={`mtag ${tag}`}>{tag.toUpperCase()}</span>
-                  ))}
-                  <span className="mono category-count">{cat.count}</span>
+                <div className="endpoint-meta">
+                  <div className="endpoint-count">{m.count}</div>
+                  <div className="endpoint-noun">{m.noun}</div>
                 </div>
+                <span className="endpoint-arrow">→</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
+
     </Layout>
   );
 }

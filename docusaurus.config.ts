@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'AuthNull API Documentation',
   tagline:
-    'Integrate privileged access management, MFA, and decentralized identity into your infrastructure with our developer-first APIs.',
+    'Integrate passwordless access and MFA across Active Directory, databases, and Radius network devices with our developer-first APIs.',
   favicon: 'img/favicon.ico',
 
   future: {

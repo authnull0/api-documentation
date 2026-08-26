@@ -13,8 +13,9 @@ const RESOURCES: FooterLink[] = [
 
 const DOCUMENTATION: FooterLink[] = [
   {label: 'Getting Started', href: '/docs/intro', external: false},
-  {label: 'Installation Guide', href: '/docs/intro', external: false},
-  {label: 'API Reference', href: '/docs/errors', external: false},
+  {label: 'AD Mode', href: '/docs/ad-domains', external: false},
+  {label: 'Database Mode', href: '/docs/db-databases', external: false},
+  {label: 'Radius Mode', href: '/docs/rad-onboarding', external: false},
 ];
 
 const COMPANY: FooterLink[] = [
@@ -45,9 +46,8 @@ function FooterColumn({title, links}: {title: string; links: FooterLink[]}): Rea
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener noreferrer' : undefined}
-              style={{fontFamily: SANS, fontSize: 14, color: '#6B7280', textDecoration: 'none'}}
-              onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'underline')}
-              onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}>
+              className="footer-link-item"
+              style={{fontFamily: SANS, fontSize: 12}}>
               {link.label}
             </Link>
           </li>
@@ -78,12 +78,12 @@ export default function Footer(): ReactNode {
                 <img src={logoSrc} alt="AuthNull" width={120} height={36} style={{objectFit: 'contain'}} />
               </Link>
             </div>
-            <p style={{fontSize: 13, color: '#6B7280', lineHeight: 1.6, marginBottom: 20, maxWidth: 260}}>
+            <p style={{fontSize: 13, color: '#374151', lineHeight: 1.6, marginBottom: 20, maxWidth: 260}}>
               MFA for everything your IdP can&apos;t reach — Active Directory, RADIUS, Windows, and Linux.
             </p>
             <div style={{display: 'flex', alignItems: 'center', gap: 8}}>
               <span style={{width: 7, height: 7, borderRadius: '50%', background: '#00d4aa', flexShrink: 0}} />
-              <span style={{fontSize: 13, color: '#6B7280'}}>All systems operational</span>
+              <span style={{fontSize: 13, color: '#374151'}}>All systems operational</span>
             </div>
           </div>
 
