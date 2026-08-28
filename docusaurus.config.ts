@@ -15,7 +15,7 @@ const config: Config = {
   },
 
   url: 'https://authnull0.github.io',
-  baseUrl: '/api-documentation/',
+  baseUrl: '/',
 
   organizationName: 'authnull0',
   projectName: 'api-documentation',
