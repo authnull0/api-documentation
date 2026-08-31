@@ -1,82 +1,134 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
-  <br>
-  <a href="https://github.com/slatedocs/slate/actions?query=workflow%3ABuild+branch%3Amain"><img src="https://github.com/slatedocs/slate/workflows/Build/badge.svg?branch=main" alt="Build Status"></a>
-  <a href="https://hub.docker.com/r/slatedocs/slate"><img src="https://img.shields.io/docker/v/slatedocs/slate?sort=semver" alt="Docker Version" /></a>
+  <img src="static/img/authnull-logo.png" alt="AuthNull" width="220">
 </p>
 
-<p align="center">Slate helps you create beautiful, intelligent, responsive API documentation.</p>
+<p align="center"><strong>API documentation for the AuthNull passwordless access platform.</strong></p>
 
-<p align="center"><img src="https://raw.githubusercontent.com/slatedocs/img/main/screenshot-slate.png" width=700 alt="Screenshot of Example Documentation created with Slate"></p>
+# AuthNull API Documentation
 
-<p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
+## About this site
 
-Features
-------------
+This repository is a [Docusaurus](https://docusaurus.io/) documentation site for AuthNull's backend APIs. AuthNull is a single platform (one monolithic API surface, one host, one auth scheme) whose endpoints are organized into three operating modes — **AD Mode**, **Database Mode**, and **Radius Mode**. Every mode shares the same `X-Authorization` bearer token and the same `orgId`/`tenantId` scoping model; they differ only in the routes and resources each one exposes.
 
-* **Clean, intuitive design** — With Slate, the description of your API is on the left side of your documentation, and all the code examples are on the right side. Inspired by [Stripe's](https://stripe.com/docs/api) and [PayPal's](https://developer.paypal.com/webapps/developer/docs/api/) API docs. Slate is responsive, so it looks great on tablets, phones, and even in print.
+This README explains how the site is organized and how to run and maintain it. **It is an index, not the reference itself** — the authoritative endpoint details (parameters, examples, responses, errors) live in the pages under [`docs/`](docs/).
 
-* **Everything on a single page** — Gone are the days when your users had to search through a million pages to find what they wanted. Slate puts the entire documentation on a single page. We haven't sacrificed linkability, though. As you scroll, your browser's hash will update to the nearest header, so linking to a particular point in the documentation is still natural and easy.
+## Table of contents
 
-* **Slate is just Markdown** — When you write docs with Slate, you're just writing Markdown, which makes it simple to edit and understand. Everything is written in Markdown — even the code samples are just Markdown code blocks.
+- [About this site](#about-this-site)
+- [API groups and base paths](#api-groups-and-base-paths)
+- [Documentation map](#documentation-map)
+- [Project structure](#project-structure)
+- [Setup and local development](#setup-and-local-development)
+- [Maintaining the docs](#maintaining-the-docs)
+- [Contributing](#contributing)
 
-* **Write code samples in multiple languages** — If your API has bindings in multiple programming languages, you can easily put in tabs to switch between them. In your document, you'll distinguish different languages by specifying the language name at the top of each code block, just like with GitHub Flavored Markdown.
+## API groups and base paths
 
-* **Out-of-the-box syntax highlighting** for [over 100 languages](https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers), no configuration required.
+| API group | Base path(s) | Description |
+|---|---|---|
+| **AD Mode** | `/ad`, `/users`, `/groups`, `/walletService`, `/credential`, `/api/v1/policyService`, `/api/v1/policy`, `/policy` | Active Directory and Entra domains, users, groups, authentication policies, sign-in logs, passwordless enrollment |
+| **Database Mode** | `/api/v1/databaseService`, `/connections`, `/api/v1/secretservice` | Database host/user/table discovery and brokered privileged connections |
+| **Radius Mode** | `/network_device` | Radius network device registration and management (NPS, ISE, ClearPass) |
+| **Conventions** (cross-cutting) | n/a | Shared request/response shape, auth, scoping, pagination, and error handling used by all three groups above |
 
-* **Automatic, smoothly scrolling table of contents** on the far left of the page. As you scroll, it displays your current position in the document. It's fast, too. We're using Slate at TripIt to build documentation for our new API, where our table of contents has over 180 entries. We've made sure that the performance remains excellent, even for larger documents.
+Notes on the surface as documented today:
 
-* **Let your users update your documentation for you** — By default, your Slate-generated documentation is hosted in a public GitHub repository. Not only does this mean you get free hosting for your docs with GitHub Pages, but it also makes it simple for other developers to make pull requests to your docs if they find typos or other problems. Of course, if you don't want to use GitHub, you're also welcome to host your docs elsewhere.
+- **Host:** `https://api.authnull.com` (production), `https://dev.api.authnull.com` (development) — placeholders pending confirmation ([docs/intro.md](docs/intro.md)).
+- **Verbs:** almost every endpoint is `POST`, including reads and searches; a small number of update endpoints use `PUT`.
+- **Versioning:** a `/api/v1/...` prefix appears on some route groups (policy, database, secret) but not others (`/ad`, `/users`, `/network_device`) — the platform has not standardized this yet.
+- **Health checks:** no health/status endpoint is documented for any group.
 
-* **RTL Support** Full right-to-left layout for RTL languages such as Arabic, Persian (Farsi), Hebrew etc.
+## Documentation map
 
-Getting started with Slate is super easy! Simply press the green "use this template" button above and follow the instructions below. Or, if you'd like to check out what Slate is capable of, take a look at the [sample docs](https://slatedocs.github.io/slate/).
+Each API group above is broken into one page per resource area under `docs/`.
 
-Getting Started with Slate
-------------------------------
+### Getting started (applies to all modes)
 
-To get started with Slate, please check out the [Getting Started](https://github.com/slatedocs/slate/wiki#getting-started)
-section in our [wiki](https://github.com/slatedocs/slate/wiki).
+| Docs file | Covers |
+|---|---|
+| [docs/intro.md](docs/intro.md) | Platform overview, the three modes, base URLs, security notes |
+| [docs/auth.md](docs/auth.md) | The `X-Authorization` header and token handling |
+| [docs/scope.md](docs/scope.md) | `orgId` / `tenantId` / `domainId` scoping |
+| [docs/headers.md](docs/headers.md) | Required and optional request headers |
+| [docs/errors.md](docs/errors.md) | Error envelope and status code meanings |
+| [docs/pagination.md](docs/pagination.md) | Shared pagination/filtering contract for list endpoints |
 
-We support running Slate in three different ways:
-* [Natively](https://github.com/slatedocs/slate/wiki/Using-Slate-Natively)
-* [Using Vagrant](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Vagrant)
-* [Using Docker](https://github.com/slatedocs/slate/wiki/Using-Slate-in-Docker)
+### AD Mode
 
-Companies Using Slate
----------------------------------
+| Docs file | Resource area |
+|---|---|
+| [docs/ad-domains.md](docs/ad-domains.md) | Domains — onboarding, enforcement mode, MFA provider |
+| [docs/ad-users.md](docs/ad-users.md) | Directory vs. platform users, onboarding, credential wallets |
+| [docs/ad-groups.md](docs/ad-groups.md) | Group management |
+| [docs/ad-policies.md](docs/ad-policies.md) | Authentication policies — create, approve, revoke, preview, discover |
+| [docs/ad-logs.md](docs/ad-logs.md) | Authentication and lockout event logs |
+| [docs/ad-enrollment.md](docs/ad-enrollment.md) | Passwordless enrollment email flow |
+| [docs/ad-lockout.md](docs/ad-lockout.md) | Account lockout events and sources |
 
-* [NASA](https://api.nasa.gov)
-* [Sony](http://developers.cimediacloud.com)
-* [Best Buy](https://bestbuyapis.github.io/api-documentation/)
-* [Travis-CI](https://docs.travis-ci.com/api/)
-* [Greenhouse](https://developers.greenhouse.io/harvest.html)
-* [WooCommerce](http://woocommerce.github.io/woocommerce-rest-api-docs/)
-* [Dwolla](https://docs.dwolla.com/)
-* [Clearbit](https://clearbit.com/docs)
-* [Coinbase](https://developers.coinbase.com/api)
-* [Parrot Drones](http://developer.parrot.com/docs/bebop/)
-* [CoinAPI](https://docs.coinapi.io/)
+### Database Mode
 
-You can view more in [the list on the wiki](https://github.com/slatedocs/slate/wiki/Slate-in-the-Wild).
+| Docs file | Resource area |
+|---|---|
+| [docs/db-databases.md](docs/db-databases.md) | Discovered database instances and hosts |
+| [docs/db-users.md](docs/db-users.md) | Database-level users |
+| [docs/db-tables.md](docs/db-tables.md) | Table and field discovery |
+| [docs/db-agents.md](docs/db-agents.md) | Database agent hosts |
+| [docs/db-connections.md](docs/db-connections.md) | Brokered privileged database connections |
 
-Questions? Need Help? Found a bug?
---------------------
+### Radius Mode
 
-If you've got questions about setup, deploying, special feature implementation in your fork, or just want to chat with the developer, please feel free to [start a thread in our Discussions tab](https://github.com/slatedocs/slate/discussions)!
+| Docs file | Resource area |
+|---|---|
+| [docs/rad-onboarding.md](docs/rad-onboarding.md) | Agent install and vendor server configuration (install workflow, not a create-device call) |
+| [docs/rad-devices.md](docs/rad-devices.md) | Registered Radius device management |
+| [docs/rad-vendors.md](docs/rad-vendors.md) | Supported Radius vendor servers (NPS, ISE, ClearPass) |
 
-Found a bug with upstream Slate? Go ahead and [submit an issue](https://github.com/slatedocs/slate/issues). And, of course, feel free to submit pull requests with bug fixes or changes to the `dev` branch.
+### API conventions
 
-Contributors
---------------------
+| Docs file | Covers |
+|---|---|
+| [docs/conv-request.md](docs/conv-request.md) | Request shape |
+| [docs/conv-response.md](docs/conv-response.md) | Response shape |
+| [docs/conv-status.md](docs/conv-status.md) | Status code conventions |
+| [docs/conv-trouble.md](docs/conv-trouble.md) | Troubleshooting common failures |
 
-Slate was built by [Robert Lord](https://lord.io) while at [TripIt](https://www.tripit.com/). The project is now maintained by [Matthew Peveler](https://github.com/MasterOdin) and [Mike Ralphson](https://github.com/MikeRalphson).
+## Project structure
 
-Thanks to the following people who have submitted major pull requests:
+```
+api-documentation/
+├── docs/                    # All API reference and guide content (Markdown/MDX) — see Documentation map above
+├── src/
+│   ├── components/          # Shared React components (e.g. QuickLinks) used in docs pages
+│   ├── css/                 # Global and custom Docusaurus theme styles
+│   ├── pages/               # Standalone routed pages (e.g. index.tsx for "/")
+│   └── theme/                # Swizzled theme components (custom Footer)
+├── static/                  # Static assets served as-is (images, fonts, favicon)
+├── docusaurus.config.ts     # Site config: title, navbar, theme, plugins
+├── sidebars.ts              # Docs sidebar structure (Getting started / AD / Database / Radius / Conventions)
+└── package.json             # Scripts and dependencies (Docusaurus 3, npm)
+```
 
-- [@chrissrogers](https://github.com/chrissrogers)
-- [@bootstraponline](https://github.com/bootstraponline)
-- [@realityking](https://github.com/realityking)
-- [@cvkef](https://github.com/cvkef)
+## Setup and local development
 
-Also, thanks to [Sauce Labs](http://saucelabs.com) for sponsoring the development of the responsive styles.
+Built with **Docusaurus 3**, managed with **npm**.
+
+| Task | Command |
+|---|---|
+| Install dependencies | `npm install` |
+| Run the dev server (live reload) | `npm start` |
+| Build the static site | `npm run build` |
+| Serve the built site locally | `npm run serve` |
+
+## Maintaining the docs
+
+1. Add or edit a Markdown/MDX file under `docs/`, following the existing frontmatter pattern (`title`, `description`).
+2. Register new pages in [`sidebars.ts`](sidebars.ts) under the relevant category (`Getting started`, `AD Mode`, `Database Mode`, `Radius Mode`, `API conventions`), and add a row to the [Documentation map](#documentation-map) above.
+3. Follow the structure already used across reference pages: an **Endpoints** summary table, one `##` section per endpoint with method/path/description, a **Body parameters** table, tabbed cURL/JavaScript/Python examples, and a **Responses** section with status-coded examples.
+4. If a request or response payload is unknown, say so explicitly with a `:::warning` admonition rather than inventing a schema — several pages currently do this pending real payloads from the platform team.
+5. Run `npm start` and confirm the page renders and internal links resolve — `onBrokenLinks` is set to `throw`, so `npm run build` fails on any broken link.
+
+## Contributing
+
+- Keep endpoint documentation in sync with the actual API. This reference is explicitly mid-migration; several pages are flagged with `:::warning` where payloads are unconfirmed — update or remove those once verified against the live API.
+- See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community guidelines.
+- Open a pull request against `main`; run `npm run build` locally to confirm the site builds cleanly before submitting.
