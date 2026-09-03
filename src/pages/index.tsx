@@ -237,7 +237,7 @@ export default function Home() {
           className="site-pad"
           style={{
             position: 'relative', zIndex: 10, textAlign: 'center', margin: '0 auto', width: '100%',
-            maxWidth: 760, paddingTop: 'calc(60px + 3rem)', paddingBottom: '3.5rem',
+            maxWidth: 760, paddingTop: 'calc(30px + 3rem)', paddingBottom: '3.5rem',
           }}
         >
 
